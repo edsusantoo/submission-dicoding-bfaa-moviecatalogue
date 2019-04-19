@@ -3,6 +3,11 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movie_list">Daftar Film</string>
+    <string name="minus">-</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="lorem">asdfasdfadfasdfadfasdfadfadfasdfasdfasdfadfadfasdfadf</string>
+    <string name="more_info">More Info</string>
 
     <string-array name="data_movie_name">
         <item>Aquaman</item>
