@@ -40,11 +40,11 @@
     </string-array>
 
 
-    <string-array name="data_movie_photo">
+    <array name="data_movie_photo">
         <item>@drawable/poster_aquaman</item>
         <item>@drawable/poster_a_star</item>
         <item>@drawable/poster_avengerinfinity</item>
         <item>@drawable/poster_birdbox</item>
-    </string-array>
+    </array>
 
 </resources>
