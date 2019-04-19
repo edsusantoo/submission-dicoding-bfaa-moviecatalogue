@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.daftarfilm;
+package com.edsusantoo.bismillah.moviecatalogue.daftarfilm.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
+import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.model.Movie;
 
 import java.util.ArrayList;
 
