@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,10 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DaftarFilmFragment extends Fragment implements DaftarFilmView {
+public class DaftarFilmFragment extends Fragment implements DaftarFilmView, SwipeRefreshLayout.OnRefreshListener {
 
     ListView lvMovie;
+    SwipeRefreshLayout swipeRefresh;
     private DaftarFilmPresenter presenter;
     private DaftarFilmAdapter adapter;
 
@@ -42,18 +44,22 @@ public class DaftarFilmFragment extends Fragment implements DaftarFilmView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lvMovie = view.findViewById(R.id.lv_movie);
+        swipeRefresh = view.findViewById(R.id.swipe);
+
+        swipeRefresh.setOnRefreshListener(this);
+
         prepared();
 
     }
 
     @Override
-    public void showShammer() {
-
+    public void showLoading() {
+        swipeRefresh.setRefreshing(true);
     }
 
     @Override
-    public void hideShammer() {
-
+    public void hideLoading() {
+        swipeRefresh.setRefreshing(false);
     }
 
     @Override
@@ -73,5 +79,10 @@ public class DaftarFilmFragment extends Fragment implements DaftarFilmView {
         @SuppressLint("Recycle") TypedArray dataPhoto = getResources().obtainTypedArray(R.array.data_movie_photo);
 
         presenter.addMovie(dataMovieName, dataMovieDate, dataMovieDescription, dataRating, dataRevenue, dataPhoto);
+    }
+
+    @Override
+    public void onRefresh() {
+        prepared();
     }
 }

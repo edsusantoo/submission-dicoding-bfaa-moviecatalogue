@@ -5,9 +5,9 @@ import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.model.Movie;
 import java.util.ArrayList;
 
 public interface DaftarFilmView {
-    void showShammer();
+    void showLoading();
 
-    void hideShammer();
+    void hideLoading();
 
     void showDaftarFilm(ArrayList<Movie> movies);
 

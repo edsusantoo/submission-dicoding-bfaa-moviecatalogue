@@ -19,6 +19,7 @@ class DaftarFilmPresenter {
                   String[] dataMovieRating,
                   String[] dataMovieRevenue,
                   TypedArray dataMoviePhoto) {
+        view.showLoading();
 
         ArrayList<Movie> movies = new ArrayList<>();
         for (int i = 0; i < dataMovieName.length; i++) {
@@ -32,5 +33,7 @@ class DaftarFilmPresenter {
             movies.add(movie);
         }
         view.showDaftarFilm(movies);
+
+        view.hideLoading();
     }
 }
