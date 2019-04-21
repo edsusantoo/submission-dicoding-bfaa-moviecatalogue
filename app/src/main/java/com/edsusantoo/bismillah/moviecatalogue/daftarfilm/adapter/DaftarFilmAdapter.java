@@ -47,13 +47,21 @@ public class DaftarFilmAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
         }
         ViewHolder viewHolder = new ViewHolder(view);
-        Movie movie = (Movie) getItem(position);
+        final Movie movie = (Movie) getItem(position);
         viewHolder.bind(movie);
 
         viewHolder.cvMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailFilmActivity.class);
+                Movie dataMovie = new Movie();
+                dataMovie.setTitle(movie.getTitle());
+                dataMovie.setDate(movie.getDate());
+                dataMovie.setDescription(movie.getDescription());
+                dataMovie.setRevenue(movie.getRevenue());
+                dataMovie.setRate(movie.getRate());
+                dataMovie.setPhoto(movie.getPhoto());
+                i.putExtra(DetailFilmActivity.EXTRA_MOVIE_DETAIL, dataMovie);
                 context.startActivity(i);
             }
         });
