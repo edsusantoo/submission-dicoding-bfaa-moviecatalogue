@@ -8,6 +8,9 @@
     <string name="date">Date</string>
     <string name="lorem">asdfasdfadfasdfadfasdfadfadfasdfasdfasdfadfadfasdadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdffadf</string>
     <string name="more_info">More Info</string>
+    <string name="rating">Rating</string>
+    <string name="revenue">Revenue</string>
+    <string name="overview">Overview</string>
 
     <string-array name="data_movie_name">
         <item>Aquaman</item>
