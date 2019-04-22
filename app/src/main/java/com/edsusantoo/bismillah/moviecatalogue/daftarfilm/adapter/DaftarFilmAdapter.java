@@ -70,13 +70,13 @@ public class DaftarFilmAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        private TextView tvTittle, tvDate, tvDescription;
+        private TextView tvTittle, tvDateRelease, tvDescription;
         private ImageView imgMovie;
         private CardView cvMovie;
 
         ViewHolder(View view) {
             tvTittle = view.findViewById(R.id.tv_title);
-            tvDate = view.findViewById(R.id.tv_date);
+            tvDateRelease = view.findViewById(R.id.tv_date_release);
             tvDescription = view.findViewById(R.id.tv_description);
             imgMovie = view.findViewById(R.id.img_movie);
             cvMovie = view.findViewById(R.id.cv_movie);
@@ -84,7 +84,7 @@ public class DaftarFilmAdapter extends BaseAdapter {
 
         void bind(Movie movie) {
             tvTittle.setText(movie.getTitle());
-            tvDate.setText(movie.getDate());
+            tvDateRelease.setText(movie.getDate());
             tvDescription.setText(movie.getDescription());
             imgMovie.setImageResource(movie.getPhoto());
         }

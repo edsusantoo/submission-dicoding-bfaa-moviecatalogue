@@ -48,7 +48,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_date"
+                    android:id="@+id/tv_date_release"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_title"
@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_above="@id/tv_moreinfo"
-                    android:layout_below="@+id/tv_date"
+                    android:layout_below="@+id/tv_date_release"
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:text="@string/lorem" />
