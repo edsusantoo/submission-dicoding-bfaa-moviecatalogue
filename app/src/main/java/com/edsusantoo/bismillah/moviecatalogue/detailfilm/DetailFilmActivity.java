@@ -2,16 +2,19 @@ package com.edsusantoo.bismillah.moviecatalogue.detailfilm;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.model.Movie;
 
-public class DetailFilmActivity extends AppCompatActivity {
+public class DetailFilmActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_MOVIE_DETAIL = "extra_movie_detail";
 
+    private Toolbar toolbar;
     private TextView tvTitle, tvDateRelease, tvRating, tvRevenue, tvDescription;
     private ImageView imgMovie;
 
@@ -19,12 +22,19 @@ public class DetailFilmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_film);
+        toolbar = findViewById(R.id.toolbar);
         tvTitle = findViewById(R.id.tv_title);
         tvDateRelease = findViewById(R.id.tv_date_release);
         tvRating = findViewById(R.id.tv_rating);
         tvRevenue = findViewById(R.id.tv_revenue);
         tvDescription = findViewById(R.id.tv_description);
         imgMovie = findViewById(R.id.img_movie);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         getDataIntent();
 
@@ -46,5 +56,10 @@ public class DetailFilmActivity extends AppCompatActivity {
             tvDescription.setText(getDataIntent().getDescription());
             imgMovie.setImageResource(getDataIntent().getPhoto());
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
