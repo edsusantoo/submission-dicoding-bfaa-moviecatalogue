@@ -24,10 +24,9 @@ import java.util.ArrayList;
  */
 public class DaftarFilmFragment extends Fragment implements DaftarFilmView, SwipeRefreshLayout.OnRefreshListener {
 
-    ListView lvMovie;
-    SwipeRefreshLayout swipeRefresh;
+    private ListView lvMovie;
+    private SwipeRefreshLayout swipeRefresh;
     private DaftarFilmPresenter presenter;
-    private DaftarFilmAdapter adapter;
 
     public DaftarFilmFragment() {
         presenter = new DaftarFilmPresenter(this);
@@ -65,7 +64,7 @@ public class DaftarFilmFragment extends Fragment implements DaftarFilmView, Swip
     @Override
     public void showDaftarFilm(ArrayList<Movie> movies) {
 
-        adapter = new DaftarFilmAdapter(getContext(), movies);
+        DaftarFilmAdapter adapter = new DaftarFilmAdapter(getContext(), movies);
         lvMovie.setDivider(null);
         lvMovie.setAdapter(adapter);
     }

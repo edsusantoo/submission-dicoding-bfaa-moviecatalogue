@@ -14,7 +14,6 @@ public class DetailFilmActivity extends AppCompatActivity implements View.OnClic
 
     public static final String EXTRA_MOVIE_DETAIL = "extra_movie_detail";
 
-    private Toolbar toolbar;
     private TextView tvTitle, tvDateRelease, tvRating, tvRevenue, tvDescription;
     private ImageView imgMovie;
 
@@ -22,7 +21,7 @@ public class DetailFilmActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_film);
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         tvTitle = findViewById(R.id.tv_title);
         tvDateRelease = findViewById(R.id.tv_date_release);
         tvRating = findViewById(R.id.tv_rating);
