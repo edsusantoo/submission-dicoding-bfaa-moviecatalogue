@@ -5,4 +5,5 @@
     <color name="colorAccent">#ecf0f1</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="colorSelectedTab">#00b894</color>
 </resources>

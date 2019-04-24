@@ -12,6 +12,8 @@
     <string name="revenue">Revenue</string>
     <string name="overview">Overview</string>
     <string name="date_release">Date Release</string>
+    <string name="root">Root</string>
+    <string name="movie">Movie</string>
 
     <string-array name="data_movie_name">
         <item>Aquaman</item>

@@ -1,33 +1,38 @@
 package com.edsusantoo.bismillah.moviecatalogue;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.DaftarFilmFragment;
+import com.edsusantoo.bismillah.moviecatalogue.adapter.MainViewPagerAdapater;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TabLayout tabLayoutMain;
+    private ViewPager viewPagerMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tabLayoutMain = findViewById(R.id.tab_main);
+        viewPagerMain = findViewById(R.id.view_pager_main);
 
-        showDaftarFilmFragment();
+        setViewPagerMain();
+        setTabLayoutMain();
+
 
     }
 
-    private void showDaftarFilmFragment() {
-        FragmentManager mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        DaftarFilmFragment mDaftarFilmFragment = new DaftarFilmFragment();
-
-        Fragment fragment = mFragmentManager.findFragmentByTag(DaftarFilmFragment.class.getSimpleName());
-        if (!(fragment instanceof DaftarFilmFragment)) {
-            mFragmentTransaction.add(R.id.frame_container, mDaftarFilmFragment, DaftarFilmFragment.class.getSimpleName());
-            mFragmentTransaction.commit();
-        }
+    private void setViewPagerMain() {
+        MainViewPagerAdapater mainViewPagerAdapater = new MainViewPagerAdapater(getSupportFragmentManager());
+        viewPagerMain.setAdapter(mainViewPagerAdapater);
     }
+
+    private void setTabLayoutMain() {
+        tabLayoutMain.setupWithViewPager(viewPagerMain);
+    }
+
 }
