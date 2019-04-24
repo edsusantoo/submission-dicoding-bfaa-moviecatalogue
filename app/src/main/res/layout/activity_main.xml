@@ -39,7 +39,7 @@
                     android:layout_marginBottom="-6dp"
                     android:layout_toEndOf="@id/img_logo"
                     android:text="@string/root"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorSelectedTab"
                     android:textStyle="bold" />
 
                 <TextView
