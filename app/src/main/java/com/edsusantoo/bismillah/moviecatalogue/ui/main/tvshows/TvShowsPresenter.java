@@ -1,15 +1,15 @@
-package com.edsusantoo.bismillah.moviecatalogue.main.movies;
+package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
 import android.content.res.TypedArray;
 
-import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 
 import java.util.ArrayList;
 
-class MoviesPresenter {
-    private MoviesView view;
+class TvShowsPresenter {
+    private TvShowsView view;
 
-    MoviesPresenter(MoviesView view) {
+    TvShowsPresenter(TvShowsView view) {
         this.view = view;
     }
 
@@ -32,7 +32,7 @@ class MoviesPresenter {
             movie.setPhoto(dataMoviePhoto.getResourceId(i, -1));
             movies.add(movie);
         }
-        view.showDaftarFilm(movies);
+        view.showListMovies(movies);
 
         view.hideLoading();
     }

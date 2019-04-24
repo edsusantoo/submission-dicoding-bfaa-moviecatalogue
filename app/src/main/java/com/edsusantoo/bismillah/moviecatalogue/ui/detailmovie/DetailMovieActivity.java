@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.detailmovie;
+package com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 
 public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,7 +20,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_film);
+        setContentView(R.layout.activity_detail_movie);
         Toolbar toolbar = findViewById(R.id.toolbar);
         tvTitle = findViewById(R.id.tv_title);
         tvDateRelease = findViewById(R.id.tv_date_release);

@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.main.movies.adapter;
+package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,17 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.detailmovie.DetailMovieActivity;
-import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie.DetailMovieActivity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DaftarFilmAdapter extends RecyclerView.Adapter<DaftarFilmAdapter.DaftarFilmViewHolder> {
 
     private Context context;
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
 
-    public DaftarFilmAdapter(Context context, ArrayList<Movie> movies) {
+    public DaftarFilmAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
     }
@@ -31,7 +31,7 @@ public class DaftarFilmAdapter extends RecyclerView.Adapter<DaftarFilmAdapter.Da
     @NonNull
     @Override
     public DaftarFilmViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_list_movie, viewGroup, false);
         return new DaftarFilmViewHolder(view);
     }
 
@@ -79,7 +79,7 @@ public class DaftarFilmAdapter extends RecyclerView.Adapter<DaftarFilmAdapter.Da
             tvDateRelease = view.findViewById(R.id.tv_date_release);
             tvDescription = view.findViewById(R.id.tv_description);
             imgMovie = view.findViewById(R.id.img_movie);
-            cvMovie = view.findViewById(R.id.cv_movie);
+            cvMovie = view.findViewById(R.id.cv_list_movie);
         }
 
     }

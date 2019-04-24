@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.main.movies;
+package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
 
 import android.annotation.SuppressLint;
@@ -15,10 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.main.movies.adapter.DaftarFilmAdapter;
-import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.DaftarFilmAdapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +37,7 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_daftar_film, container, false);
+        return inflater.inflate(R.layout.fragment_list_movie, container, false);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     }
 
     @Override
-    public void showDaftarFilm(ArrayList<Movie> movies) {
+    public void showListMovies(List<Movie> movies) {
         DaftarFilmAdapter adapter = new DaftarFilmAdapter(getContext(), movies);
         LinearLayoutManager llManager = new LinearLayoutManager(getActivity());
         llManager.setOrientation(LinearLayoutManager.VERTICAL);

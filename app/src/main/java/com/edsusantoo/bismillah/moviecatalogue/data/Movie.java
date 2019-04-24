@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.main.movies.model;
+package com.edsusantoo.bismillah.moviecatalogue.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

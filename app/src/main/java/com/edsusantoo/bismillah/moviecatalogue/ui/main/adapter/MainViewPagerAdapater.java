@@ -1,10 +1,11 @@
-package com.edsusantoo.bismillah.moviecatalogue.main.adapter;
+package com.edsusantoo.bismillah.moviecatalogue.ui.main.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.edsusantoo.bismillah.moviecatalogue.main.movies.MoviesFragment;
+import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.MoviesFragment;
+import com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows.TvShowsFragment;
 
 public class MainViewPagerAdapater extends FragmentStatePagerAdapter {
     public MainViewPagerAdapater(FragmentManager fm) {
@@ -17,7 +18,7 @@ public class MainViewPagerAdapater extends FragmentStatePagerAdapter {
             case 0:
                 return new MoviesFragment();
             case 1:
-                return new MoviesFragment();
+                return new TvShowsFragment();
         }
         return null;
     }
