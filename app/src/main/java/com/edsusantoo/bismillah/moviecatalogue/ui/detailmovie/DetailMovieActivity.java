@@ -10,11 +10,12 @@ import android.widget.TextView;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 
-public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetailMovieActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE_DETAIL = "extra_movie_detail";
 
     private TextView tvTitle, tvDateRelease, tvRating, tvRevenue, tvDescription;
+    private TextView labelRevenue;
     private ImageView imgMovie;
 
     @Override
@@ -25,6 +26,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         tvTitle = findViewById(R.id.tv_title);
         tvDateRelease = findViewById(R.id.tv_date_release);
         tvRating = findViewById(R.id.tv_rating);
+        labelRevenue = findViewById(R.id.label_revenue);
         tvRevenue = findViewById(R.id.tv_revenue);
         tvDescription = findViewById(R.id.tv_description);
         imgMovie = findViewById(R.id.img_movie);
@@ -54,11 +56,11 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
             tvRevenue.setText(getDataIntent().getRevenue());
             tvDescription.setText(getDataIntent().getDescription());
             imgMovie.setImageResource(getDataIntent().getPhoto());
+
+            if (getDataIntent().getRevenue() == null) {
+                labelRevenue.setVisibility(View.GONE);
+                tvRevenue.setVisibility(View.GONE);
+            }
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

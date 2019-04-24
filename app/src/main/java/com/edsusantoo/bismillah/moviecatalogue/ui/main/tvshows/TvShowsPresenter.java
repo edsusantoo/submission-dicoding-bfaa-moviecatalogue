@@ -17,7 +17,6 @@ class TvShowsPresenter {
                   String[] dataMovieDate,
                   String[] dataMovieDescription,
                   String[] dataMovieRating,
-                  String[] dataMovieRevenue,
                   TypedArray dataMoviePhoto) {
         view.showLoading();
 
@@ -28,7 +27,6 @@ class TvShowsPresenter {
             movie.setDate(dataMovieDate[i]);
             movie.setDescription(dataMovieDescription[i]);
             movie.setRate(dataMovieRating[i]);
-            movie.setRevenue(dataMovieRevenue[i]);
             movie.setPhoto(dataMoviePhoto.getResourceId(i, -1));
             movies.add(movie);
         }

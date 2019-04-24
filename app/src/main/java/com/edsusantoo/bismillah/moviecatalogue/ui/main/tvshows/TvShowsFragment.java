@@ -54,14 +54,13 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
     }
 
     private void prepared() {
-        String[] dataMovieName = getResources().getStringArray(R.array.data_movie_name);
-        String[] dataMovieDate = getResources().getStringArray(R.array.data_movie_date);
-        String[] dataMovieDescription = getResources().getStringArray(R.array.data_movie_description);
-        String[] dataRating = getResources().getStringArray(R.array.data_movie_rating);
-        String[] dataRevenue = getResources().getStringArray(R.array.data_movie_revenue);
-        @SuppressLint("Recycle") TypedArray dataPhoto = getResources().obtainTypedArray(R.array.data_movie_photo);
+        String[] dataMovieName = getResources().getStringArray(R.array.data_tvshow_name);
+        String[] dataMovieDate = getResources().getStringArray(R.array.data_tvshow_date);
+        String[] dataMovieDescription = getResources().getStringArray(R.array.data_tvshow_description);
+        String[] dataRating = getResources().getStringArray(R.array.data_tvshow_rating);
+        @SuppressLint("Recycle") TypedArray dataPhoto = getResources().obtainTypedArray(R.array.data_tvshow_photo);
 
-        presenter.addMovie(dataMovieName, dataMovieDate, dataMovieDescription, dataRating, dataRevenue, dataPhoto);
+        presenter.addMovie(dataMovieName, dataMovieDate, dataMovieDescription, dataRating, dataPhoto);
     }
 
 
