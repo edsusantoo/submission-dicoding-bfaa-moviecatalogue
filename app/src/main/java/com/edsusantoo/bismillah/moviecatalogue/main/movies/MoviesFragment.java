@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.daftarfilm;
+package com.edsusantoo.bismillah.moviecatalogue.main.movies;
 
 
 import android.annotation.SuppressLint;
@@ -8,28 +8,29 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.adapter.DaftarFilmAdapter;
-import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.model.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.main.movies.adapter.DaftarFilmAdapter;
+import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DaftarFilmFragment extends Fragment implements DaftarFilmView, SwipeRefreshLayout.OnRefreshListener {
+public class MoviesFragment extends Fragment implements MoviesView, SwipeRefreshLayout.OnRefreshListener {
 
-    private ListView lvMovie;
+    private RecyclerView recyclerListMovie;
     private SwipeRefreshLayout swipeRefresh;
-    private DaftarFilmPresenter presenter;
+    private MoviesPresenter presenter;
 
-    public DaftarFilmFragment() {
-        presenter = new DaftarFilmPresenter(this);
+    public MoviesFragment() {
+        presenter = new MoviesPresenter(this);
     }
 
 
@@ -42,7 +43,7 @@ public class DaftarFilmFragment extends Fragment implements DaftarFilmView, Swip
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        lvMovie = view.findViewById(R.id.lv_movie);
+        recyclerListMovie = view.findViewById(R.id.recycler_list_movie);
         swipeRefresh = view.findViewById(R.id.swipe);
 
         swipeRefresh.setOnRefreshListener(this);
@@ -63,10 +64,12 @@ public class DaftarFilmFragment extends Fragment implements DaftarFilmView, Swip
 
     @Override
     public void showDaftarFilm(ArrayList<Movie> movies) {
-
         DaftarFilmAdapter adapter = new DaftarFilmAdapter(getContext(), movies);
-        lvMovie.setDivider(null);
-        lvMovie.setAdapter(adapter);
+        LinearLayoutManager llManager = new LinearLayoutManager(getActivity());
+        llManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerListMovie.setLayoutManager(llManager);
+        recyclerListMovie.setAdapter(adapter);
+        recyclerListMovie.setHasFixedSize(true);
     }
 
     private void prepared() {

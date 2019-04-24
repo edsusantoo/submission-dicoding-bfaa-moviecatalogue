@@ -1,22 +1,23 @@
-package com.edsusantoo.bismillah.moviecatalogue.daftarfilm.adapter;
+package com.edsusantoo.bismillah.moviecatalogue.main.movies.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.model.Movie;
-import com.edsusantoo.bismillah.moviecatalogue.detailfilm.DetailFilmActivity;
+import com.edsusantoo.bismillah.moviecatalogue.detailmovie.DetailMovieActivity;
+import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
 
 import java.util.ArrayList;
 
-public class DaftarFilmAdapter extends BaseAdapter {
+public class DaftarFilmAdapter extends RecyclerView.Adapter<DaftarFilmAdapter.DaftarFilmViewHolder> {
 
     private Context context;
     private ArrayList<Movie> movies;
@@ -26,34 +27,27 @@ public class DaftarFilmAdapter extends BaseAdapter {
         this.movies = movies;
     }
 
+
+    @NonNull
     @Override
-    public int getCount() {
-        return movies.size();
+    public DaftarFilmViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
+        return new DaftarFilmViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return movies.get(position);
-    }
+    public void onBindViewHolder(@NonNull DaftarFilmViewHolder holder, int position) {
+        final Movie movie = movies.get(position);
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+        holder.tvTittle.setText(movie.getTitle());
+        holder.tvDateRelease.setText(movie.getDate());
+        holder.tvDescription.setText(movie.getDescription());
+        holder.imgMovie.setImageResource(movie.getPhoto());
 
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
-        }
-        ViewHolder viewHolder = new ViewHolder(view);
-        final Movie movie = (Movie) getItem(position);
-        viewHolder.bind(movie);
-
-        viewHolder.cvMovie.setOnClickListener(new View.OnClickListener() {
+        holder.cvMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, DetailFilmActivity.class);
+                Intent i = new Intent(context, DetailMovieActivity.class);
                 Movie dataMovie = new Movie();
                 dataMovie.setTitle(movie.getTitle());
                 dataMovie.setDate(movie.getDate());
@@ -61,20 +55,26 @@ public class DaftarFilmAdapter extends BaseAdapter {
                 dataMovie.setRevenue(movie.getRevenue());
                 dataMovie.setRate(movie.getRate());
                 dataMovie.setPhoto(movie.getPhoto());
-                i.putExtra(DetailFilmActivity.EXTRA_MOVIE_DETAIL, dataMovie);
+                i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
                 context.startActivity(i);
             }
         });
-
-        return view;
     }
 
-    private class ViewHolder {
+
+    @Override
+    public int getItemCount() {
+        return movies.size();
+    }
+
+
+    class DaftarFilmViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTittle, tvDateRelease, tvDescription;
         private ImageView imgMovie;
         private CardView cvMovie;
 
-        ViewHolder(View view) {
+        DaftarFilmViewHolder(View view) {
+            super(view);
             tvTittle = view.findViewById(R.id.tv_title);
             tvDateRelease = view.findViewById(R.id.tv_date_release);
             tvDescription = view.findViewById(R.id.tv_description);
@@ -82,11 +82,5 @@ public class DaftarFilmAdapter extends BaseAdapter {
             cvMovie = view.findViewById(R.id.cv_movie);
         }
 
-        void bind(Movie movie) {
-            tvTittle.setText(movie.getTitle());
-            tvDateRelease.setText(movie.getDate());
-            tvDescription.setText(movie.getDescription());
-            imgMovie.setImageResource(movie.getPhoto());
-        }
     }
 }

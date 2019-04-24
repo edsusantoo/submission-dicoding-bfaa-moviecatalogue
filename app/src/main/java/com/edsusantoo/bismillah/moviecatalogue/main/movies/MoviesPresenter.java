@@ -1,15 +1,15 @@
-package com.edsusantoo.bismillah.moviecatalogue.daftarfilm;
+package com.edsusantoo.bismillah.moviecatalogue.main.movies;
 
 import android.content.res.TypedArray;
 
-import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.model.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
 
 import java.util.ArrayList;
 
-class DaftarFilmPresenter {
-    private DaftarFilmView view;
+class MoviesPresenter {
+    private MoviesView view;
 
-    DaftarFilmPresenter(DaftarFilmView view) {
+    MoviesPresenter(MoviesView view) {
         this.view = view;
     }
 

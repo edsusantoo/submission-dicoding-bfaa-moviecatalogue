@@ -1,11 +1,12 @@
-package com.edsusantoo.bismillah.moviecatalogue;
+package com.edsusantoo.bismillah.moviecatalogue.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.edsusantoo.bismillah.moviecatalogue.adapter.MainViewPagerAdapater;
+import com.edsusantoo.bismillah.moviecatalogue.R;
+import com.edsusantoo.bismillah.moviecatalogue.main.adapter.MainViewPagerAdapater;
 
 public class MainActivity extends AppCompatActivity {
 

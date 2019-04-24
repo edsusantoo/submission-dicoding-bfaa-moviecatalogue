@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.detailfilm;
+package com.edsusantoo.bismillah.moviecatalogue.detailmovie;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.daftarfilm.model.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.main.movies.model.Movie;
 
-public class DetailFilmActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_MOVIE_DETAIL = "extra_movie_detail";
 
