@@ -106,27 +106,47 @@
     </string-array>
 
     <string-array name="data_movie_revenue">
-        <item>$1,143,689,193.00</item>
-        <item>$433,888,866.00</item>
-        <item>$2,046,239,637.00</item>
-        <item>-</item>
-        <item>$835,137,710.00</item>
-        <item>$465,895,025.00</item>
-        <item>$137,944,327.00</item>
-        <item>-</item>
-        <item>$508,700,470.00</item>
-        <item>$89,617,139.00</item>
-        <item>$246,941,965.00</item>
-        <item>-</item>
-        <item>$348,807,090.00</item>
-        <item>$104,236,467.00</item>
-        <item>-</item>
-        <item>$73,260,114.00</item>
-        <item>$374,130,437.00</item>
-        <item>$17,894,345.00</item>
-        <item>$171,304,407.00</item>
-        <item>$855,013,954.00</item>
+        <item>@string/revenue_movie_aquaman</item>
+        <item>@string/revenue_movie_star_in_born</item>
+        <item>@string/revenue_movie_avanger</item>
+        <item>@string/revenue_movie_bird_box</item>
+        <item>@string/revenue_movie_bohemian</item>
+        <item>@string/revenue_movie_bumblebee</item>
+        <item>@string/revenue_movie_creed_ii</item>
+        <item>@string/revenue_movie_deadpool</item>
+        <item>@string/revenue_movie_how_to_train_dragon</item>
+        <item>@string/revenue_movie_dragonball_broly</item>
+        <item>@string/revenue_movie_glass</item>
+        <item>@string/revenue_movie_hunter_killer</item>
+        <item>@string/revenue_movie_marry_poppins</item>
+        <item>@string/revenue_movie_mortal_engine</item>
+        <item>@string/revenue_movie_preman_pensiun</item>
+        <item>@string/revenue_movie_robinhood</item>
+        <item>@string/revenue_movie_spiderman</item>
+        <item>@string/revenue_movie_the_girl_spiderman</item>
+        <item>@string/revenue_movie_the_mule</item>
+        <item>@string/revenue_movie_venom</item>
     </string-array>
+    <string name="revenue_movie_aquaman">$1,143,689,193.00</string>
+    <string name="revenue_movie_star_in_born">$433,888,866.00</string>
+    <string name="revenue_movie_avanger">$2,046,239,637.00</string>
+    <string name="revenue_movie_bird_box">-</string>
+    <string name="revenue_movie_bohemian">$835,137,710.00</string>
+    <string name="revenue_movie_bumblebee">$465,895,025.00</string>
+    <string name="revenue_movie_creed_ii">$137,944,327.00</string>
+    <string name="revenue_movie_deadpool">-</string>
+    <string name="revenue_movie_how_to_train_dragon">$508,700,470.00</string>
+    <string name="revenue_movie_dragonball_broly">$89,617,139.00</string>
+    <string name="revenue_movie_glass">$246,941,965.00</string>
+    <string name="revenue_movie_hunter_killer">-</string>
+    <string name="revenue_movie_marry_poppins">$348,807,090.00</string>
+    <string name="revenue_movie_mortal_engine">$104,236,467.00</string>
+    <string name="revenue_movie_preman_pensiun">-</string>
+    <string name="revenue_movie_robinhood">$73,260,114.00</string>
+    <string name="revenue_movie_spiderman">$374,130,437.00</string>
+    <string name="revenue_movie_the_girl_spiderman">$17,894,345.00</string>
+    <string name="revenue_movie_the_mule">$171,304,407.00</string>
+    <string name="revenue_movie_venom">$855,013,954.00</string>
 
     <string-array name="data_movie_description">
         <item>Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm\'s half-human, half-Atlantean brother and true heir to the throne.</item>

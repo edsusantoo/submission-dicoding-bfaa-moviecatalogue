@@ -34,6 +34,26 @@
     <string name="date_movie_the_girl_spiderman">25 Oktober 2018</string>
     <string name="date_movie_the_mule">14 Desember 2018</string>
     <string name="date_movie_venom">28 Desember 2018</string>
+    <string name="revenue_movie_aquaman">Rp. 16,231,237,027,056</string>
+    <string name="revenue_movie_star_in_born">Rp. 6,157,750,786,272</string>
+    <string name="revenue_movie_avanger">Rp. 29,040,232,928,304</string>
+    <string name="revenue_movie_bird_box">-</string>
+    <string name="revenue_movie_bohemian">Rp. 11,852,274,380,320</string>
+    <string name="revenue_movie_bumblebee">Rp. 6,611,982,194,800</string>
+    <string name="revenue_movie_creed_ii">Rp. 1,957,705,888,784</string>
+    <string name="revenue_movie_deadpool">-</string>
+    <string name="revenue_movie_how_to_train_dragon">Rp. 7,219,477,070,240</string>
+    <string name="revenue_movie_dragonball_broly">Rp. 1,271,846,436,688</string>
+    <string name="revenue_movie_glass">Rp. 3,504,600,367,280</string>
+    <string name="revenue_movie_hunter_killer">-</string>
+    <string name="revenue_movie_marry_poppins">Rp. 4,950,270,221,280</string>
+    <string name="revenue_movie_mortal_engine">Rp. 1,479,323,939,664</string>
+    <string name="revenue_movie_preman_pensiun">-</string>
+    <string name="revenue_movie_robinhood">Rp. 1,039,707,537,888</string>
+    <string name="revenue_movie_spiderman">Rp. 5,309,659,161,904</string>
+    <string name="revenue_movie_the_girl_spiderman">Rp. 253,956,544,240</string>
+    <string name="revenue_movie_the_mule">Rp. 2,431,152,144,144</string>
+    <string name="revenue_movie_venom">Rp. 12,134,358,035,168</string>
 
 
 </resources>
