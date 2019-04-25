@@ -240,27 +240,46 @@
     </string-array>
 
     <string-array name="data_tvshow_date">
-        <item>October 10, 2012</item>
-        <item>February 15, 2019</item>
-        <item>February 26, 1986</item>
-        <item>February 26, 1986</item>
-        <item>October 12, 2009</item>
-        <item>January 31, 1999</item>
-        <item>October 7, 2014</item>
-        <item>September 22, 2014</item>
-        <item>March 27, 2005</item>
-        <item>March 28, 2019</item>
-        <item>March 17, 2017</item>
-        <item>February 15, 2007</item>
-        <item>September 23, 2003</item>
-        <item>January 26, 2017</item>
-        <item>January 9, 2011</item>
-        <item>October 26, 2015</item>
-        <item>September 13, 2005</item>
-        <item>December 17, 1989</item>
-        <item>February 15, 2019</item>
-        <item>October 31, 2010</item>
+        <item>@string/date_tvshow_arrow</item>
+        <item>@string/date_tvshow_doom_patrol</item>
+        <item>@string/date_tvshow_dragonball</item>
+        <item>@string/date_tvshow_fairy_tail</item>
+        <item>@string/date_tvshow_family_guy</item>
+        <item>@string/date_tvshow_the_flash</item>
+        <item>@string/date_tvshow_gotham</item>
+        <item>@string/date_tvshow_grey_anatomi</item>
+        <item>@string/date_tvshow_hanna</item>
+        <item>@string/date_tvshow_iron_fist</item>
+        <item>@string/date_tvshow_naruto</item>
+        <item>@string/date_tvshow_ncis</item>
+        <item>@string/date_tvshow_riverdale</item>
+        <item>@string/date_tvshow_shameless</item>
+        <item>@string/date_tvshow_supergirl</item>
+        <item>@string/date_tvshow_supernatural</item>
+        <item>@string/date_tvshow_the_simpsons</item>
+        <item>@string/date_tvshow_the_umbrella_academy</item>
+        <item>@string/date_tvshow_the_walking_dead</item>
     </string-array>
+
+    <string name="date_tvshow_arrow">October 10, 2012</string>
+    <string name="date_tvshow_doom_patrol">February 15, 2019</string>
+    <string name="date_tvshow_dragonball">February 26, 1986</string>
+    <string name="date_tvshow_fairy_tail">February 26, 1986</string>
+    <string name="date_tvshow_family_guy">October 12, 2009</string>
+    <string name="date_tvshow_the_flash">January 31, 1999</string>
+    <string name="date_tvshow_gotham">October 7, 2014</string>
+    <string name="date_tvshow_grey_anatomi">September 22, 2014</string>
+    <string name="date_tvshow_hanna">March 27, 2005</string>
+    <string name="date_tvshow_iron_fist">March 28, 2019</string>
+    <string name="date_tvshow_naruto">March 17, 2017</string>
+    <string name="date_tvshow_ncis">February 15, 2007</string>
+    <string name="date_tvshow_riverdale">September 23, 2003</string>
+    <string name="date_tvshow_shameless">January 26, 2017</string>
+    <string name="date_tvshow_supergirl">January 9, 2011</string>
+    <string name="date_tvshow_supernatural">October 26, 2015</string>
+    <string name="date_tvshow_the_simpsons">September 13, 2005</string>
+    <string name="date_tvshow_the_umbrella_academy">December 17, 1989</string>
+    <string name="date_tvshow_the_walking_dead">February 15, 2019</string>
 
 
     <string-array name="data_tvshow_rating">

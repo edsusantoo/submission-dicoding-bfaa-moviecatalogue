@@ -74,6 +74,25 @@
     <string name="description_movie_the_girl_spiderman">Di Stockholm, Swedia, peretas Lisbeth Salander disewa oleh Frans Balder, seorang insinyur komputer, untuk mengambil program yang menurutnya terlalu berbahaya untuk ada.</string>
     <string name="description_movie_the_mule">Earl Stone, seorang pria berusia 80-an, bangkrut, sendirian, dan menghadapi penyitaan bisnisnya ketika ia ditawari pekerjaan yang hanya mengharuskannya mengemudi. Cukup mudah, tetapi, tanpa diketahui Earl, dia baru saja mendaftar sebagai kurir narkoba untuk kartel Meksiko. Dia melakukannya dengan baik sehingga muatannya meningkat secara eksponensial, dan Earl menabrak radar agen DEA yang sibuk mengisi daya.</string>
     <string name="description_movie_venom">Jurnalis investigasi Eddie Brock mencoba untuk kembali setelah skandal, tetapi secara tidak sengaja menjadi tuan rumah Venom, seorang simbiot alien yang sangat kuat dan sakti. Segera, ia harus mengandalkan kekuatan barunya untuk melindungi dunia dari organisasi bayangan yang mencari simbiosis mereka sendiri.</string>
+    <string name="date_tvshow_arrow">10 Oktober 2012</string>
+    <string name="date_tvshow_doom_patrol">15 Februari 2019</string>
+    <string name="date_tvshow_dragonball">26 Februari 1986</string>
+    <string name="date_tvshow_fairy_tail">26 Februari 1986</string>
+    <string name="date_tvshow_family_guy">12 Oktober 2009</string>
+    <string name="date_tvshow_the_flash">31 Januari 1999</string>
+    <string name="date_tvshow_gotham">7 Oktober 2014</string>
+    <string name="date_tvshow_grey_anatomi">22 September 2014</string>
+    <string name="date_tvshow_hanna">27 Maret 2005</string>
+    <string name="date_tvshow_iron_fist">28 Maret 2019</string>
+    <string name="date_tvshow_naruto">17 Maret 2017</string>
+    <string name="date_tvshow_ncis">15 Februari 2007</string>
+    <string name="date_tvshow_riverdale">23 September 2003</string>
+    <string name="date_tvshow_shameless">26 Januari 2017</string>
+    <string name="date_tvshow_supergirl">9 Januari 2011</string>
+    <string name="date_tvshow_supernatural">26 Oktober 2015</string>
+    <string name="date_tvshow_the_simpsons">13 September 2005</string>
+    <string name="date_tvshow_the_umbrella_academy">17 Desember 1989</string>
+    <string name="date_tvshow_the_walking_dead">15 Februari 2019</string>
 
 
 </resources>
