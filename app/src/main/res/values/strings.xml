@@ -2,7 +2,7 @@
     <string name="app_name">Movie Catalogue</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="movie_list">Daftar Film</string>
+    <string name="movie_list">Movie List</string>
     <string name="minus">-</string>
     <string name="title">Title</string>
     <string name="date">Date</string>
@@ -39,27 +39,48 @@
     </string-array>
 
     <string-array name="data_movie_date">
-        <item>December 7, 2018</item>
-        <item>October 3, 2018</item>
-        <item>April 25, 2018</item>
-        <item>December 13, 2018</item>
-        <item>October 24, 2018</item>
-        <item>December 15, 2018</item>
-        <item>November 21, 2018</item>
-        <item>December 11, 2018</item>
-        <item>January 3, 2019</item>
-        <item>December 14, 2018</item>
-        <item>January 16, 2019</item>
-        <item>October 19, 2018</item>
-        <item>December 13, 2018</item>
-        <item>November 27, 2018</item>
-        <item>January 17, 2019</item>
-        <item>November 20, 2018</item>
-        <item>December 7, 2018</item>
-        <item>October 25, 2018</item>
-        <item>December 14, 2018</item>
-        <item>September 28, 2018</item>
+        <item>@string/date_movie_aquaman</item>
+        <item>@string/date_movie_star_in_born</item>
+        <item>@string/date_movie_avanger</item>
+        <item>@string/date_movie_bird_box</item>
+        <item>@string/date_movie_bohemian</item>
+        <item>@string/date_movie_bumblebee</item>
+        <item>@string/date_movie_creed_ii</item>
+        <item>@string/date_movie_deadpool</item>
+        <item>@string/date_movie_how_to_train_dragon</item>
+        <item>@string/date_movie_dragonball_broly</item>
+        <item>@string/date_movie_glass</item>
+        <item>@string/date_movie_hunter_killer</item>
+        <item>@string/date_movie_marry_poppins</item>
+        <item>@string/date_movie_mortal_engine</item>
+        <item>@string/date_movie_preman_pensiun</item>
+        <item>@string/date_movie_robinhood</item>
+        <item>@string/date_movie_spiderman</item>
+        <item>@string/date_movie_the_girl_spiderman</item>
+        <item>@string/date_movie_the_mule</item>
+        <item>@string/date_movie_venom</item>
     </string-array>
+
+    <string name="date_movie_aquaman">December 7, 2018</string>
+    <string name="date_movie_star_in_born">October 3, 2018</string>
+    <string name="date_movie_avanger">April 25, 2018</string>
+    <string name="date_movie_bird_box">December 13, 2018</string>
+    <string name="date_movie_bohemian">October 24, 2018</string>
+    <string name="date_movie_bumblebee">December 15, 2018</string>
+    <string name="date_movie_creed_ii">November 21, 2018</string>
+    <string name="date_movie_deadpool">December 11, 2018</string>
+    <string name="date_movie_how_to_train_dragon">January 3, 2019</string>
+    <string name="date_movie_dragonball_broly">December 14, 2018</string>
+    <string name="date_movie_glass">January 16, 2019</string>
+    <string name="date_movie_hunter_killer">October 19, 2018</string>
+    <string name="date_movie_marry_poppins">December 13, 2018</string>
+    <string name="date_movie_mortal_engine">November 27, 2018</string>
+    <string name="date_movie_preman_pensiun">January 17, 2019</string>
+    <string name="date_movie_robinhood">November 20, 2018</string>
+    <string name="date_movie_spiderman">December 7, 2018</string>
+    <string name="date_movie_the_girl_spiderman">October 25, 2018</string>
+    <string name="date_movie_the_mule">December 14, 2018</string>
+    <string name="date_movie_venom">September 28, 2018</string>
 
     <string-array name="data_movie_rating">
         <item>68/100</item>

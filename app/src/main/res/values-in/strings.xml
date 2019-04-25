@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Katalog Film</string>
+    <string name="hello_blank_fragment">Halo Fragment Kosong</string>
+    <string name="movie_list">Daftar Film</string>
+    <string name="minus">-</string>
+    <string name="title">Judul</string>
+    <string name="date">Tanggal</string>
+    <string name="lorem">asdfasdfadfasdfadfasdfadfadfasdfasdfasdfadfadfasdadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdffadf</string>
+    <string name="more_info">Lebih banyak info</string>
+    <string name="rating">Peringkat</string>
+    <string name="revenue">Pendapatan</string>
+    <string name="overview">Deskripsi</string>
+    <string name="date_release">Tanggal Ditayangkan</string>
+    <string name="root">Root</string>
+    <string name="movie">Film</string>
+    <string name="date_movie_aquaman">7 Desember 2018</string>
+    <string name="date_movie_star_in_born">3 Oktober 2018</string>
+    <string name="date_movie_avanger">25 April 2018</string>
+    <string name="date_movie_bird_box">13 Desember 2018</string>
+    <string name="date_movie_bohemian">24 Oktober 2018</string>
+    <string name="date_movie_bumblebee">15 Desember 2018</string>
+    <string name="date_movie_creed_ii">21 Nopember 2018</string>
+    <string name="date_movie_deadpool">11 Desember 2018</string>
+    <string name="date_movie_how_to_train_dragon">3 Januari 2019</string>
+    <string name="date_movie_dragonball_broly">14 Desember 2018</string>
+    <string name="date_movie_glass">16 Januari 2019</string>
+    <string name="date_movie_hunter_killer">19 Oktober 2018</string>
+    <string name="date_movie_marry_poppins">13 December 2018</string>
+    <string name="date_movie_mortal_engine">27 Nopember 2018</string>
+    <string name="date_movie_preman_pensiun">17 Januari 2019</string>
+    <string name="date_movie_robinhood">20 Nopember 2018</string>
+    <string name="date_movie_spiderman">7 Desember 2018</string>
+    <string name="date_movie_the_girl_spiderman">25 Oktober 2018</string>
+    <string name="date_movie_the_mule">14 Desember 2018</string>
+    <string name="date_movie_venom">28 Desember 2018</string>
+
+
+</resources>
