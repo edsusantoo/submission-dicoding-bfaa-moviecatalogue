@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.ui.changelanguage.ChangeLanguage;
-import com.edsusantoo.bismillah.moviecatalogue.ui.main.adapter.MainViewPagerAdapater;
+import com.edsusantoo.bismillah.moviecatalogue.ui.changelanguage.ChangeLanguageActivity;
+import com.edsusantoo.bismillah.moviecatalogue.ui.main.adapter.MainViewPagerAdapter;
 
 import java.util.Locale;
 
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setViewPagerMain() {
-        MainViewPagerAdapater mainViewPagerAdapater = new MainViewPagerAdapater(getSupportFragmentManager());
-        viewPagerMain.setAdapter(mainViewPagerAdapater);
+        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        viewPagerMain.setAdapter(mainViewPagerAdapter);
     }
 
     private void setTabLayoutMain() {
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_setting:
-                Intent i = new Intent(MainActivity.this, ChangeLanguage.class);
-                i.putExtra(ChangeLanguage.EXTRA_LANGUAGE, language);
+                Intent i = new Intent(MainActivity.this, ChangeLanguageActivity.class);
+                i.putExtra(ChangeLanguageActivity.EXTRA_LANGUAGE, language);
                 startActivityForResult(i, REQUEST_CODE_CHANGE_LANGUAGE);
                 break;
         }
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == REQUEST_CODE_CHANGE_LANGUAGE) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
-                    language = data.getStringExtra(ChangeLanguage.EXTRA_LANGUAGE);
+                    language = data.getStringExtra(ChangeLanguageActivity.EXTRA_LANGUAGE);
                     if (language != null) {
                         setLanguage(language);
 

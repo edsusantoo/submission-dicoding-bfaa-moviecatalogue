@@ -10,7 +10,7 @@ import android.widget.RadioGroup;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
 
-public class ChangeLanguage extends AppCompatActivity {
+public class ChangeLanguageActivity extends AppCompatActivity {
     public static final String EXTRA_LANGUAGE = "extra_language";
     private String language = null;
     private RadioGroup rgChangeLanguage;
@@ -33,11 +33,11 @@ public class ChangeLanguage extends AppCompatActivity {
             }
         });
 
-        setRadiButtonLanguage();
+        setRadioButtonLanguage();
 
     }
 
-    private void setRadiButtonLanguage() {
+    private void setRadioButtonLanguage() {
         language = getIntent().getStringExtra(EXTRA_LANGUAGE);
         if (language != null) {
             switch (language) {

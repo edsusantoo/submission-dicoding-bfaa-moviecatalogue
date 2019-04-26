@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.MoviesFragment;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows.TvShowsFragment;
 
-public class MainViewPagerAdapater extends FragmentStatePagerAdapter {
-    public MainViewPagerAdapater(FragmentManager fm) {
+public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
+    public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

@@ -17,12 +17,12 @@ import com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie.DetailMovieActivit
 
 import java.util.List;
 
-public class DaftarFilmAdapter extends RecyclerView.Adapter<DaftarFilmAdapter.DaftarFilmViewHolder> {
+public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.ListMoviesViewHolder> {
 
     private Context context;
     private List<Movie> movies;
 
-    public DaftarFilmAdapter(Context context, List<Movie> movies) {
+    public ListMoviesAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
     }
@@ -30,13 +30,13 @@ public class DaftarFilmAdapter extends RecyclerView.Adapter<DaftarFilmAdapter.Da
 
     @NonNull
     @Override
-    public DaftarFilmViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ListMoviesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_list_movie, viewGroup, false);
-        return new DaftarFilmViewHolder(view);
+        return new ListMoviesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DaftarFilmViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListMoviesViewHolder holder, int position) {
         final Movie movie = movies.get(position);
 
         holder.tvTittle.setText(movie.getTitle());
@@ -68,12 +68,12 @@ public class DaftarFilmAdapter extends RecyclerView.Adapter<DaftarFilmAdapter.Da
     }
 
 
-    class DaftarFilmViewHolder extends RecyclerView.ViewHolder {
+    class ListMoviesViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTittle, tvDateRelease, tvDescription;
         private ImageView imgMovie;
         private CardView cvMovie;
 
-        DaftarFilmViewHolder(View view) {
+        ListMoviesViewHolder(View view) {
             super(view);
             tvTittle = view.findViewById(R.id.tv_title);
             tvDateRelease = view.findViewById(R.id.tv_date_release);

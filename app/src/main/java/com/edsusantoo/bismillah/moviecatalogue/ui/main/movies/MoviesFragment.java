@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
-import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.DaftarFilmAdapter;
+import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.ListMoviesAdapter;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
     @Override
     public void showListMovies(List<Movie> movies) {
-        DaftarFilmAdapter adapter = new DaftarFilmAdapter(getContext(), movies);
+        ListMoviesAdapter adapter = new ListMoviesAdapter(getContext(), movies);
         LinearLayoutManager llManager = new LinearLayoutManager(getActivity());
         llManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerListMovie.setLayoutManager(llManager);
