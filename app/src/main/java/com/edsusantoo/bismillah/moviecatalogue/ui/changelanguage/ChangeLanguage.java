@@ -28,6 +28,7 @@ public class ChangeLanguage extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finishChangeLanguage();
                 finish();
             }
         });
@@ -66,12 +67,16 @@ public class ChangeLanguage extends AppCompatActivity {
         return language;
     }
 
-
-    @Override
-    public void onBackPressed() {
+    private void finishChangeLanguage() {
         Intent i = new Intent();
         i.putExtra(EXTRA_LANGUAGE, getRadioChangeLanguage());
         setResult(RESULT_OK, i);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        finishChangeLanguage();
         super.onBackPressed();
     }
 }
