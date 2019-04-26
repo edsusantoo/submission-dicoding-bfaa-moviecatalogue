@@ -15,22 +15,26 @@ import com.edsusantoo.bismillah.moviecatalogue.ui.main.adapter.MainViewPagerAdap
 
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final int REQUEST_CODE_CHANGE_LANGUAGE = 101;
     private String language = null;
-
-    private TabLayout tabLayoutMain;
-    private ViewPager viewPagerMain;
-
+    @BindView(R.id.tab_main)
+    TabLayout tabLayoutMain;
+    @BindView(R.id.view_pager_main)
+    ViewPager viewPagerMain;
+    @BindView(R.id.img_setting)
+    ImageView imgSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView imgSetting = findViewById(R.id.img_setting);
-        tabLayoutMain = findViewById(R.id.tab_main);
-        viewPagerMain = findViewById(R.id.view_pager_main);
+
+        ButterKnife.bind(this);
 
         setViewPagerMain();
         setTabLayoutMain();

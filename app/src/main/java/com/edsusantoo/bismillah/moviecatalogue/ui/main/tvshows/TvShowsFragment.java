@@ -20,12 +20,18 @@ import com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows.adapter.TvShowsAd
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefreshLayout.OnRefreshListener {
-    private RecyclerView recyclerTvShows;
-    private SwipeRefreshLayout swipeRefresh;
+
+    @BindView(R.id.recycler_tvmovie)
+    RecyclerView recyclerTvShows;
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout swipeRefresh;
     private TvShowsPresenter presenter;
 
     public TvShowsFragment() {
@@ -44,8 +50,7 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerTvShows = view.findViewById(R.id.recycler_tvmovie);
-        swipeRefresh = view.findViewById(R.id.swipe);
+        ButterKnife.bind(this, view);
 
         swipeRefresh.setOnRefreshListener(this);
 

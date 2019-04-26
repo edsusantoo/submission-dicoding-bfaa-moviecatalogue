@@ -20,14 +20,22 @@ import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.ListMovies
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MoviesFragment extends Fragment implements MoviesView, SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView recyclerListMovie;
-    private SwipeRefreshLayout swipeRefresh;
     private MoviesPresenter presenter;
+
+
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.recycler_list_movie)
+    RecyclerView recyclerListMovie;
+
 
     public MoviesFragment() {
         presenter = new MoviesPresenter(this);
@@ -43,8 +51,8 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerListMovie = view.findViewById(R.id.recycler_list_movie);
-        swipeRefresh = view.findViewById(R.id.swipe);
+
+        ButterKnife.bind(this, view);
 
         swipeRefresh.setOnRefreshListener(this);
 

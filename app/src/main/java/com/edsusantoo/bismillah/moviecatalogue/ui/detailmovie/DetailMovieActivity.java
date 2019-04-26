@@ -10,26 +10,38 @@ import android.widget.TextView;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailMovieActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE_DETAIL = "extra_movie_detail";
 
-    private TextView tvTitle, tvDateRelease, tvRating, tvRevenue, tvDescription;
-    private TextView labelRevenue;
-    private ImageView imgMovie;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_date_release)
+    TextView tvDateRelease;
+    @BindView(R.id.tv_rating)
+    TextView tvRating;
+    @BindView(R.id.label_revenue)
+    TextView labelRevenue;
+    @BindView(R.id.tv_revenue)
+    TextView tvRevenue;
+    @BindView(R.id.tv_description)
+    TextView tvDescription;
+    @BindView(R.id.img_movie)
+    ImageView imgMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        tvTitle = findViewById(R.id.tv_title);
-        tvDateRelease = findViewById(R.id.tv_date_release);
-        tvRating = findViewById(R.id.tv_rating);
-        labelRevenue = findViewById(R.id.label_revenue);
-        tvRevenue = findViewById(R.id.tv_revenue);
-        tvDescription = findViewById(R.id.tv_description);
-        imgMovie = findViewById(R.id.img_movie);
+
+        ButterKnife.bind(this);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

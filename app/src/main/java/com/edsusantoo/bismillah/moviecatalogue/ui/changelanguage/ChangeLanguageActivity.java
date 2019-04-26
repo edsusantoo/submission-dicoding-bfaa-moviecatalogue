@@ -10,20 +10,29 @@ import android.widget.RadioGroup;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ChangeLanguageActivity extends AppCompatActivity {
     public static final String EXTRA_LANGUAGE = "extra_language";
     private String language = null;
-    private RadioGroup rgChangeLanguage;
-    private RadioButton rbIndonesia, rbEnglish;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.rg_change_language)
+    RadioGroup rgChangeLanguage;
+    @BindView(R.id.rb_indonesia)
+    RadioButton rbIndonesia;
+    @BindView(R.id.rb_english)
+    RadioButton rbEnglish;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_language);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        rgChangeLanguage = findViewById(R.id.rg_change_language);
-        rbIndonesia = findViewById(R.id.rb_indonesia);
-        rbEnglish = findViewById(R.id.rb_english);
+        ButterKnife.bind(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
