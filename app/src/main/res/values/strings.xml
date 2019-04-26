@@ -350,6 +350,11 @@
     <string name="description_tvshow_the_simpsons">Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.</string>
     <string name="description_tvshow_the_umbrella_academy">A dysfunctional family of superheroes comes together to solve the mystery of their father\'s death, the threat of the apocalypse and more.</string>
     <string name="description_tvshow_the_walking_dead">Sheriff\'s deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.</string>
+    <string name="change_language">Change Language</string>
+    <string name="indonesian">Indonesian</string>
+    <string name="english">English</string>
+    <string name="detail_movie">Detail Movie</string>
+    <string name="setting">Setting</string>
 
 
     <array name="data_tvshow_photo">

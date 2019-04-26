@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            app:title="Detail Movie"
+            app:title="@string/detail_movie"
             app:titleTextColor="@color/white" />
     </android.support.design.widget.AppBarLayout>
 

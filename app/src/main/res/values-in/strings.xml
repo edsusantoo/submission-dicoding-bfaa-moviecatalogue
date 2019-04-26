@@ -112,6 +112,11 @@
     <string name="description_tvshow_the_simpsons">Bertempat di Springfield, kota rata-rata Amerika, pertunjukan ini berfokus pada kejenakaan dan petualangan sehari-hari keluarga Simpson; Homer, Marge, Bart, Lisa dan Maggie, serta ribuan pemain virtual. Sejak awal, serial ini telah menjadi ikon budaya pop, menarik ratusan selebriti menjadi bintang tamu. Acara ini juga menjadi terkenal karena satirnya yang tak kenal takut terhadap kehidupan politik, media, dan Amerika secara umum.</string>
     <string name="description_tvshow_the_umbrella_academy">Keluarga pahlawan super yang disfungsional berkumpul untuk memecahkan misteri kematian ayah mereka, ancaman kiamat, dan banyak lagi.</string>
     <string name="description_tvshow_the_walking_dead">Wakil Sheriff, Rick Grimes, terbangun dari koma untuk menemukan dunia pasca-apokaliptik yang didominasi oleh zombie pemakan daging. Dia berangkat untuk menemukan keluarganya dan bertemu banyak penyintas lainnya di sepanjang jalan.</string>
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="indonesian">Indonesia</string>
+    <string name="english">Inggris</string>
+    <string name="detail_movie">Detil Film</string>
+    <string name="setting">Pengaturan</string>
 
 
 </resources>

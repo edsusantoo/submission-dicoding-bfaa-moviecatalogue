@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--Color Selected Radio Button -->
+    <style name="RadioButtonGreen" parent="AppTheme">
+        <item name="colorAccent">@color/colorSelectedTab</item>
+    </style>
+
 </resources>
