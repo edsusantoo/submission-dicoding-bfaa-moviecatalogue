@@ -12,7 +12,7 @@ public class RetrofitConfig {
 
         Gson gsonBuilder = new GsonBuilder().setLenient().create();
         return new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/")
+                .baseUrl("https://api.themoviedb.org/3/discover/")
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
                 .build();
     }

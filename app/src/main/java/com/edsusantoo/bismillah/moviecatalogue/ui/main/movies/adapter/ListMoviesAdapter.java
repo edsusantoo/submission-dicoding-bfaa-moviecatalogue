@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie.DetailMovieActivity;
 
 import java.util.List;
@@ -20,9 +22,9 @@ import java.util.List;
 public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.ListMoviesViewHolder> {
 
     private Context context;
-    private List<Movie> movies;
+    private List<ResultsItem> movies;
 
-    public ListMoviesAdapter(Context context, List<Movie> movies) {
+    public ListMoviesAdapter(Context context, List<ResultsItem> movies) {
         this.context = context;
         this.movies = movies;
     }
@@ -37,12 +39,16 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
 
     @Override
     public void onBindViewHolder(@NonNull ListMoviesViewHolder holder, int position) {
-        final Movie movie = movies.get(position);
+        final ResultsItem movie = movies.get(position);
+        final String image_url = "https://image.tmdb.org/t/p/w185" + movie.getBackdropPath();
 
         holder.tvTittle.setText(movie.getTitle());
-        holder.tvDateRelease.setText(movie.getDate());
-        holder.tvDescription.setText(movie.getDescription());
-        holder.imgMovie.setImageResource(movie.getPhoto());
+        holder.tvDateRelease.setText(movie.getReleaseDate());
+        holder.tvDescription.setText(movie.getOverview());
+        Glide.with(context).load(image_url)
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher)
+                .into(holder.imgMovie);
 
         holder.cvMovie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,11 +56,10 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
                 Intent i = new Intent(context, DetailMovieActivity.class);
                 Movie dataMovie = new Movie();
                 dataMovie.setTitle(movie.getTitle());
-                dataMovie.setDate(movie.getDate());
-                dataMovie.setDescription(movie.getDescription());
-                dataMovie.setRevenue(movie.getRevenue());
-                dataMovie.setRate(movie.getRate());
-                dataMovie.setPhoto(movie.getPhoto());
+                dataMovie.setDate(movie.getReleaseDate());
+                dataMovie.setDescription(movie.getOverview());
+                dataMovie.setRate(movie.getVoteAverage());
+                dataMovie.setPhoto(image_url);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
                 context.startActivity(i);
             }

@@ -1,8 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
 
-import android.annotation.SuppressLint;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,9 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.ListMoviesAdapter;
 
 import java.util.List;
@@ -28,13 +27,11 @@ import butterknife.ButterKnife;
  */
 public class MoviesFragment extends Fragment implements MoviesView, SwipeRefreshLayout.OnRefreshListener {
 
-    private MoviesPresenter presenter;
-
-
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recycler_list_movie)
     RecyclerView recyclerListMovie;
+    private MoviesPresenter presenter;
 
 
     public MoviesFragment() {
@@ -56,7 +53,7 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
         swipeRefresh.setOnRefreshListener(this);
 
-        prepared();
+        presenter.getMovies();
 
     }
 
@@ -71,7 +68,7 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     }
 
     @Override
-    public void showListMovies(List<Movie> movies) {
+    public void showListMovies(List<ResultsItem> movies) {
         ListMoviesAdapter adapter = new ListMoviesAdapter(getContext(), movies);
         LinearLayoutManager llManager = new LinearLayoutManager(getActivity());
         llManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -80,19 +77,18 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
         recyclerListMovie.setHasFixedSize(true);
     }
 
-    private void prepared() {
-        String[] dataMovieName = getResources().getStringArray(R.array.data_movie_name);
-        String[] dataMovieDate = getResources().getStringArray(R.array.data_movie_date);
-        String[] dataMovieDescription = getResources().getStringArray(R.array.data_movie_description);
-        String[] dataRating = getResources().getStringArray(R.array.data_movie_rating);
-        String[] dataRevenue = getResources().getStringArray(R.array.data_movie_revenue);
-        @SuppressLint("Recycle") TypedArray dataPhoto = getResources().obtainTypedArray(R.array.data_movie_photo);
+    @Override
+    public void onMovieEmpty() {
 
-        presenter.addMovie(dataMovieName, dataMovieDate, dataMovieDescription, dataRating, dataRevenue, dataPhoto);
+    }
+
+    @Override
+    public void onErrorConnection(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onRefresh() {
-        prepared();
+        presenter.getMovies();
     }
 }

@@ -1,10 +1,14 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
-import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 
-import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.RetrofitConfig;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
 
-import java.util.ArrayList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 class MoviesPresenter {
     private MoviesView view;
@@ -13,27 +17,33 @@ class MoviesPresenter {
         this.view = view;
     }
 
-    void addMovie(String[] dataMovieName,
-                  String[] dataMovieDate,
-                  String[] dataMovieDescription,
-                  String[] dataMovieRating,
-                  String[] dataMovieRevenue,
-                  TypedArray dataMoviePhoto) {
+    void getMovies() {
         view.showLoading();
+        RetrofitConfig.getApiServices().getMovie(
+                BuildConfig.API_KEY,
+                "en-US"
+        ).enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
+                view.hideLoading();
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        if (response.body().getResults() != null) {
+                            view.showListMovies(response.body().getResults());
+                        } else {
+                            view.onMovieEmpty();
+                        }
+                    }
+                } else {
+                    view.onErrorConnection("Not Successful");
+                }
+            }
 
-        ArrayList<Movie> movies = new ArrayList<>();
-        for (int i = 0; i < dataMovieName.length; i++) {
-            Movie movie = new Movie();
-            movie.setTitle(dataMovieName[i]);
-            movie.setDate(dataMovieDate[i]);
-            movie.setDescription(dataMovieDescription[i]);
-            movie.setRate(dataMovieRating[i]);
-            movie.setRevenue(dataMovieRevenue[i]);
-            movie.setPhoto(dataMoviePhoto.getResourceId(i, -1));
-            movies.add(movie);
-        }
-        view.showListMovies(movies);
-
-        view.hideLoading();
+            @Override
+            public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
+                view.hideLoading();
+                view.onErrorConnection(t.getMessage());
+            }
+        });
     }
 }

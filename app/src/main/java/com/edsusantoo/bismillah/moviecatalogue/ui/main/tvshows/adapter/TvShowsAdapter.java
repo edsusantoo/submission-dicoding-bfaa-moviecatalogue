@@ -41,7 +41,6 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
         holder.tvTittle.setText(movie.getTitle());
         holder.tvDateRelease.setText(movie.getDate());
         holder.tvDescription.setText(movie.getDescription());
-        holder.imgMovie.setImageResource(movie.getPhoto());
 
         holder.cvMovie.setOnClickListener(new View.OnClickListener() {
             @Override

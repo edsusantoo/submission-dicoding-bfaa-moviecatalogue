@@ -64,10 +64,9 @@ public class DetailMovieActivity extends AppCompatActivity {
         if (getDataIntent() != null) {
             tvTitle.setText(getDataIntent().getTitle());
             tvDateRelease.setText(getDataIntent().getDate());
-            tvRating.setText(getDataIntent().getRate());
+            tvRating.setText(String.valueOf(getDataIntent().getRate()));
             tvRevenue.setText(getDataIntent().getRevenue());
             tvDescription.setText(getDataIntent().getDescription());
-            imgMovie.setImageResource(getDataIntent().getPhoto());
 
             if (getDataIntent().getRevenue() == null) {
                 labelRevenue.setVisibility(View.GONE);
