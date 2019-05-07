@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.data.network.model;
+package com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie;
 
 import com.google.gson.annotations.SerializedName;
 
