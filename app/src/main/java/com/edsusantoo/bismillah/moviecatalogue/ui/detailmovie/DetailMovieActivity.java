@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 
@@ -22,8 +23,8 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.label_tv_date)
-    TextView labelDate;
+    @BindView(R.id.label_tv_date_release)
+    TextView labelDateRelease;
     @BindView(R.id.tv_date_release)
     TextView tvDateRelease;
     @BindView(R.id.tv_rating)
@@ -64,20 +65,28 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     private void setDataIntent() {
         if (getDataIntent() != null) {
+            if (getDataIntent().getRevenue() == null) {
+                labelRevenue.setVisibility(View.GONE);
+                tvRevenue.setVisibility(View.GONE);
+            }
+            if (getDataIntent().getDate() == null) {
+                labelDateRelease.setVisibility(View.GONE);
+                tvDateRelease.setVisibility(View.GONE);
+            }
+
             tvTitle.setText(getDataIntent().getTitle());
             tvDateRelease.setText(getDataIntent().getDate());
             String rate = (int) getDataIntent().getRate() + "/100";
             tvRating.setText(rate);
             tvRevenue.setText(getDataIntent().getRevenue());
             tvDescription.setText(getDataIntent().getDescription());
+            Glide.with(this).load(getDataIntent().getPhoto())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_image_grey_100dp)
+                    .error(R.drawable.ic_broken_image_grey_100dp)
+                    .into(imgMovie);
 
-            if (getDataIntent().getRevenue() == null) {
-                labelRevenue.setVisibility(View.GONE);
-                tvRevenue.setVisibility(View.GONE);
-            } else if (getDataIntent().getDate() == null) {
-                labelDate.setVisibility(View.GONE);
-                tvDateRelease.setVisibility(View.GONE);
-            }
+
         }
     }
 }

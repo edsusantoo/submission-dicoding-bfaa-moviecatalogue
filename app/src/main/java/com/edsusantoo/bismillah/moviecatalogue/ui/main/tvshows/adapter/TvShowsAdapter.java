@@ -71,14 +71,13 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
     }
 
     class TvShowsViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTittle, tvDateRelease, tvDescription;
+        private TextView tvTittle, tvDescription;
         private ImageView imgMovie;
         private CardView cvMovie;
 
         TvShowsViewHolder(View view) {
             super(view);
             tvTittle = view.findViewById(R.id.tv_title);
-            tvDateRelease = view.findViewById(R.id.tv_date_release);
             tvDescription = view.findViewById(R.id.tv_description);
             imgMovie = view.findViewById(R.id.img_tvmovie);
             cvMovie = view.findViewById(R.id.cv_tvmovie);

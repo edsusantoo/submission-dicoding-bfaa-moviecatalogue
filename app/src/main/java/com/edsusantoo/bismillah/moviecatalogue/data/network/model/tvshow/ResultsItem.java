@@ -45,6 +45,17 @@ public class ResultsItem {
     @SerializedName("vote_count")
     private int voteCount;
 
+    @SerializedName("release_date")
+    private String releaseDate;
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
     public String getFirstAirDate() {
         return firstAirDate;
     }
