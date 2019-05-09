@@ -42,7 +42,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
         final String image_url = "https://image.tmdb.org/t/p/w500" + tv_show.getBackdropPath();
 
 
-        holder.tvTittle.setText(tv_show.getOriginalName());
+        holder.tvTittle.setText(tv_show.getName());
         holder.tvDescription.setText(tv_show.getOverview());
         Glide.with(context).load(image_url)
                 .centerCrop()
