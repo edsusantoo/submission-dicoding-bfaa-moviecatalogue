@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie.DetailMovieActivity;
 
 import java.util.List;
@@ -20,11 +22,11 @@ import java.util.List;
 public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder> {
 
     private Context context;
-    private List<Movie> movies;
+    private List<ResultsItem> tv_shows;
 
-    public TvShowsAdapter(Context context, List<Movie> movies) {
+    public TvShowsAdapter(Context context, List<ResultsItem> tv_shows) {
         this.context = context;
-        this.movies = movies;
+        this.tv_shows = tv_shows;
     }
 
     @NonNull
@@ -36,23 +38,27 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
 
     @Override
     public void onBindViewHolder(@NonNull TvShowsAdapter.TvShowsViewHolder holder, int position) {
-        final Movie movie = movies.get(position);
+        final ResultsItem tv_show = tv_shows.get(position);
+        final String image_url = "https://image.tmdb.org/t/p/w500" + tv_show.getBackdropPath();
 
-        holder.tvTittle.setText(movie.getTitle());
-        holder.tvDateRelease.setText(movie.getDate());
-        holder.tvDescription.setText(movie.getDescription());
+
+        holder.tvTittle.setText(tv_show.getOriginalName());
+        holder.tvDescription.setText(tv_show.getOverview());
+        Glide.with(context).load(image_url)
+                .centerCrop()
+                .placeholder(R.drawable.ic_image_grey_100dp)
+                .error(R.drawable.ic_broken_image_grey_100dp)
+                .into(holder.imgMovie);
 
         holder.cvMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailMovieActivity.class);
                 Movie dataMovie = new Movie();
-                dataMovie.setTitle(movie.getTitle());
-                dataMovie.setDate(movie.getDate());
-                dataMovie.setDescription(movie.getDescription());
-                dataMovie.setRevenue(movie.getRevenue());
-                dataMovie.setRate(movie.getRate());
-                dataMovie.setPhoto(movie.getPhoto());
+                dataMovie.setTitle(tv_show.getName());
+                dataMovie.setDescription(tv_show.getOverview());
+                dataMovie.setRate(tv_show.getVoteAverage());
+                dataMovie.setPhoto(image_url);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
                 context.startActivity(i);
             }
@@ -61,7 +67,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return tv_shows.size();
     }
 
     class TvShowsViewHolder extends RecyclerView.ViewHolder {

@@ -40,14 +40,15 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
     @Override
     public void onBindViewHolder(@NonNull ListMoviesViewHolder holder, int position) {
         final ResultsItem movie = movies.get(position);
-        final String image_url = "https://image.tmdb.org/t/p/w185" + movie.getBackdropPath();
+        final String image_url = "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath();
 
         holder.tvTittle.setText(movie.getTitle());
         holder.tvDateRelease.setText(movie.getReleaseDate());
         holder.tvDescription.setText(movie.getOverview());
         Glide.with(context).load(image_url)
                 .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.ic_image_grey_100dp)
+                .error(R.drawable.ic_broken_image_grey_100dp)
                 .into(holder.imgMovie);
 
         holder.cvMovie.setOnClickListener(new View.OnClickListener() {

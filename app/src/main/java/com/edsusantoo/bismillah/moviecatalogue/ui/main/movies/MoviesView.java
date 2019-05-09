@@ -9,7 +9,7 @@ interface MoviesView {
 
     void hideLoading();
 
-    void showListMovies(List<ResultsItem> movies);
+    void showListMovies(List<ResultsItem> data);
 
     void onMovieEmpty();
 

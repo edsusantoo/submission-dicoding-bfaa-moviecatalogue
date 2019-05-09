@@ -1,8 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
 
-import android.annotation.SuppressLint;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows.adapter.TvShowsAdapter;
 
 import java.util.List;
@@ -54,18 +52,8 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
 
         swipeRefresh.setOnRefreshListener(this);
 
-        prepared();
+        presenter.getTvMovie();
 
-    }
-
-    private void prepared() {
-        String[] dataMovieName = getResources().getStringArray(R.array.data_tvshow_name);
-        String[] dataMovieDate = getResources().getStringArray(R.array.data_tvshow_date);
-        String[] dataMovieDescription = getResources().getStringArray(R.array.data_tvshow_description);
-        String[] dataRating = getResources().getStringArray(R.array.data_tvshow_rating);
-        @SuppressLint("Recycle") TypedArray dataPhoto = getResources().obtainTypedArray(R.array.data_tvshow_photo);
-
-        presenter.addMovie(dataMovieName, dataMovieDate, dataMovieDescription, dataRating, dataPhoto);
     }
 
 
@@ -80,15 +68,26 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
     }
 
     @Override
-    public void showListMovies(List<Movie> movies) {
-        TvShowsAdapter adapter = new TvShowsAdapter(getContext(), movies);
+    public void showListTvShow(List<ResultsItem> data) {
+        TvShowsAdapter adapter = new TvShowsAdapter(getContext(), data);
         recyclerTvShows.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerTvShows.setAdapter(adapter);
         recyclerTvShows.setHasFixedSize(true);
     }
 
     @Override
+    public void onMovieEmpty() {
+
+    }
+
+    @Override
+    public void onErrorConnection(String massage) {
+
+    }
+
+
+    @Override
     public void onRefresh() {
-        prepared();
+        presenter.getTvMovie();
     }
 }

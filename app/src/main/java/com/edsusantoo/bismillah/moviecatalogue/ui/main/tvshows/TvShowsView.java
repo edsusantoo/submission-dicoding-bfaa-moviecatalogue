@@ -1,6 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
-import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.ResultsItem;
 
 import java.util.List;
 
@@ -10,5 +10,10 @@ interface TvShowsView {
 
     void hideLoading();
 
-    void showListMovies(List<Movie> movies);
+    void showListTvShow(List<ResultsItem> data);
+
+
+    void onMovieEmpty();
+
+    void onErrorConnection(String massage);
 }

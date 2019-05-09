@@ -1,6 +1,14 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
-import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
+
+import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.RetrofitConfig;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 class TvShowsPresenter {
     private TvShowsView view;
@@ -9,25 +17,32 @@ class TvShowsPresenter {
         this.view = view;
     }
 
-    void addMovie(String[] dataMovieName,
-                  String[] dataMovieDate,
-                  String[] dataMovieDescription,
-                  String[] dataMovieRating,
-                  TypedArray dataMoviePhoto) {
+    void getTvMovie() {
         view.showLoading();
+        RetrofitConfig.getApiServices()
+                .getTvMovie(BuildConfig.API_KEY, "en-US")
+                .enqueue(new Callback<TvShowResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
+                        view.hideLoading();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body().getResults() != null) {
+                                    view.showListTvShow(response.body().getResults());
+                                } else {
+                                    view.onMovieEmpty();
+                                }
+                            }
+                        } else {
+                            view.onErrorConnection("Not Successful");
+                        }
+                    }
 
-//        ArrayList<Movie> movies = new ArrayList<>();
-//        for (int i = 0; i < dataMovieName.length; i++) {
-//            Movie movie = new Movie();
-//            movie.setTitle(dataMovieName[i]);
-//            movie.setDate(dataMovieDate[i]);
-//            movie.setDescription(dataMovieDescription[i]);
-//            movie.setRate(dataMovieRating[i]);
-//            movie.setPhoto(dataMoviePhoto.getResourceId(i, -1));
-//            movies.add(movie);
-//        }
-//        view.showListMovies(movies);
-
-        view.hideLoading();
+                    @Override
+                    public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
+                        view.hideLoading();
+                        view.onErrorConnection(t.getMessage());
+                    }
+                });
     }
 }
