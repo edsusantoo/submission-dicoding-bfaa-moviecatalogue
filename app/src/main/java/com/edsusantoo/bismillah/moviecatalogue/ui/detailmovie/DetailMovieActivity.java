@@ -22,6 +22,8 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.label_tv_date)
+    TextView labelDate;
     @BindView(R.id.tv_date_release)
     TextView tvDateRelease;
     @BindView(R.id.tv_rating)
@@ -64,13 +66,17 @@ public class DetailMovieActivity extends AppCompatActivity {
         if (getDataIntent() != null) {
             tvTitle.setText(getDataIntent().getTitle());
             tvDateRelease.setText(getDataIntent().getDate());
-            tvRating.setText(String.valueOf(getDataIntent().getRate()));
+            String rate = (int) getDataIntent().getRate() + "/100";
+            tvRating.setText(rate);
             tvRevenue.setText(getDataIntent().getRevenue());
             tvDescription.setText(getDataIntent().getDescription());
 
             if (getDataIntent().getRevenue() == null) {
                 labelRevenue.setVisibility(View.GONE);
                 tvRevenue.setVisibility(View.GONE);
+            } else if (getDataIntent().getDate() == null) {
+                labelDate.setVisibility(View.GONE);
+                tvDateRelease.setVisibility(View.GONE);
             }
         }
     }

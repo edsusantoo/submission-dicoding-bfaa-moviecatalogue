@@ -41,6 +41,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
     public void onBindViewHolder(@NonNull ListMoviesViewHolder holder, int position) {
         final ResultsItem movie = movies.get(position);
         final String image_url = "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath();
+        final double rate = movie.getVoteAverage() * 10;
 
         holder.tvTittle.setText(movie.getTitle());
         holder.tvDateRelease.setText(movie.getReleaseDate());
@@ -59,7 +60,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
                 dataMovie.setTitle(movie.getTitle());
                 dataMovie.setDate(movie.getReleaseDate());
                 dataMovie.setDescription(movie.getOverview());
-                dataMovie.setRate(movie.getVoteAverage());
+                dataMovie.setRate(rate);
                 dataMovie.setPhoto(image_url);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
                 context.startActivity(i);

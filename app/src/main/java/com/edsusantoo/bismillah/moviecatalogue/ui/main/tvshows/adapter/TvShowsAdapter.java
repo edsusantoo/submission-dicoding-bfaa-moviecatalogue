@@ -40,7 +40,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
     public void onBindViewHolder(@NonNull TvShowsAdapter.TvShowsViewHolder holder, int position) {
         final ResultsItem tv_show = tv_shows.get(position);
         final String image_url = "https://image.tmdb.org/t/p/w500" + tv_show.getBackdropPath();
-
+        final double rate = tv_show.getVoteAverage() * 10;
 
         holder.tvTittle.setText(tv_show.getName());
         holder.tvDescription.setText(tv_show.getOverview());
@@ -57,7 +57,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
                 Movie dataMovie = new Movie();
                 dataMovie.setTitle(tv_show.getName());
                 dataMovie.setDescription(tv_show.getOverview());
-                dataMovie.setRate(tv_show.getVoteAverage());
+                dataMovie.setRate(rate);
                 dataMovie.setPhoto(image_url);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
                 context.startActivity(i);

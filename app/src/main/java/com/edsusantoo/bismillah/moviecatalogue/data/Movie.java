@@ -30,7 +30,7 @@ public class Movie implements Parcelable {
         this.title = in.readString();
         this.date = in.readString();
         this.description = in.readString();
-        this.rate = in.readInt();
+        this.rate = in.readDouble();
         this.revenue = in.readString();
     }
 
