@@ -42,10 +42,14 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
         final ResultsItem movie = movies.get(position);
         final String image_url = "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath();
         final double rate = movie.getVoteAverage() * 10;
+        String description = movie.getOverview();
+        if (description != null && description.isEmpty()) {
+            description = context.getResources().getString(R.string.no_translations);
+        }
 
         holder.tvTittle.setText(movie.getTitle());
         holder.tvDateRelease.setText(movie.getReleaseDate());
-        holder.tvDescription.setText(movie.getOverview());
+        holder.tvDescription.setText(description);
         Glide.with(context).load(image_url)
                 .centerCrop()
                 .placeholder(R.drawable.ic_image_grey_100dp)

@@ -1,6 +1,7 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +16,9 @@ import android.widget.Toast;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
+import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.ListMoviesAdapter;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.List;
 
@@ -26,18 +29,24 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class MoviesFragment extends Fragment implements MoviesView, SwipeRefreshLayout.OnRefreshListener {
-
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recycler_list_movie)
     RecyclerView recyclerListMovie;
+
     private MoviesPresenter presenter;
+    private Context context;
 
 
     public MoviesFragment() {
         presenter = new MoviesPresenter(this);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -53,7 +62,11 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
         swipeRefresh.setOnRefreshListener(this);
 
-        presenter.getMovies();
+        if (getLanguage() != null && !getLanguage().isEmpty()) {
+            presenter.getMovies(getLanguage());
+        } else {
+            presenter.getMovies(Constant.DEFAULT_LANGUAGE);
+        }
 
     }
 
@@ -89,6 +102,13 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
     @Override
     public void onRefresh() {
-        presenter.getMovies();
+        if (getLanguage() != null && !getLanguage().isEmpty()) {
+            presenter.getMovies(getLanguage());
+        }
+    }
+
+    private String getLanguage() {
+        SharedPref sharedPref = new SharedPref(context);
+        return sharedPref.getSharedPref().getString(Constant.PREF_LANGUAGE, "");
     }
 }

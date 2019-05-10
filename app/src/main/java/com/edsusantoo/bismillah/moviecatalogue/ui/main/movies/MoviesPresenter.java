@@ -17,11 +17,11 @@ class MoviesPresenter {
         this.view = view;
     }
 
-    void getMovies() {
+    void getMovies(String language) {
         view.showLoading();
         RetrofitConfig.getApiServices().getMovie(
                 BuildConfig.API_KEY,
-                "en-US"
+                language
         ).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {

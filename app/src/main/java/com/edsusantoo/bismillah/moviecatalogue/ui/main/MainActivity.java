@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
+import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
 import com.edsusantoo.bismillah.moviecatalogue.ui.changelanguage.ChangeLanguageActivity;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.adapter.MainViewPagerAdapter;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.Locale;
 
@@ -21,13 +23,13 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final int REQUEST_CODE_CHANGE_LANGUAGE = 101;
-    private String language = null;
     @BindView(R.id.tab_main)
     TabLayout tabLayoutMain;
     @BindView(R.id.view_pager_main)
     ViewPager viewPagerMain;
     @BindView(R.id.img_setting)
     ImageView imgSetting;
+    private String language = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTabLayoutMain();
 
         imgSetting.setOnClickListener(this);
-
 
     }
 
@@ -55,23 +56,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.img_setting:
-                Intent i = new Intent(MainActivity.this, ChangeLanguageActivity.class);
-                i.putExtra(ChangeLanguageActivity.EXTRA_LANGUAGE, language);
-                startActivityForResult(i, REQUEST_CODE_CHANGE_LANGUAGE);
-                break;
+        if (v.getId() == R.id.img_setting) {
+            Intent i = new Intent(MainActivity.this, ChangeLanguageActivity.class);
+            i.putExtra(ChangeLanguageActivity.EXTRA_LANGUAGE, language);
+            startActivityForResult(i, REQUEST_CODE_CHANGE_LANGUAGE);
         }
     }
 
-
-    private void setLanguage(String lang) {
-        Locale locale = new Locale(lang);
+    private void setLanguage() {
+        SharedPref sharedPref = new SharedPref(this);
+        Locale locale = new Locale(sharedPref.getSharedPref().getString(Constant.PREF_LANGUAGE, ""));
         Locale.setDefault(locale);
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+    }
 
+    private void saveLanguage(String language) {
+        SharedPref sharedPref = new SharedPref(this);
+        sharedPref.modifyDataSharedPref(Constant.PREF_LANGUAGE, language);
     }
 
     @Override
@@ -82,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (data != null) {
                     language = data.getStringExtra(ChangeLanguageActivity.EXTRA_LANGUAGE);
                     if (language != null) {
-                        setLanguage(language);
-
+                        saveLanguage(language);
+                        setLanguage();
                         //untuk refresh
                         setTabLayoutMain();
                         setViewPagerMain();

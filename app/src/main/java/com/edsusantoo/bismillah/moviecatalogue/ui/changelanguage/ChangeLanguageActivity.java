@@ -50,10 +50,10 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         language = getIntent().getStringExtra(EXTRA_LANGUAGE);
         if (language != null) {
             switch (language) {
-                case "in":
+                case "id":
                     rbIndonesia.setChecked(true);
                     break;
-                case "en":
+                case "en-US":
                     rbEnglish.setChecked(true);
                     break;
             }
@@ -66,10 +66,10 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         if (checkedRadioButtonId != -1) {
             switch (checkedRadioButtonId) {
                 case R.id.rb_indonesia:
-                    language = "in";
+                    language = "id";
                     break;
                 case R.id.rb_english:
-                    language = "en";
+                    language = "en-US";
                     break;
             }
         }

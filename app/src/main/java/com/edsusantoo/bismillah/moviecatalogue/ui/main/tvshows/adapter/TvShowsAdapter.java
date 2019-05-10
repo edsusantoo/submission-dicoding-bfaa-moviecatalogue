@@ -41,9 +41,13 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
         final ResultsItem tv_show = tv_shows.get(position);
         final String image_url = "https://image.tmdb.org/t/p/w500" + tv_show.getBackdropPath();
         final double rate = tv_show.getVoteAverage() * 10;
+        String description = tv_show.getOverview();
+        if (description != null && description.isEmpty()) {
+            description = context.getResources().getString(R.string.no_translations);
+        }
 
         holder.tvTittle.setText(tv_show.getName());
-        holder.tvDescription.setText(tv_show.getOverview());
+        holder.tvDescription.setText(description);
         Glide.with(context).load(image_url)
                 .centerCrop()
                 .placeholder(R.drawable.ic_image_grey_100dp)
