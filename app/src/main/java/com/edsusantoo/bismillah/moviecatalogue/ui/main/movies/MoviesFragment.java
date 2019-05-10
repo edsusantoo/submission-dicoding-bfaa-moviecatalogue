@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
-import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.ListMoviesAdapter;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
@@ -62,8 +61,8 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
         swipeRefresh.setOnRefreshListener(this);
 
-        if (getLanguage() != null && !getLanguage().isEmpty()) {
-            presenter.getMovies(getLanguage());
+        if (presenter.getLanguage(context) != null && !presenter.getLanguage(context).isEmpty()) {
+            presenter.getMovies(presenter.getLanguage(context));
         } else {
             presenter.getMovies(Constant.DEFAULT_LANGUAGE);
         }
@@ -102,13 +101,9 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
     @Override
     public void onRefresh() {
-        if (getLanguage() != null && !getLanguage().isEmpty()) {
-            presenter.getMovies(getLanguage());
+        if (presenter.getLanguage(context) != null && !presenter.getLanguage(context).isEmpty()) {
+            presenter.getMovies(presenter.getLanguage(context));
         }
     }
 
-    private String getLanguage() {
-        SharedPref sharedPref = new SharedPref(context);
-        return sharedPref.getSharedPref().getString(Constant.PREF_LANGUAGE, "");
-    }
 }

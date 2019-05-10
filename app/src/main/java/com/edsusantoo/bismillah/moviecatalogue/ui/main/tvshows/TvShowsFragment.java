@@ -1,6 +1,7 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows.adapter.TvShowsAdapter;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.List;
 
@@ -31,12 +33,19 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefresh;
     private TvShowsPresenter presenter;
+    private Context context;
 
     public TvShowsFragment() {
 
         presenter = new TvShowsPresenter(this);
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -51,8 +60,11 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
         ButterKnife.bind(this, view);
 
         swipeRefresh.setOnRefreshListener(this);
-
-        presenter.getTvMovie();
+        if (presenter.getLanguage(context) != null && !presenter.getLanguage(context).isEmpty()) {
+            presenter.getTvMovie(presenter.getLanguage(context));
+        } else {
+            presenter.getTvMovie(Constant.DEFAULT_LANGUAGE);
+        }
 
     }
 
@@ -88,6 +100,8 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
 
     @Override
     public void onRefresh() {
-        presenter.getTvMovie();
+        if (presenter.getLanguage(context) != null && !presenter.getLanguage(context).isEmpty()) {
+            presenter.getTvMovie(presenter.getLanguage(context));
+        }
     }
 }

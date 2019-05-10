@@ -1,10 +1,13 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.RetrofitConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,10 +20,10 @@ class TvShowsPresenter {
         this.view = view;
     }
 
-    void getTvMovie() {
+    void getTvMovie(String language) {
         view.showLoading();
         RetrofitConfig.getApiServices()
-                .getTvMovie(BuildConfig.API_KEY, "en-US")
+                .getTvMovie(BuildConfig.API_KEY, language)
                 .enqueue(new Callback<TvShowResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
@@ -44,5 +47,10 @@ class TvShowsPresenter {
                         view.onErrorConnection(t.getMessage());
                     }
                 });
+    }
+
+    String getLanguage(Context context) {
+        SharedPref sharedPref = new SharedPref(context);
+        return sharedPref.getSharedPref().getString(Constant.PREF_LANGUAGE, "");
     }
 }

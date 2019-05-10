@@ -1,10 +1,13 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.RetrofitConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,5 +48,10 @@ class MoviesPresenter {
                 view.onErrorConnection(t.getMessage());
             }
         });
+    }
+
+    String getLanguage(Context context) {
+        SharedPref sharedPref = new SharedPref(context);
+        return sharedPref.getSharedPref().getString(Constant.PREF_LANGUAGE, "");
     }
 }
