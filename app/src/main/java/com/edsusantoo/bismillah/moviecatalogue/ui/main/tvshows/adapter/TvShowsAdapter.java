@@ -32,7 +32,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
     @NonNull
     @Override
     public TvShowsAdapter.TvShowsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_tvmovie, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_list_tvshow, viewGroup, false);
         return new TvShowsViewHolder(view);
     }
 
