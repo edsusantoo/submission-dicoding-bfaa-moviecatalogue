@@ -20,7 +20,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainView {
 
     private final int REQUEST_CODE_CHANGE_LANGUAGE = 101;
     @BindView(R.id.tab_main)
@@ -31,11 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView imgSetting;
     private String language = null;
 
+    private MainPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        presenter = new MainPresenter(this);
         ButterKnife.bind(this);
 
         setViewPagerMain();
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         imgSetting.setOnClickListener(this);
 
+        if (presenter.getLanguage(this) != null && !presenter.getLanguage(this).isEmpty()) {
+            setLanguage(presenter.getLanguage(this));
+        }
     }
 
     private void setViewPagerMain() {
@@ -96,4 +101,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void setLanguage(String language) {
+        saveLanguage(language);
+        setLanguage();
+    }
 }

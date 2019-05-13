@@ -13,26 +13,26 @@ import com.edsusantoo.bismillah.moviecatalogue.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChangeLanguageActivity extends AppCompatActivity {
+public class ChangeLanguageActivity extends AppCompatActivity implements ChangeLanguageView {
     public static final String EXTRA_LANGUAGE = "extra_language";
-    private String language = null;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.rg_change_language)
     RadioGroup rgChangeLanguage;
     @BindView(R.id.rb_indonesia)
     RadioButton rbIndonesia;
     @BindView(R.id.rb_english)
     RadioButton rbEnglish;
-
+    private String language = null;
+    private ChangeLanguagePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_language);
         ButterKnife.bind(this);
+
+        presenter = new ChangeLanguagePresenter(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,22 +42,16 @@ public class ChangeLanguageActivity extends AppCompatActivity {
             }
         });
 
-        setRadioButtonLanguage();
-
-    }
-
-    private void setRadioButtonLanguage() {
-        language = getIntent().getStringExtra(EXTRA_LANGUAGE);
-        if (language != null) {
-            switch (language) {
-                case "id":
-                    rbIndonesia.setChecked(true);
-                    break;
-                case "en-US":
-                    rbEnglish.setChecked(true);
-                    break;
-            }
+        if (presenter.getLanguage(this) != null && !presenter.getLanguage(this).isEmpty()) {
+            setRadioButtonLanguage(presenter.getLanguage(this));
         }
+
+        //for set radiobutton intent data
+        language = getIntent().getStringExtra(EXTRA_LANGUAGE);
+        if (language != null && !language.isEmpty()) {
+            setRadioButtonLanguage(language);
+        }
+
     }
 
     private String getRadioChangeLanguage() {
@@ -87,5 +81,29 @@ public class ChangeLanguageActivity extends AppCompatActivity {
     public void onBackPressed() {
         finishChangeLanguage();
         super.onBackPressed();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void setRadioButtonLanguage(String language) {
+        if (language != null) {
+            switch (language) {
+                case "id":
+                    rbIndonesia.setChecked(true);
+                    break;
+                case "en-US":
+                    rbEnglish.setChecked(true);
+                    break;
+            }
+        }
     }
 }
