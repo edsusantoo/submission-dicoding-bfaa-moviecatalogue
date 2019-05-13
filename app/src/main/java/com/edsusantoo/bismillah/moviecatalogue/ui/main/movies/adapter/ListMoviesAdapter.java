@@ -56,6 +56,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
                 .error(R.drawable.ic_broken_image_grey_100dp)
                 .into(holder.imgMovie);
 
+        final String finalDescription = description;
         holder.cvMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +64,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
                 Movie dataMovie = new Movie();
                 dataMovie.setTitle(movie.getTitle());
                 dataMovie.setDate(movie.getReleaseDate());
-                dataMovie.setDescription(movie.getOverview());
+                dataMovie.setDescription(finalDescription);
                 dataMovie.setRate(rate);
                 dataMovie.setPhoto(image_url);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);

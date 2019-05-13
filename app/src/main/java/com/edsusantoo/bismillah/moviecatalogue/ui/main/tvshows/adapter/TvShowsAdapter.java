@@ -54,13 +54,14 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
                 .error(R.drawable.ic_broken_image_grey_100dp)
                 .into(holder.imgMovie);
 
+        final String finalDescription = description;
         holder.cvMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailMovieActivity.class);
                 Movie dataMovie = new Movie();
                 dataMovie.setTitle(tv_show.getName());
-                dataMovie.setDescription(tv_show.getOverview());
+                dataMovie.setDescription(finalDescription);
                 dataMovie.setRate(rate);
                 dataMovie.setPhoto(image_url);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
