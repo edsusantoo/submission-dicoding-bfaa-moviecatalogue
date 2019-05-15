@@ -356,6 +356,7 @@
     <string name="english">English</string>
     <string name="detail_movie">Detail Movie</string>
     <string name="setting">Setting</string>
+    <string name="nothing_film">Nothing Film</string>
 
 
     <array name="data_tvshow_photo">

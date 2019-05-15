@@ -14,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
@@ -35,6 +37,10 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recycler_list_movie)
     RecyclerView recyclerListMovie;
+    @BindView(R.id.label_tv_nothing_movies)
+    TextView tvNothingMovies;
+    @BindView(R.id.img_broken)
+    ImageView imgBroken;
 
     private Context context;
     private MoviesViewModel moviesViewModel;
@@ -107,7 +113,8 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
     @Override
     public void onMovieEmpty() {
-
+        tvNothingMovies.setVisibility(View.VISIBLE);
+        imgBroken.setVisibility(View.VISIBLE);
     }
 
     @Override
