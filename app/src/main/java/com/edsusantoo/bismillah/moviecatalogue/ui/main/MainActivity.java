@@ -1,5 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,13 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView imgSetting;
     private String language = null;
 
-    private MainPresenter presenter;
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new MainPresenter(this);
         ButterKnife.bind(this);
 
         setViewPagerMain();
@@ -45,8 +45,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         imgSetting.setOnClickListener(this);
 
-        if (presenter.getLanguage(this) != null && !presenter.getLanguage(this).isEmpty()) {
-            setLanguage(presenter.getLanguage(this));
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
+        if (mainViewModel.getLanguage() != null && !mainViewModel.getLanguage().isEmpty()) {
+            setLanguage(mainViewModel.getLanguage());
         }
     }
 
