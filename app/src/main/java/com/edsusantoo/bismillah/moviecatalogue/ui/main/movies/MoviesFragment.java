@@ -53,6 +53,7 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
                     hideLoading();
                     showListMovies(movieResponse.getResults());
                 } else {
+                    hideLoading();
                     onMovieEmpty();
                 }
             }

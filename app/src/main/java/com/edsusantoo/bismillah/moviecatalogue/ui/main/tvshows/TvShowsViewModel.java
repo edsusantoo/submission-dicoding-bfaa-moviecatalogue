@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
+package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,18 +6,18 @@ import android.arch.lifecycle.LiveData;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.MoviesRepository;
-import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
 
-public class MoviesViewModel extends AndroidViewModel {
+public class TvShowsViewModel extends AndroidViewModel {
     private MoviesRepository repository;
 
-    public MoviesViewModel(Application application) {
+    public TvShowsViewModel(Application application) {
         super(application);
         repository = new MoviesRepository(application.getApplicationContext());
     }
 
-    LiveData<MovieResponse> getMovies(String language) {
-        return repository.getMovie(BuildConfig.API_KEY, language);
+    LiveData<TvShowResponse> getTvShow(String language) {
+        return repository.getTvShow(BuildConfig.API_KEY, language);
     }
 
     String getLanguage() {

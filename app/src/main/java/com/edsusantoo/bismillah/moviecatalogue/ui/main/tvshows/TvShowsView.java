@@ -15,5 +15,5 @@ interface TvShowsView {
 
     void onMovieEmpty();
 
-    void onErrorConnection(String massage);
+    void onErrorConnection(String message);
 }

@@ -8,6 +8,7 @@ import com.edsusantoo.bismillah.moviecatalogue.data.network.ApiObserver;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.ApiServices;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.RetrofitConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
 import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
@@ -20,6 +21,7 @@ public class MoviesRepository implements Repository {
     private CompositeDisposable compositeDisposable;
     private SharedPref pref;
     private MutableLiveData<MovieResponse> dataMovies = new MutableLiveData<>();
+    private MutableLiveData<TvShowResponse> dataTvShows = new MutableLiveData<>();
 
     public MoviesRepository(Context context) {
         apiServices = RetrofitConfig.getApiServices();
@@ -50,7 +52,31 @@ public class MoviesRepository implements Repository {
     }
 
     @Override
+    public LiveData<TvShowResponse> getTvShow(String api_key, String language) {
+        apiServices.getTvMovie(api_key, language)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiObserver<TvShowResponse>(compositeDisposable) {
+                    @Override
+                    public void onSuccess(TvShowResponse response) {
+                        dataTvShows.setValue(response);
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        dataTvShows.setValue(null);
+                    }
+                });
+        return dataTvShows;
+    }
+
+    @Override
     public String getLanguage() {
         return pref.getSharedPref().getString(Constant.PREF_LANGUAGE, "");
+    }
+
+    @Override
+    public void onDestroy() {
+        compositeDisposable.dispose();
     }
 }
