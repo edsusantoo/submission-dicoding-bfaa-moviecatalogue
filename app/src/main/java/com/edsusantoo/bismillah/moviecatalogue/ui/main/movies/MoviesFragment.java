@@ -1,6 +1,8 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.ListMoviesAdapter;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
@@ -33,13 +36,22 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     @BindView(R.id.recycler_list_movie)
     RecyclerView recyclerListMovie;
 
-    private MoviesPresenter presenter;
     private Context context;
+    private MoviesViewModel moviesViewModel;
 
-
-    public MoviesFragment() {
-        presenter = new MoviesPresenter(this);
-    }
+    private Observer<MovieResponse> getMovies = new Observer<MovieResponse>() {
+        @Override
+        public void onChanged(@Nullable MovieResponse movieResponse) {
+            if (movieResponse != null) {
+                if (movieResponse.getResults() != null && movieResponse.getResults().size() != 0) {
+                    hideLoading();
+                    showListMovies(movieResponse.getResults());
+                } else {
+                    onMovieEmpty();
+                }
+            }
+        }
+    };
 
     @Override
     public void onAttach(Context context) {
@@ -61,10 +73,14 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
         swipeRefresh.setOnRefreshListener(this);
 
-        if (presenter.getLanguage(context) != null && !presenter.getLanguage(context).isEmpty()) {
-            presenter.getMovies(presenter.getLanguage(context));
+        moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
+
+        if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
+            showLoading();
+            moviesViewModel.getMovies(moviesViewModel.getLanguage()).observe(this, getMovies);
         } else {
-            presenter.getMovies(Constant.DEFAULT_LANGUAGE);
+            showLoading();
+            moviesViewModel.getMovies(Constant.DEFAULT_LANGUAGE).observe(this, getMovies);
         }
 
     }
@@ -101,8 +117,8 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
     @Override
     public void onRefresh() {
-        if (presenter.getLanguage(context) != null && !presenter.getLanguage(context).isEmpty()) {
-            presenter.getMovies(presenter.getLanguage(context));
+        if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
+            moviesViewModel.getMovies(moviesViewModel.getLanguage());
         }
     }
 

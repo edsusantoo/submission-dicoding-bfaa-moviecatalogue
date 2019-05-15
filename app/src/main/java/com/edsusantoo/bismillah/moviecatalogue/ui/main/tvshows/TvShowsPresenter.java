@@ -1,20 +1,21 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.ApiObserver;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.RetrofitConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
 import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 class TvShowsPresenter {
     private TvShowsView view;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     TvShowsPresenter(TvShowsView view) {
         this.view = view;
@@ -24,28 +25,26 @@ class TvShowsPresenter {
         view.showLoading();
         RetrofitConfig.getApiServices()
                 .getTvMovie(BuildConfig.API_KEY, language)
-                .enqueue(new Callback<TvShowResponse>() {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiObserver<TvShowResponse>(compositeDisposable) {
                     @Override
-                    public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
+                    public void onSuccess(TvShowResponse response) {
                         view.hideLoading();
-                        if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                if (response.body().getResults() != null) {
-                                    view.showListTvShow(response.body().getResults());
-                                } else {
-                                    view.onMovieEmpty();
-                                }
+                        if (response != null) {
+                            if (response.getResults() != null) {
+                                view.showListTvShow(response.getResults());
+                            } else {
+                                view.onMovieEmpty();
                             }
-                        } else {
-                            view.onErrorConnection("Not Successful");
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
-                        view.hideLoading();
-                        view.onErrorConnection(t.getMessage());
+                    public void onFailure(String message) {
+                        view.onErrorConnection(message);
                     }
+
                 });
     }
 
