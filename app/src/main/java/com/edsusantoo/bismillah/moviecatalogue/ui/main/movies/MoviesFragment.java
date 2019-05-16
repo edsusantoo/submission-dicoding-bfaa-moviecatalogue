@@ -3,7 +3,6 @@ package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +21,6 @@ import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.movies.adapter.ListMoviesAdapter;
-import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.List;
 
@@ -42,7 +40,6 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     @BindView(R.id.img_broken)
     ImageView imgBroken;
 
-    private Context context;
     private MoviesViewModel moviesViewModel;
 
     private Observer<MovieResponse> getMovies = new Observer<MovieResponse>() {
@@ -59,12 +56,6 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
             }
         }
     };
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -84,10 +75,12 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
 
         if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
             showLoading();
-            moviesViewModel.getMovies(moviesViewModel.getLanguage()).observe(this, getMovies);
+            moviesViewModel.getMovies(moviesViewModel.getLanguage());
+            moviesViewModel.getDataMovies().observe(this, getMovies);
         } else {
             showLoading();
-            moviesViewModel.getMovies(Constant.DEFAULT_LANGUAGE).observe(this, getMovies);
+            moviesViewModel.getMovies(moviesViewModel.getLanguage());
+            moviesViewModel.getDataMovies().observe(this, getMovies);
         }
 
     }
@@ -127,7 +120,9 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     public void onRefresh() {
         if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
+            moviesViewModel.getDataMovies().observe(this, getMovies);
         }
+        hideLoading();
     }
 
 }

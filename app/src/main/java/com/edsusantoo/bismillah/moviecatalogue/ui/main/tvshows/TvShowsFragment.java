@@ -22,7 +22,6 @@ import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
 import com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows.adapter.TvShowsAdapter;
-import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.List;
 
@@ -85,10 +84,12 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
 
         if (tvShowsViewModel.getLanguage() != null && !tvShowsViewModel.getLanguage().isEmpty()) {
             showLoading();
-            tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage()).observe(this, getTvShows);
+            tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
+            tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
         } else {
             showLoading();
-            tvShowsViewModel.getTvShow(Constant.DEFAULT_LANGUAGE).observe(this, getTvShows);
+            tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
+            tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
         }
 
     }
@@ -127,6 +128,8 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
     public void onRefresh() {
         if (tvShowsViewModel.getLanguage() != null && !tvShowsViewModel.getLanguage().isEmpty()) {
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
+            tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
         }
+        hideLoading();
     }
 }

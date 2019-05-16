@@ -24,7 +24,6 @@ public class ChangeLanguageActivity extends AppCompatActivity implements ChangeL
     @BindView(R.id.rb_english)
     RadioButton rbEnglish;
     private String language = null;
-    private ChangeLanguagePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public class ChangeLanguageActivity extends AppCompatActivity implements ChangeL
         setContentView(R.layout.activity_change_language);
         ButterKnife.bind(this);
 
-        presenter = new ChangeLanguagePresenter(this);
+        ChangeLanguagePresenter presenter = new ChangeLanguagePresenter(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,16 +80,6 @@ public class ChangeLanguageActivity extends AppCompatActivity implements ChangeL
     public void onBackPressed() {
         finishChangeLanguage();
         super.onBackPressed();
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
     }
 
     @Override
