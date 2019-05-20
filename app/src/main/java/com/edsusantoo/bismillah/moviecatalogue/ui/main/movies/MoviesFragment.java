@@ -73,6 +73,7 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         return inflater.inflate(R.layout.fragment_list_movie, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -84,13 +85,13 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
 
         if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
-            moviesViewModel.getIsLoading().observe(this, getIsLoading);
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
             moviesViewModel.getDataMovies().observe(this, getMovies);
+            moviesViewModel.getIsLoading().observe(this, getIsLoading);
         } else {
-            moviesViewModel.getIsLoading().observe(this, getIsLoading);
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
             moviesViewModel.getDataMovies().observe(this, getMovies);
+            moviesViewModel.getIsLoading().observe(this, getIsLoading);
         }
 
     }
@@ -123,11 +124,10 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onRefresh() {
-        if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
-            moviesViewModel.getIsLoading().observe(this, getIsLoading);
-            moviesViewModel.getMovies(moviesViewModel.getLanguage());
-            moviesViewModel.getDataMovies().observe(this, getMovies);
-        }
+        moviesViewModel.refreshMovies(moviesViewModel.getLanguage());
+        moviesViewModel.getDataMovies().observe(this, getMovies);
+        moviesViewModel.getIsLoading().observe(this, getIsLoading);
+
     }
 
 }

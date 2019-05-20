@@ -54,6 +54,26 @@ public class TvShowsViewModel extends AndroidViewModel {
         }
     }
 
+    void refreshMovies(String language) {
+        isLoading.setValue(true);
+        repository.getTvShow(BuildConfig.API_KEY, language)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiObserver<TvShowResponse>(repository.getCompositeDisposable()) {
+                    @Override
+                    public void onSuccess(TvShowResponse response) {
+                        isLoading.setValue(false);
+                        dataTvShows.setValue(response);
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        isLoading.setValue(false);
+                        dataTvShows.setValue(null);
+                    }
+                });
+    }
+
     String getLanguage() {
         return repository.getLanguage();
     }

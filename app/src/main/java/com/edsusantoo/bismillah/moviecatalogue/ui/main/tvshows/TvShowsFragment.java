@@ -93,13 +93,13 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         tvShowsViewModel = ViewModelProviders.of(this).get(TvShowsViewModel.class);
 
         if (tvShowsViewModel.getLanguage() != null && !tvShowsViewModel.getLanguage().isEmpty()) {
-            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
             tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
+            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
         } else {
-            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
             tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
+            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
         }
 
     }
@@ -130,10 +130,8 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onRefresh() {
-        if (tvShowsViewModel.getLanguage() != null && !tvShowsViewModel.getLanguage().isEmpty()) {
-            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
-            tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
-            tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
-        }
+        tvShowsViewModel.refreshMovies(tvShowsViewModel.getLanguage());
+        tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
+        tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
     }
 }

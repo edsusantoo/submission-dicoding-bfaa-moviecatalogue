@@ -54,6 +54,26 @@ public class MoviesViewModel extends AndroidViewModel {
         }
     }
 
+    void refreshMovies(String language) {
+        isLoading.setValue(true);
+        repository.getMovie(BuildConfig.API_KEY, language)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiObserver<MovieResponse>(repository.getCompositeDisposable()) {
+                    @Override
+                    public void onSuccess(MovieResponse response) {
+                        isLoading.setValue(false);
+                        dataMovies.setValue(response);
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        isLoading.setValue(false);
+                        dataMovies.setValue(null);
+                    }
+                });
+    }
+
     String getLanguage() {
         return repository.getLanguage();
     }
