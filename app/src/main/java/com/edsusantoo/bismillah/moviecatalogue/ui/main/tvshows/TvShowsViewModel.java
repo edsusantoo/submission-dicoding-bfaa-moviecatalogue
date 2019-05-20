@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 public class TvShowsViewModel extends AndroidViewModel {
     private MoviesRepository repository;
     private MutableLiveData<TvShowResponse> dataTvShows = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     public TvShowsViewModel(Application application) {
         super(application);
@@ -27,19 +28,26 @@ public class TvShowsViewModel extends AndroidViewModel {
         return dataTvShows;
     }
 
+    LiveData<Boolean> getIsLoading() {
+        return isLoading;
+    }
+
     void getTvShow(String language) {
         if (dataTvShows.getValue() == null) {
+            isLoading.setValue(true);
             repository.getTvShow(BuildConfig.API_KEY, language)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new ApiObserver<TvShowResponse>(repository.getCompositeDisposable()) {
                         @Override
                         public void onSuccess(TvShowResponse response) {
+                            isLoading.setValue(false);
                             dataTvShows.setValue(response);
                         }
 
                         @Override
                         public void onFailure(String message) {
+                            isLoading.setValue(false);
                             dataTvShows.setValue(null);
                         }
                     });

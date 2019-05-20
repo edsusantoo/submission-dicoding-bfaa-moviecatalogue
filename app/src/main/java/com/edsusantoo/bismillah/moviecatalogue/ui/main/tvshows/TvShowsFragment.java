@@ -49,11 +49,21 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         public void onChanged(@Nullable TvShowResponse tvShowResponse) {
             if (tvShowResponse != null) {
                 if (tvShowResponse.getResults() != null && tvShowResponse.getResults().size() != 0) {
-                    hideLoading();
                     showListTvShow(tvShowResponse.getResults());
                 } else {
-                    hideLoading();
                     onMovieEmpty();
+                }
+            }
+        }
+    };
+    private Observer<Boolean> getIsLoading = new Observer<Boolean>() {
+        @Override
+        public void onChanged(@Nullable Boolean isLoading) {
+            if (isLoading != null) {
+                if (isLoading) {
+                    showLoading();
+                } else {
+                    hideLoading();
                 }
             }
         }
@@ -83,11 +93,11 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         tvShowsViewModel = ViewModelProviders.of(this).get(TvShowsViewModel.class);
 
         if (tvShowsViewModel.getLanguage() != null && !tvShowsViewModel.getLanguage().isEmpty()) {
-            showLoading();
+            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
             tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
         } else {
-            showLoading();
+            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
             tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
         }
@@ -121,9 +131,9 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onRefresh() {
         if (tvShowsViewModel.getLanguage() != null && !tvShowsViewModel.getLanguage().isEmpty()) {
+            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
             tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
         }
-        hideLoading();
     }
 }
