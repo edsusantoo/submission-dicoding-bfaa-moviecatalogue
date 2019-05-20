@@ -2,6 +2,7 @@ package com.edsusantoo.bismillah.moviecatalogue.ui.main.movies;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
@@ -15,6 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MoviesViewModel extends AndroidViewModel {
     private MoviesRepository repository;
     private MutableLiveData<MovieResponse> dataMovies = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     public MoviesViewModel(Application application) {
         super(application);
@@ -22,23 +24,30 @@ public class MoviesViewModel extends AndroidViewModel {
     }
 
 
-    MutableLiveData<MovieResponse> getDataMovies() {
+    LiveData<MovieResponse> getDataMovies() {
         return dataMovies;
+    }
+
+    LiveData<Boolean> getIsLoading() {
+        return isLoading;
     }
 
     void getMovies(String language) {
         if (dataMovies.getValue() == null) {
+            isLoading.setValue(true);
             repository.getMovie(BuildConfig.API_KEY, language)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new ApiObserver<MovieResponse>(repository.getCompositeDisposable()) {
                         @Override
                         public void onSuccess(MovieResponse response) {
+                            isLoading.setValue(false);
                             dataMovies.setValue(response);
                         }
 
                         @Override
                         public void onFailure(String message) {
+                            isLoading.setValue(false);
                             dataMovies.setValue(null);
                         }
                     });

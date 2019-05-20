@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefreshLayout.OnRefreshListener {
+public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.recycler_tvmovie)
     RecyclerView recyclerTvShows;
@@ -94,33 +94,27 @@ public class TvShowsFragment extends Fragment implements TvShowsView, SwipeRefre
 
     }
 
-
-    @Override
-    public void showLoading() {
+    private void showLoading() {
         swipeRefresh.setRefreshing(true);
     }
 
-    @Override
-    public void hideLoading() {
+    private void hideLoading() {
         swipeRefresh.setRefreshing(false);
     }
 
-    @Override
-    public void showListTvShow(List<ResultsItem> data) {
+    private void showListTvShow(List<ResultsItem> data) {
         TvShowsAdapter adapter = new TvShowsAdapter(getContext(), data);
         recyclerTvShows.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerTvShows.setAdapter(adapter);
         recyclerTvShows.setHasFixedSize(true);
     }
 
-    @Override
-    public void onMovieEmpty() {
+    private void onMovieEmpty() {
         tvNothingMovies.setVisibility(View.VISIBLE);
         imgBroken.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onErrorConnection(String message) {
+    private void onErrorConnection(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 

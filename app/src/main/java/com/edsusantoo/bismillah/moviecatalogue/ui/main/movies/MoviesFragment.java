@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MoviesFragment extends Fragment implements MoviesView, SwipeRefreshLayout.OnRefreshListener {
+public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recycler_list_movie)
@@ -47,11 +47,21 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
         public void onChanged(@Nullable MovieResponse movieResponse) {
             if (movieResponse != null) {
                 if (movieResponse.getResults() != null && movieResponse.getResults().size() != 0) {
-                    hideLoading();
                     showListMovies(movieResponse.getResults());
                 } else {
-                    hideLoading();
                     onMovieEmpty();
+                }
+            }
+        }
+    };
+    private Observer<Boolean> getIsLoading = new Observer<Boolean>() {
+        @Override
+        public void onChanged(@Nullable Boolean isLoading) {
+            if (isLoading != null) {
+                if (isLoading) {
+                    showLoading();
+                } else {
+                    hideLoading();
                 }
             }
         }
@@ -74,29 +84,26 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
 
         if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
-            showLoading();
+            moviesViewModel.getIsLoading().observe(this, getIsLoading);
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
             moviesViewModel.getDataMovies().observe(this, getMovies);
         } else {
-            showLoading();
+            moviesViewModel.getIsLoading().observe(this, getIsLoading);
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
             moviesViewModel.getDataMovies().observe(this, getMovies);
         }
 
     }
 
-    @Override
-    public void showLoading() {
+    private void showLoading() {
         swipeRefresh.setRefreshing(true);
     }
 
-    @Override
-    public void hideLoading() {
+    private void hideLoading() {
         swipeRefresh.setRefreshing(false);
     }
 
-    @Override
-    public void showListMovies(List<ResultsItem> movies) {
+    private void showListMovies(List<ResultsItem> movies) {
         ListMoviesAdapter adapter = new ListMoviesAdapter(getContext(), movies);
         LinearLayoutManager llManager = new LinearLayoutManager(getActivity());
         llManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -105,13 +112,11 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
         recyclerListMovie.setHasFixedSize(true);
     }
 
-    @Override
     public void onMovieEmpty() {
         tvNothingMovies.setVisibility(View.VISIBLE);
         imgBroken.setVisibility(View.VISIBLE);
     }
 
-    @Override
     public void onErrorConnection(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
@@ -119,10 +124,10 @@ public class MoviesFragment extends Fragment implements MoviesView, SwipeRefresh
     @Override
     public void onRefresh() {
         if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
+            moviesViewModel.getIsLoading().observe(this, getIsLoading);
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
             moviesViewModel.getDataMovies().observe(this, getMovies);
         }
-        hideLoading();
     }
 
 }

@@ -2,6 +2,7 @@ package com.edsusantoo.bismillah.moviecatalogue.ui.main.tvshows;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
@@ -22,7 +23,7 @@ public class TvShowsViewModel extends AndroidViewModel {
     }
 
 
-    MutableLiveData<TvShowResponse> getDataTvShows() {
+    LiveData<TvShowResponse> getDataTvShows() {
         return dataTvShows;
     }
 

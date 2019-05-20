@@ -21,7 +21,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainView {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final int REQUEST_CODE_CHANGE_LANGUAGE = 101;
     @BindView(R.id.tab_main)
@@ -103,8 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void setLanguage(String language) {
+    private void setLanguage(String language) {
         saveLanguage(language);
         setLanguage();
     }

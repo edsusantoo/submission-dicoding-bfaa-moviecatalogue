@@ -1,6 +1,5 @@
 package com.edsusantoo.bismillah.moviecatalogue.data;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 
 import com.edsusantoo.bismillah.moviecatalogue.data.network.ApiServices;
@@ -17,7 +16,6 @@ public class MoviesRepository implements Repository {
     private ApiServices apiServices;
     private CompositeDisposable compositeDisposable;
     private SharedPref pref;
-    private MutableLiveData<TvShowResponse> dataTvShows = new MutableLiveData<>();
 
     public MoviesRepository(Context context) {
         apiServices = RetrofitConfig.getApiServices();

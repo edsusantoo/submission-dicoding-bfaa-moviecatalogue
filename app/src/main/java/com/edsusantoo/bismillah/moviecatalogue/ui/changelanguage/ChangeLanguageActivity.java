@@ -1,5 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.changelanguage;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import com.edsusantoo.bismillah.moviecatalogue.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChangeLanguageActivity extends AppCompatActivity implements ChangeLanguageView {
+public class ChangeLanguageActivity extends AppCompatActivity {
     public static final String EXTRA_LANGUAGE = "extra_language";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -31,8 +32,6 @@ public class ChangeLanguageActivity extends AppCompatActivity implements ChangeL
         setContentView(R.layout.activity_change_language);
         ButterKnife.bind(this);
 
-        ChangeLanguagePresenter presenter = new ChangeLanguagePresenter(this);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,8 +40,10 @@ public class ChangeLanguageActivity extends AppCompatActivity implements ChangeL
             }
         });
 
-        if (presenter.getLanguage(this) != null && !presenter.getLanguage(this).isEmpty()) {
-            setRadioButtonLanguage(presenter.getLanguage(this));
+        ChangeLanguageViewModel changeLanguageViewModel = ViewModelProviders.of(this).get(ChangeLanguageViewModel.class);
+
+        if (changeLanguageViewModel.getLanguage() != null || changeLanguageViewModel.getLanguage().isEmpty()) {
+            setRadioButtonLanguage(changeLanguageViewModel.getLanguage());
         }
 
         //for set radiobutton intent data
@@ -82,8 +83,7 @@ public class ChangeLanguageActivity extends AppCompatActivity implements ChangeL
         super.onBackPressed();
     }
 
-    @Override
-    public void setRadioButtonLanguage(String language) {
+    private void setRadioButtonLanguage(String language) {
         if (language != null) {
             switch (language) {
                 case "id":
