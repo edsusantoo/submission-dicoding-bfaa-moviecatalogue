@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView imgSetting;
     private String language = null;
 
-    private MainViewModel mainViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         imgSetting.setOnClickListener(this);
 
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         if (mainViewModel.getLanguage() != null && !mainViewModel.getLanguage().isEmpty()) {
             setLanguage(mainViewModel.getLanguage());
