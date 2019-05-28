@@ -63,4 +63,7 @@ dependencies {
     //butterknive
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //bottomnavigation
+    implementation 'com.aurelhubert:ahbottomnavigation:2.2.0'
 }
