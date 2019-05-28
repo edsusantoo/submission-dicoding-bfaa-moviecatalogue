@@ -91,15 +91,13 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         swipeRefresh.setOnRefreshListener(this);
 
         tvShowsViewModel = ViewModelProviders.of(this).get(TvShowsViewModel.class);
+        tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
+        tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
 
         if (tvShowsViewModel.getLanguage() != null && !tvShowsViewModel.getLanguage().isEmpty()) {
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
-            tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
-            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
         } else {
             tvShowsViewModel.getTvShow(tvShowsViewModel.getLanguage());
-            tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
-            tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
         }
 
     }
@@ -131,7 +129,5 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onRefresh() {
         tvShowsViewModel.refreshMovies(tvShowsViewModel.getLanguage());
-        tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
-        tvShowsViewModel.getIsLoading().observe(this, getIsLoading);
     }
 }

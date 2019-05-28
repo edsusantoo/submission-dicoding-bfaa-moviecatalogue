@@ -83,15 +83,13 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         swipeRefresh.setOnRefreshListener(this);
 
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
+        moviesViewModel.getDataMovies().observe(this, getMovies);
+        moviesViewModel.getIsLoading().observe(this, getIsLoading);
 
         if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
-            moviesViewModel.getDataMovies().observe(this, getMovies);
-            moviesViewModel.getIsLoading().observe(this, getIsLoading);
         } else {
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
-            moviesViewModel.getDataMovies().observe(this, getMovies);
-            moviesViewModel.getIsLoading().observe(this, getIsLoading);
         }
 
     }
@@ -125,9 +123,6 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onRefresh() {
         moviesViewModel.refreshMovies(moviesViewModel.getLanguage());
-        moviesViewModel.getDataMovies().observe(this, getMovies);
-        moviesViewModel.getIsLoading().observe(this, getIsLoading);
-
     }
 
 }
