@@ -13,6 +13,7 @@ import android.support.v7.content.res.AppCompatResources;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.edsusantoo.bismillah.moviecatalogue.R;
+import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.favorites.FavoritesFragment;
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.movies.MoviesFragment;
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.tvshows.TvShowsFragment;
 
@@ -23,10 +24,12 @@ public class MenuBottomActivity extends AppCompatActivity implements AHBottomNav
 
     private static final String TAG_MOVIES = "tagmovies";
     private static final String TAG_TVSHOWS = "tagtvshows";
+    private static final String TAG_FAVORITES = "tagfavorites";
     @BindView(R.id.menu_bottom_navigation)
     AHBottomNavigation menuBottom;
     private MoviesFragment moviesFragment;
     private TvShowsFragment tvShowsFragment;
+    private FavoritesFragment favoritesFragment;
 
 
     private MenuBottomViewModel menuBottomViewModel;
@@ -97,6 +100,10 @@ public class MenuBottomActivity extends AppCompatActivity implements AHBottomNav
                         getSupportFragmentManager().findFragmentByTag(TAG_TVSHOWS);
                 menuBottom.setCurrentItem(1);
                 break;
+            case TAG_FAVORITES:
+                favoritesFragment = (FavoritesFragment)
+                        getSupportFragmentManager().findFragmentByTag(TAG_FAVORITES);
+                break;
         }
     }
 
@@ -118,6 +125,11 @@ public class MenuBottomActivity extends AppCompatActivity implements AHBottomNav
                 }
                 break;
             case 2:
+                if (menuBottom.getCurrentItem() != 2) {
+                    menuBottomViewModel.setPositionMenuBottom(TAG_FAVORITES);
+                    favoritesFragment = new FavoritesFragment();
+                    callFragment(favoritesFragment, TAG_FAVORITES);
+                }
                 break;
             default:
                 break;
