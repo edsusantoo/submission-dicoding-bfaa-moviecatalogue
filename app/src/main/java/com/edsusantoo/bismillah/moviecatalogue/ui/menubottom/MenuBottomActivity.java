@@ -20,6 +20,8 @@ import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.tvshows.TvShowsFrag
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//TODO:muncul errror ketika tidak ada koneksi
+//
 public class MenuBottomActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener {
 
     private static final String TAG_MOVIES = "tagmovies";

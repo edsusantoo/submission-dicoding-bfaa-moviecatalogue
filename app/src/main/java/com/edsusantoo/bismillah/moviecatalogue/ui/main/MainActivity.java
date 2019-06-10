@@ -21,7 +21,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-//TODO:muncul errror ketika tidak ada koneksi
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final int REQUEST_CODE_CHANGE_LANGUAGE = 101;
