@@ -66,4 +66,11 @@ dependencies {
 
     //bottomnavigation
     implementation 'com.aurelhubert:ahbottomnavigation:2.2.0'
+
+    // Room
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+
+    // RxJava support for Room
+    implementation 'android.arch.persistence.room:rxjava2:1.1.1'
 }
