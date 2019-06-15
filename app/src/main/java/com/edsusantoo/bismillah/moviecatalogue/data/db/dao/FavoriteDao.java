@@ -1,5 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.data.db.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -13,7 +14,7 @@ import java.util.List;
 @Dao
 public interface FavoriteDao {
     @Query("SELECT * FROM favorites")
-    List<Favorites> getAll();
+    LiveData<List<Favorites>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Favorites... favorites);
@@ -22,5 +23,5 @@ public interface FavoriteDao {
     void delete(Favorites... favorites);
 
     @Query("SELECT * FROM favorites WHERE id =:id")
-    List<Favorites> getMovie(int id);
+    LiveData<List<Favorites>> getMovie(int id);
 }

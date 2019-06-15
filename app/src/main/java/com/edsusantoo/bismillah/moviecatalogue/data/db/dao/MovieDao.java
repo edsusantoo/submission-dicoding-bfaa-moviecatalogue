@@ -1,5 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.data.db.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -13,7 +14,7 @@ import java.util.List;
 @Dao
 public interface MovieDao {
     @Query("SELECT * FROM movie")
-    List<Movie> getAll();
+    LiveData<List<Movie>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Movie... movies);
@@ -22,6 +23,6 @@ public interface MovieDao {
     void delete(Movie... movies);
 
     @Query("SELECT * FROM movie WHERE id =:id")
-    List<Movie> getMovie(int id);
+    LiveData<List<Movie>> getMovie(int id);
 
 }
