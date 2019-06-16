@@ -18,4 +18,27 @@ public class Favorites {
     @ColumnInfo(name = "movie_id")
     private int movieId;
 
+    public int getFavoritesId() {
+        return favoritesId;
+    }
+
+    public void setFavoritesId(int favoritesId) {
+        this.favoritesId = favoritesId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
 }

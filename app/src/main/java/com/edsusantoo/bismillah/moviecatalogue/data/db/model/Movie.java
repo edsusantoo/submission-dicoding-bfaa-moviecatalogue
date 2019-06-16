@@ -2,10 +2,12 @@ package com.edsusantoo.bismillah.moviecatalogue.data.db.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "movie")
 public class Movie {
 
+    @PrimaryKey
     @ColumnInfo(name = "id")
     private int movieId;
 

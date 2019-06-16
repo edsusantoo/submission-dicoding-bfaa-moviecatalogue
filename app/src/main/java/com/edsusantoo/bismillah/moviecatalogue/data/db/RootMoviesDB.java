@@ -5,6 +5,9 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.edsusantoo.bismillah.moviecatalogue.data.db.dao.FavoriteDao;
+import com.edsusantoo.bismillah.moviecatalogue.data.db.dao.MovieDao;
+import com.edsusantoo.bismillah.moviecatalogue.data.db.dao.UserDao;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.User;
@@ -13,7 +16,7 @@ import com.edsusantoo.bismillah.moviecatalogue.data.db.model.User;
 public abstract class RootMoviesDB extends RoomDatabase {
     private static RootMoviesDB INSTANCE;
 
-    static RootMoviesDB getDatabase(Context context) {
+    public static RootMoviesDB getDatabase(Context context) {
         if (INSTANCE == null) {
             synchronized (RootMoviesDB.class) {
                 if (INSTANCE == null) {
@@ -28,5 +31,9 @@ public abstract class RootMoviesDB extends RoomDatabase {
         return INSTANCE;
     }
 
-    public abstract RootMoviesDB rootMoviesDB();
+    public abstract UserDao userDao();
+
+    public abstract FavoriteDao favoriteDao();
+
+    public abstract MovieDao movieDao();
 }
