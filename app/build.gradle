@@ -25,6 +25,11 @@ android {
             buildConfigField("String", "API_KEY", "\"50ec555cc1d67559ec5eb1bff307acce\"")
         }
     }
+//    compileOptions {
+//        sourceCompatibility = '1.8'
+//        targetCompatibility = '1.8'
+//    }
+    buildToolsVersion = '28.0.3'
 }
 
 dependencies {

@@ -63,6 +63,22 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         }
     };
 
+    private Observer<String> getMessageError = new Observer<String>() {
+        @Override
+        public void onChanged(@Nullable String s) {
+            if (s != null && !s.isEmpty()) {
+                onMessageError(s);
+            }
+        }
+    };
+
+    private Observer<String> getMessageSuccess = new Observer<String>() {
+        @Override
+        public void onChanged(@Nullable String s) {
+            onMessageSucces(s);
+        }
+    };
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,6 +97,8 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         moviesViewModel.getDataMovies().observe(this, getMovies);
         moviesViewModel.getIsLoading().observe(this, getIsLoading);
+        moviesViewModel.getMessageError().observe(this, getMessageError);
+        moviesViewModel.getMessageSuccess().observe(this, getMessageSuccess);
 
         if (moviesViewModel.getLanguage() != null && !moviesViewModel.getLanguage().isEmpty()) {
             moviesViewModel.getMovies(moviesViewModel.getLanguage());
@@ -112,7 +130,15 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         imgBroken.setVisibility(View.VISIBLE);
     }
 
-    public void onErrorConnection(String message) {
+    private void onErrorConnection(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private void onMessageError(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private void onMessageSucces(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
