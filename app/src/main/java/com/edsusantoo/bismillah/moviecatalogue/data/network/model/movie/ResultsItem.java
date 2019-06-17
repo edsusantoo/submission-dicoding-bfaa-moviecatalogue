@@ -48,6 +48,16 @@ public class ResultsItem {
     @SerializedName("vote_count")
     private int voteCount;
 
+    private boolean favorite = false;
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     public String getOverview() {
         return overview;
     }

@@ -35,21 +35,9 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     TextView tvNothingMovies;
     @BindView(R.id.img_broken)
     ImageView imgBroken;
+    private ListMoviesAdapter adapter;
 
     private MoviesViewModel moviesViewModel;
-
-    private Observer<MovieResponse> getMovies = new Observer<MovieResponse>() {
-        @Override
-        public void onChanged(@Nullable MovieResponse movieResponse) {
-            if (movieResponse != null) {
-                if (movieResponse.getResults() != null && movieResponse.getResults().size() != 0) {
-                    showListMovies(movieResponse.getResults());
-                } else {
-                    onMovieEmpty();
-                }
-            }
-        }
-    };
     private Observer<Boolean> getIsLoading = new Observer<Boolean>() {
         @Override
         public void onChanged(@Nullable Boolean isLoading) {
@@ -62,7 +50,6 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
         }
     };
-
     private Observer<String> getMessageError = new Observer<String>() {
         @Override
         public void onChanged(@Nullable String s) {
@@ -71,11 +58,32 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
         }
     };
-
     private Observer<String> getMessageSuccess = new Observer<String>() {
         @Override
         public void onChanged(@Nullable String s) {
             onMessageSucces(s);
+        }
+    };
+    private ListMoviesAdapter.OnMovieListener movieListener = new ListMoviesAdapter.OnMovieListener() {
+        @Override
+        public void onClickItem(ResultsItem movie, View view, int position) {
+            switch (view.getId()) {
+                case R.id.cv_favorite:
+                    adapter.setFavorite(true, position);
+                    break;
+            }
+        }
+    };
+    private Observer<MovieResponse> getMovies = new Observer<MovieResponse>() {
+        @Override
+        public void onChanged(@Nullable MovieResponse movieResponse) {
+            if (movieResponse != null) {
+                if (movieResponse.getResults() != null && movieResponse.getResults().size() != 0) {
+                    showListMovies(movieResponse.getResults());
+                } else {
+                    onMovieEmpty();
+                }
+            }
         }
     };
 
@@ -117,7 +125,7 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     private void showListMovies(List<ResultsItem> movies) {
-        ListMoviesAdapter adapter = new ListMoviesAdapter(getContext(), movies);
+        adapter = new ListMoviesAdapter(getContext(), movies, movieListener);
         LinearLayoutManager llManager = new LinearLayoutManager(getActivity());
         llManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerListMovie.setLayoutManager(llManager);

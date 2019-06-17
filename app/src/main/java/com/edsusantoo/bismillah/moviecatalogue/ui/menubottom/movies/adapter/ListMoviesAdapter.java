@@ -19,14 +19,19 @@ import com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie.DetailMovieActivit
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.ListMoviesViewHolder> {
 
     private Context context;
     private List<ResultsItem> movies;
+    private OnMovieListener listener;
 
-    public ListMoviesAdapter(Context context, List<ResultsItem> movies) {
+    public ListMoviesAdapter(Context context, List<ResultsItem> movies, OnMovieListener listener) {
         this.context = context;
         this.movies = movies;
+        this.listener = listener;
     }
 
 
@@ -39,6 +44,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
 
     @Override
     public void onBindViewHolder(@NonNull ListMoviesViewHolder holder, int position) {
+        holder.bind(listener);
         final ResultsItem movie = movies.get(position);
         final String image_url = "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath();
         final double rate = movie.getVoteAverage() * 10;
@@ -55,6 +61,12 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
                 .placeholder(R.drawable.ic_image_grey_100dp)
                 .error(R.drawable.ic_broken_image_grey_100dp)
                 .into(holder.imgMovie);
+
+        if (movie.isFavorite()) {
+            holder.imgFavorite.setColorFilter(context.getResources().getColor(R.color.colorFavorite));
+        } else {
+            holder.imgFavorite.setColorFilter(context.getResources().getColor(R.color.colorPrimary));
+        }
 
         final String finalDescription = description;
         holder.cvMovie.setOnClickListener(new View.OnClickListener() {
@@ -74,25 +86,58 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
     }
 
 
+    public void setFavorite(Boolean value, int position) {
+        if (movies.get(position).isFavorite()) {
+            movies.get(position).setFavorite(false);
+        } else if (value) {
+            movies.get(position).setFavorite(true);
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return movies.size();
     }
 
+    public interface OnMovieListener {
+        void onClickItem(ResultsItem movie, View view, int position);
+    }
 
-    class ListMoviesViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTittle, tvDateRelease, tvDescription;
-        private ImageView imgMovie;
-        private CardView cvMovie;
+
+    public class ListMoviesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.tv_title)
+        TextView tvTittle;
+        @BindView(R.id.tv_description)
+        TextView tvDescription;
+        @BindView(R.id.tv_date_release)
+        TextView tvDateRelease;
+        @BindView(R.id.img_movie)
+        ImageView imgMovie;
+        @BindView(R.id.img_favorite)
+        ImageView imgFavorite;
+        @BindView(R.id.cv_favorite)
+        CardView cvFavorite;
+        @BindView(R.id.cv_list_movie)
+        CardView cvMovie;
+
+
+        private OnMovieListener listener;
 
         ListMoviesViewHolder(View view) {
             super(view);
-            tvTittle = view.findViewById(R.id.tv_title);
-            tvDateRelease = view.findViewById(R.id.tv_date_release);
-            tvDescription = view.findViewById(R.id.tv_description);
-            imgMovie = view.findViewById(R.id.img_movie);
-            cvMovie = view.findViewById(R.id.cv_list_movie);
+            ButterKnife.bind(this, view);
         }
 
+        void bind(OnMovieListener listener) {
+            this.listener = listener;
+            cvFavorite.setOnClickListener(this);
+            imgMovie.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClickItem(movies.get(getAdapterPosition()), v, getAdapterPosition());
+        }
     }
 }
