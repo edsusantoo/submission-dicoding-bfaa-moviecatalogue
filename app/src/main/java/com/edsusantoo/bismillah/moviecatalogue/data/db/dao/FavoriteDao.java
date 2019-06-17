@@ -11,10 +11,12 @@ import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
+
 @Dao
 public interface FavoriteDao {
     @Query("SELECT * FROM favorites")
-    LiveData<List<Favorites>> getAll();
+    Maybe<List<Favorites>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Favorites... favorites);
@@ -22,6 +24,6 @@ public interface FavoriteDao {
     @Delete
     void delete(Favorites... favorites);
 
-    @Query("SELECT * FROM favorites WHERE id =:id")
-    LiveData<List<Favorites>> getMovie(int id);
+    @Query("SELECT * FROM favorites WHERE id =:movieId")
+    LiveData<Favorites> getMovieFavorite(int movieId);
 }

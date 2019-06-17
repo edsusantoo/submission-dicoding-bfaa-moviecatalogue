@@ -11,6 +11,8 @@ import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
+
 @Dao
 public interface MovieDao {
     @Query("SELECT * FROM movie")
@@ -22,7 +24,7 @@ public interface MovieDao {
     @Delete
     void delete(Movie... movies);
 
-    @Query("SELECT * FROM movie WHERE id =:id")
-    LiveData<List<Movie>> getMovie(int id);
+    @Query("SELECT * FROM movie WHERE id =:movieId")
+    Maybe<List<Movie>> getMovie(int movieId);
 
 }
