@@ -21,6 +21,7 @@ public class Movie implements Parcelable {
     private String description;
     private double rate;
     private String revenue;
+    private int movieId;
 
     public Movie() {
     }
@@ -32,6 +33,7 @@ public class Movie implements Parcelable {
         this.description = in.readString();
         this.rate = in.readDouble();
         this.revenue = in.readString();
+        this.movieId = in.readInt();
     }
 
     public String getPhoto() {
@@ -82,6 +84,14 @@ public class Movie implements Parcelable {
         this.revenue = revenue;
     }
 
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -95,5 +105,6 @@ public class Movie implements Parcelable {
         dest.writeString(this.description);
         dest.writeDouble(this.rate);
         dest.writeString(this.revenue);
+        dest.writeInt(this.movieId);
     }
 }

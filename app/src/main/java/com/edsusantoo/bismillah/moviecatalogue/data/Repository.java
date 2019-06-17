@@ -10,13 +10,17 @@ import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowR
 
 import java.util.List;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 interface Repository {
+
+    //======Response Network======
     Observable<MovieResponse> getMovie(String api_key, String language);
 
     Observable<TvShowResponse> getTvShow(String api_key, String language);
 
+    //======MovieDao======
     void insertUser(User user);
 
     void insertMovie(Movie movie);
@@ -27,11 +31,19 @@ interface Repository {
 
     void deleteFavorite(Favorites favorites);
 
+    void getMovieFavorite(int movieId);
+
     LiveData<List<Movie>> getAllMovie();
 
     LiveData<List<User>> getAllUser();
 
     LiveData<List<Favorites>> getAllFavorites();
+
+    LiveData<Favorites> getMovieFavorite();
+
+    Maybe<List<Favorites>> getAllFavorite();
+
+    Maybe<List<Movie>> getMovie(int movieId);
 
     String getLanguage();
 

@@ -19,6 +19,7 @@ import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -34,6 +35,9 @@ public class MoviesRepository implements Repository {
     private LiveData<List<Favorites>> allFavorites;
     private LiveData<List<User>> allUsers;
 
+
+    private LiveData<Favorites> movieFavorite;
+
     public MoviesRepository(Context context) {
         apiServices = RetrofitConfig.getApiServices();
         compositeDisposable = new CompositeDisposable();
@@ -46,7 +50,6 @@ public class MoviesRepository implements Repository {
         favoriteDao = rootMoviesDB.favoriteDao();
 
         allMovies = movieDao.getAll();
-
     }
 
 
@@ -86,6 +89,11 @@ public class MoviesRepository implements Repository {
     }
 
     @Override
+    public void getMovieFavorite(int movieId) {
+        movieFavorite = favoriteDao.getMovieFavorite(movieId);
+    }
+
+    @Override
     public LiveData<List<Movie>> getAllMovie() {
         return allMovies;
     }
@@ -98,6 +106,21 @@ public class MoviesRepository implements Repository {
     @Override
     public LiveData<List<Favorites>> getAllFavorites() {
         return allFavorites;
+    }
+
+    @Override
+    public LiveData<Favorites> getMovieFavorite() {
+        return movieFavorite;
+    }
+
+    @Override
+    public Maybe<List<Favorites>> getAllFavorite() {
+        return favoriteDao.getAll();
+    }
+
+    @Override
+    public Maybe<List<Movie>> getMovie(int movieId) {
+        return movieDao.getMovie(movieId);
     }
 
     @Override
