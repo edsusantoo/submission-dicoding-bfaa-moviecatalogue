@@ -1,16 +1,22 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
+import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +39,38 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     @BindView(R.id.img_favorite)
     ImageView imgFavorite;
 
+    private Favorites favorite;
+
+    private DetailMovieViewModel detailMovieViewModel;
+    private Observer<Favorites> getMovieFavorite = new Observer<Favorites>() {
+        @Override
+        public void onChanged(@Nullable Favorites favorites) {
+            if (favorites != null) {
+                favorite = favorites;
+                Log.d("MovieFavorite", String.valueOf(favorites.getMovieId()));
+                Log.d("MovieIntent", String.valueOf(getDataIntent().getMovieId()));
+                if (favorites.getMovieId() == getDataIntent().getMovieId()) {
+                    imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
+                }
+            }
+        }
+    };
+
+    private Observer<String> getMessageError = new Observer<String>() {
+        @Override
+        public void onChanged(@Nullable String s) {
+            if (s != null && !s.isEmpty()) {
+                onMessageError(s);
+            }
+        }
+    };
+    private Observer<String> getMessageSuccess = new Observer<String>() {
+        @Override
+        public void onChanged(@Nullable String s) {
+            onMessageSucces(s);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +91,14 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
         cvFavorite.setOnClickListener(this);
 
+
+        detailMovieViewModel = ViewModelProviders.of(this).get(DetailMovieViewModel.class);
+
+        detailMovieViewModel.getMovieFavorite().observe(this, getMovieFavorite);
+        detailMovieViewModel.getMessageError().observe(this, getMessageError);
+        detailMovieViewModel.getMessageSuccess().observe(this, getMessageSuccess);
+
+        detailMovieViewModel.getMovieFavorite(getDataIntent().getMovieId());
 
     }
 
@@ -76,10 +122,26 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.cv_favorite:
-                imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
-                break;
+        if (v.getId() == R.id.cv_favorite) {
+            imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
+            detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
+                    getDataIntent().getMovieId(),
+                    getDataIntent().getTitle(),
+                    getDataIntent().getPhoto(),
+                    getDataIntent().getDescription()
+            ));
+            detailMovieViewModel.insertFavorite(new Favorites(
+                    1,
+                    getDataIntent().getMovieId()
+            ));
         }
+    }
+
+    private void onMessageError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    private void onMessageSucces(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
