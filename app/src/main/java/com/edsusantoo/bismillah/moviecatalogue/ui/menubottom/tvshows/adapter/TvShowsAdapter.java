@@ -19,6 +19,9 @@ import com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie.DetailMovieActivit
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder> {
 
     private Context context;
@@ -76,16 +79,18 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
     }
 
     class TvShowsViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTittle, tvDescription;
-        private ImageView imgMovie;
-        private CardView cvMovie;
+        @BindView(R.id.tv_title)
+        TextView tvTittle;
+        @BindView(R.id.tv_description)
+        TextView tvDescription;
+        @BindView(R.id.img_tvmovie)
+        ImageView imgMovie;
+        @BindView(R.id.cv_tvmovie)
+        CardView cvMovie;
 
         TvShowsViewHolder(View view) {
             super(view);
-            tvTittle = view.findViewById(R.id.tv_title);
-            tvDescription = view.findViewById(R.id.tv_description);
-            imgMovie = view.findViewById(R.id.img_tvmovie);
-            cvMovie = view.findViewById(R.id.cv_tvmovie);
+            ButterKnife.bind(this, view);
         }
     }
 }
