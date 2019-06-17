@@ -141,6 +141,58 @@ public class MoviesViewModel extends AndroidViewModel {
                 });
     }
 
+    void deleteMovie(final com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie movie) {
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() {
+                repository.deleteMovie(movie);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        messageSuccess.setValue("Movie Berhasil Dihapus");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        messageError.setValue(e.getMessage());
+                    }
+                });
+    }
+
+    void deleteFavorite(final Favorites favorites) {
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() {
+                repository.deleteFavorite(favorites);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        messageSuccess.setValue("Favorite Berhasil Dihapus");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        messageError.setValue(e.getMessage());
+                    }
+                });
+    }
+
     String getLanguage() {
         return repository.getLanguage();
     }

@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
+import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
+import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.movies.adapter.ListMoviesAdapter;
@@ -70,6 +72,29 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             switch (view.getId()) {
                 case R.id.cv_favorite:
                     adapter.setFavorite(true, position);
+                    if (movie.isFavorite()) {
+                        moviesViewModel.insertMovie(new Movie(
+                                movie.getId(),
+                                movie.getTitle(),
+                                "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath(),
+                                movie.getOverview()
+                        ));
+                        moviesViewModel.insertFavorite(new Favorites(
+                                1,
+                                movie.getId()
+                        ));
+                    } else {
+                        moviesViewModel.deleteMovie(new Movie(
+                                movie.getId(),
+                                movie.getTitle(),
+                                "https://image.tmdb.org/t/p/w500" + movie.getBackdropPath(),
+                                movie.getOverview()
+                        ));
+                        moviesViewModel.deleteFavorite(new Favorites(
+                                1,
+                                movie.getId()
+                        ));
+                    }
                     break;
             }
         }
