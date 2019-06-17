@@ -23,16 +23,6 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.label_tv_date_release)
-    TextView labelDateRelease;
-    @BindView(R.id.tv_date_release)
-    TextView tvDateRelease;
-    @BindView(R.id.tv_rating)
-    TextView tvRating;
-    @BindView(R.id.label_revenue)
-    TextView labelRevenue;
-    @BindView(R.id.tv_revenue)
-    TextView tvRevenue;
     @BindView(R.id.tv_description)
     TextView tvDescription;
     @BindView(R.id.img_movie)
@@ -65,20 +55,7 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     private void setDataIntent() {
         if (getDataIntent() != null) {
-            if (getDataIntent().getRevenue() == null) {
-                labelRevenue.setVisibility(View.GONE);
-                tvRevenue.setVisibility(View.GONE);
-            }
-            if (getDataIntent().getDate() == null) {
-                labelDateRelease.setVisibility(View.GONE);
-                tvDateRelease.setVisibility(View.GONE);
-            }
-
             tvTitle.setText(getDataIntent().getTitle());
-            tvDateRelease.setText(getDataIntent().getDate());
-            String rate = (int) getDataIntent().getRate() + "/100";
-            tvRating.setText(rate);
-            tvRevenue.setText(getDataIntent().getRevenue());
             tvDescription.setText(getDataIntent().getDescription());
             Glide.with(this).load(getDataIntent().getPhoto())
                     .centerCrop()
