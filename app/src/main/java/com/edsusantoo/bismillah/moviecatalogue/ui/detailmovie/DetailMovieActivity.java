@@ -2,6 +2,7 @@ package com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +15,7 @@ import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailMovieActivity extends AppCompatActivity {
+public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_MOVIE_DETAIL = "extra_movie_detail";
 
@@ -27,6 +28,10 @@ public class DetailMovieActivity extends AppCompatActivity {
     TextView tvDescription;
     @BindView(R.id.img_movie)
     ImageView imgMovie;
+    @BindView(R.id.cv_favorite)
+    CardView cvFavorite;
+    @BindView(R.id.img_favorite)
+    ImageView imgFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class DetailMovieActivity extends AppCompatActivity {
 
         setDataIntent();
 
+        cvFavorite.setOnClickListener(this);
+
 
     }
 
@@ -64,6 +71,15 @@ public class DetailMovieActivity extends AppCompatActivity {
                     .into(imgMovie);
 
 
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.cv_favorite:
+                imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
+                break;
         }
     }
 }
