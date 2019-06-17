@@ -23,6 +23,10 @@ interface Repository {
 
     void insertFavorite(Favorites favorites);
 
+    void deleteMovie(Movie movie);
+
+    void deleteFavorite(Favorites favorites);
+
     LiveData<List<Movie>> getAllMovie();
 
     LiveData<List<User>> getAllUser();

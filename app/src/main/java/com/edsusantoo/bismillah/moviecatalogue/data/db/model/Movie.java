@@ -20,6 +20,13 @@ public class Movie {
     @ColumnInfo(name = "description")
     private String description;
 
+    public Movie(int movieId, String movieName, String moviePhoto, String description) {
+        this.movieId = movieId;
+        this.movieName = movieName;
+        this.moviePhoto = moviePhoto;
+        this.description = description;
+    }
+
     public int getMovieId() {
         return movieId;
     }

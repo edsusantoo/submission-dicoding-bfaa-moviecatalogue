@@ -47,7 +47,6 @@ public class MoviesRepository implements Repository {
 
         allMovies = movieDao.getAll();
 
-
     }
 
 
@@ -74,6 +73,16 @@ public class MoviesRepository implements Repository {
     @Override
     public void insertFavorite(Favorites favorites) {
         favoriteDao.insert(favorites);
+    }
+
+    @Override
+    public void deleteMovie(Movie movie) {
+        movieDao.delete(movie);
+    }
+
+    @Override
+    public void deleteFavorite(Favorites favorites) {
+        favoriteDao.delete(favorites);
     }
 
     @Override

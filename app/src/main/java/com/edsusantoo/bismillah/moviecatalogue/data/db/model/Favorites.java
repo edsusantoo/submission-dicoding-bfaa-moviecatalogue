@@ -18,6 +18,11 @@ public class Favorites {
     @ColumnInfo(name = "movie_id")
     private int movieId;
 
+    public Favorites(int userId, int movieId) {
+        this.userId = userId;
+        this.movieId = movieId;
+    }
+
     public int getFavoritesId() {
         return favoritesId;
     }
