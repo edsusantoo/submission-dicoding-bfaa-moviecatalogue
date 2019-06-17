@@ -64,6 +64,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailMovieActivity.class);
                 Movie dataMovie = new Movie();
+                dataMovie.setMovieId(movie.getId());
                 dataMovie.setTitle(movie.getTitle());
                 dataMovie.setDate(movie.getReleaseDate());
                 dataMovie.setDescription(finalDescription);
