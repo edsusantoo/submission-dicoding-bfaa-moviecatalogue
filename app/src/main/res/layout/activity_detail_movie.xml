@@ -38,7 +38,10 @@
                 android:id="@+id/cv_poster_movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 app:cardCornerRadius="@dimen/_5dp"
                 app:layout_constraintBottom_toTopOf="@+id/cardView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -47,132 +50,39 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_16dp">
-
-                    <ImageView
-                        android:id="@+id/img_movie"
-                        android:layout_width="150dp"
-                        android:layout_height="230dp"
-                        android:layout_marginEnd="8dp"
-                        android:contentDescription="@string/minus"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/poster_birdbox"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                    <android.support.constraint.Guideline
-                        android:id="@+id/guideline2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_begin="165dp" />
-
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginBottom="8dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="@dimen/_10dp"
                         android:text="@string/title"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/white"
                         android:textSize="28sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/label_tv_date_release"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
 
 
-                    <TextView
-                        android:id="@+id/label_tv_date_release"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/date_release"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_date_release"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-
-                    <TextView
-                        android:id="@+id/tv_date_release"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/minus"
-                        app:layout_constraintBottom_toTopOf="@+id/textView2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toBottomOf="@+id/label_tv_date_release" />
-
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/rating"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_rating"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_date_release" />
-
-                    <TextView
-                        android:id="@+id/tv_rating"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/minus"
-                        app:layout_constraintBottom_toTopOf="@+id/label_revenue"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
-                    <TextView
-                        android:id="@+id/label_revenue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/revenue"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
-
-                    <TextView
-                        android:id="@+id/tv_revenue"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/minus"
+                    <ImageView
+                        android:id="@+id/img_movie"
+                        android:layout_width="match_parent"
+                        android:layout_height="230dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/minus"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/poster_birdbox"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toBottomOf="@+id/label_revenue"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title"
                         app:layout_constraintVertical_bias="0.0" />
 
 
