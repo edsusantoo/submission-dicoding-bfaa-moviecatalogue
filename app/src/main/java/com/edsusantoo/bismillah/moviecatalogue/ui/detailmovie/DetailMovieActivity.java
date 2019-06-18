@@ -121,34 +121,72 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.cv_favorite) {
-            if (favorite != null && favorite.getMovieId() == getDataIntent().getMovieId()) {
-                imgFavorite.setColorFilter(getResources().getColor(R.color.colorPrimary));
-                detailMovieViewModel.deleteMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
-                        getDataIntent().getMovieId(),
-                        getDataIntent().getTitle(),
-                        getDataIntent().getPhoto(),
-                        getDataIntent().getDescription(),
-                        Constant.TYPE_MOVIE
-                ));
+            if (getDataIntent() != null) {
+                switch (getDataIntent().getType()) {
+                    case Constant.TYPE_MOVIE:
+                        if (favorite != null && favorite.getMovieId() == getDataIntent().getMovieId()) {
+                            imgFavorite.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                            detailMovieViewModel.deleteMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
+                                    getDataIntent().getMovieId(),
+                                    getDataIntent().getTitle(),
+                                    getDataIntent().getPhoto(),
+                                    getDataIntent().getDescription(),
+                                    Constant.TYPE_MOVIE
+                            ));
 
-                detailMovieViewModel.deleteFavorite(new Favorites(
-                        favorite.getFavoritesId(),
-                        1,
-                        getDataIntent().getMovieId()
-                ));
-            } else {
-                imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
-                detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
-                        getDataIntent().getMovieId(),
-                        getDataIntent().getTitle(),
-                        getDataIntent().getPhoto(),
-                        getDataIntent().getDescription(),
-                        Constant.TYPE_MOVIE
-                ));
-                detailMovieViewModel.insertFavorite(new Favorites(
-                        1,
-                        getDataIntent().getMovieId()
-                ));
+                            detailMovieViewModel.deleteFavorite(new Favorites(
+                                    favorite.getFavoritesId(),
+                                    1,
+                                    getDataIntent().getMovieId()
+                            ));
+                        } else {
+                            imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
+                            detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
+                                    getDataIntent().getMovieId(),
+                                    getDataIntent().getTitle(),
+                                    getDataIntent().getPhoto(),
+                                    getDataIntent().getDescription(),
+                                    Constant.TYPE_MOVIE
+                            ));
+                            detailMovieViewModel.insertFavorite(new Favorites(
+                                    1,
+                                    getDataIntent().getMovieId()
+                            ));
+                        }
+                        break;
+
+                    case Constant.TYPE_TVSHOWS:
+                        if (favorite != null && favorite.getMovieId() == getDataIntent().getMovieId()) {
+                            imgFavorite.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                            detailMovieViewModel.deleteMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
+                                    getDataIntent().getMovieId(),
+                                    getDataIntent().getTitle(),
+                                    getDataIntent().getPhoto(),
+                                    getDataIntent().getDescription(),
+                                    Constant.TYPE_TVSHOWS
+                            ));
+
+                            detailMovieViewModel.deleteFavorite(new Favorites(
+                                    favorite.getFavoritesId(),
+                                    1,
+                                    getDataIntent().getMovieId()
+                            ));
+                        } else {
+                            imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
+                            detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
+                                    getDataIntent().getMovieId(),
+                                    getDataIntent().getTitle(),
+                                    getDataIntent().getPhoto(),
+                                    getDataIntent().getDescription(),
+                                    Constant.TYPE_TVSHOWS
+                            ));
+                            detailMovieViewModel.insertFavorite(new Favorites(
+                                    1,
+                                    getDataIntent().getMovieId()
+                            ));
+                        }
+                        break;
+                }
             }
 
 

@@ -16,6 +16,7 @@ import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie.DetailMovieActivity;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.List;
 
@@ -70,6 +71,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
                 dataMovie.setDescription(finalDescription);
                 dataMovie.setRate(rate);
                 dataMovie.setPhoto(image_url);
+                dataMovie.setType(Constant.TYPE_MOVIE);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
                 context.startActivity(i);
             }
