@@ -20,11 +20,23 @@ public class Movie {
     @ColumnInfo(name = "description")
     private String description;
 
-    public Movie(int movieId, String movieName, String moviePhoto, String description) {
+    @ColumnInfo(name = "type")
+    private String type;
+
+    public Movie(int movieId, String movieName, String moviePhoto, String description, String type) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.moviePhoto = moviePhoto;
         this.description = description;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getMovieId() {

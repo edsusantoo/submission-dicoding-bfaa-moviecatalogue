@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -126,7 +127,8 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                         getDataIntent().getMovieId(),
                         getDataIntent().getTitle(),
                         getDataIntent().getPhoto(),
-                        getDataIntent().getDescription()
+                        getDataIntent().getDescription(),
+                        Constant.TYPE_MOVIE
                 ));
 
                 detailMovieViewModel.deleteFavorite(new Favorites(
@@ -140,7 +142,8 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                         getDataIntent().getMovieId(),
                         getDataIntent().getTitle(),
                         getDataIntent().getPhoto(),
-                        getDataIntent().getDescription()
+                        getDataIntent().getDescription(),
+                        Constant.TYPE_MOVIE
                 ));
                 detailMovieViewModel.insertFavorite(new Favorites(
                         1,
