@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.favorites.movies;
+package com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.favorites.tvshows;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -17,15 +17,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class FavoriteMoviesViewModel extends AndroidViewModel {
+public class FavoriteTvShowsViewModel extends AndroidViewModel {
     private MoviesRepository repository;
+
 
     private MutableLiveData<List<Favorites>> dataFavorite = new MutableLiveData<>();
     private MutableLiveData<List<Movie>> dataMovie = new MutableLiveData<>();
     private MutableLiveData<String> messageError = new MutableLiveData<>();
 
-    public FavoriteMoviesViewModel(@NonNull Application application) {
+    public FavoriteTvShowsViewModel(@NonNull Application application) {
         super(application);
+
         repository = new MoviesRepository(application.getApplicationContext());
     }
 
@@ -92,9 +94,12 @@ public class FavoriteMoviesViewModel extends AndroidViewModel {
 
     }
 
+
     @Override
     protected void onCleared() {
         super.onCleared();
         repository.onDestroy();
     }
+
+
 }
