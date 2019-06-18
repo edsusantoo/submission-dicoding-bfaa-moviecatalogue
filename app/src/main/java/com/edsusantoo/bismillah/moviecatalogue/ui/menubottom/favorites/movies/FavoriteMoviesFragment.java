@@ -16,6 +16,7 @@ import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie;
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.favorites.movies.adapter.FavoriteMoviesAdapter;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class FavoriteMoviesFragment extends Fragment {
         public void onChanged(@Nullable List<Favorites> favorites) {
             if (favorites != null) {
                 for (Favorites data : favorites) {
-                    favoriteMoviesViewModel.getMovie(data.getMovieId());
+                    favoriteMoviesViewModel.getMovie(data.getMovieId(), Constant.TYPE_MOVIE);
                 }
             }
         }

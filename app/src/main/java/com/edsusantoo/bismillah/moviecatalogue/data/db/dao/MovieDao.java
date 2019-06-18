@@ -24,7 +24,7 @@ public interface MovieDao {
     @Delete
     void delete(Movie... movies);
 
-    @Query("SELECT * FROM movie WHERE id =:movieId")
-    Maybe<List<Movie>> getMovie(int movieId);
+    @Query("SELECT * FROM movie WHERE id =:movieId AND type =:type")
+    Maybe<List<Movie>> getMovie(int movieId, String type);
 
 }

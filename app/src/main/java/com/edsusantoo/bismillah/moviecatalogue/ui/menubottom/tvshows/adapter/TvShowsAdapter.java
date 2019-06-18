@@ -64,6 +64,7 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailMovieActivity.class);
                 Movie dataMovie = new Movie();
+                dataMovie.setMovieId(tv_show.getId());
                 dataMovie.setTitle(tv_show.getName());
                 dataMovie.setDescription(finalDescription);
                 dataMovie.setRate(rate);

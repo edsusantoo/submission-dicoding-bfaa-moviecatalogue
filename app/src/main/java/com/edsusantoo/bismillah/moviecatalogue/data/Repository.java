@@ -31,7 +31,7 @@ interface Repository {
 
     Maybe<List<Favorites>> getAllFavorite();
 
-    Maybe<List<Movie>> getMovie(int movieId);
+    Maybe<List<Movie>> getMovie(int movieId, String type);
 
     Maybe<Favorites> getMovieFavorites(int movieId);
 

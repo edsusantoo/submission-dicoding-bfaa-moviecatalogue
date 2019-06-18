@@ -66,8 +66,8 @@ public class FavoriteMoviesViewModel extends AndroidViewModel {
                 });
     }
 
-    void getMovie(int movieId) {
-        repository.getMovie(movieId)
+    void getMovie(int movieId, String type) {
+        repository.getMovie(movieId, type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new MaybeObserver<List<Movie>>() {

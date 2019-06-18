@@ -84,8 +84,8 @@ public class MoviesRepository implements Repository {
     }
 
     @Override
-    public Maybe<List<Movie>> getMovie(int movieId) {
-        return movieDao.getMovie(movieId);
+    public Maybe<List<Movie>> getMovie(int movieId, String type) {
+        return movieDao.getMovie(movieId, type);
     }
 
     @Override
