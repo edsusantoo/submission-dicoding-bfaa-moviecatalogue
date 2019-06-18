@@ -12,6 +12,7 @@ import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
+import io.reactivex.MaybeObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -47,28 +48,28 @@ public class DetailMovieViewModel extends AndroidViewModel {
     }
 
     void getMovieFavorite(final int movieId) {
-        Completable.fromAction(new Action() {
-            @Override
-            public void run() {
-                repository.getMovieFavorite(movieId);
-            }
-        }).subscribeOn(Schedulers.io())
+        repository.getMovieFavorites(movieId)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
+                .subscribe(new MaybeObserver<Favorites>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onComplete() {
-                        messageSuccess.setValue("Movie Ada");
-                        movieFavorite.setValue(repository.getMovieFavorite().getValue());
+                    public void onSuccess(Favorites favorites) {
+                        movieFavorite.setValue(favorites);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         messageError.setValue(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

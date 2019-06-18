@@ -1,7 +1,5 @@
 package com.edsusantoo.bismillah.moviecatalogue.data;
 
-import android.arch.lifecycle.LiveData;
-
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.User;
@@ -31,19 +29,11 @@ interface Repository {
 
     void deleteFavorite(Favorites favorites);
 
-    void getMovieFavorite(int movieId);
-
-    LiveData<List<Movie>> getAllMovie();
-
-    LiveData<List<User>> getAllUser();
-
-    LiveData<List<Favorites>> getAllFavorites();
-
-    LiveData<Favorites> getMovieFavorite();
-
     Maybe<List<Favorites>> getAllFavorite();
 
     Maybe<List<Movie>> getMovie(int movieId);
+
+    Maybe<Favorites> getMovieFavorites(int movieId);
 
     String getLanguage();
 

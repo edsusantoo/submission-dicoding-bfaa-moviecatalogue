@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,8 +46,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         public void onChanged(@Nullable Favorites favorites) {
             if (favorites != null) {
                 favorite = favorites;
-                Log.d("MovieFavorite", String.valueOf(favorites.getMovieId()));
-                Log.d("MovieIntent", String.valueOf(getDataIntent().getMovieId()));
                 if (favorites.getMovieId() == getDataIntent().getMovieId()) {
                     imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
                 }
@@ -123,17 +120,35 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.cv_favorite) {
-            imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
-            detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
-                    getDataIntent().getMovieId(),
-                    getDataIntent().getTitle(),
-                    getDataIntent().getPhoto(),
-                    getDataIntent().getDescription()
-            ));
-            detailMovieViewModel.insertFavorite(new Favorites(
-                    1,
-                    getDataIntent().getMovieId()
-            ));
+            if (favorite != null && favorite.getMovieId() == getDataIntent().getMovieId()) {
+                imgFavorite.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                detailMovieViewModel.deleteMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
+                        getDataIntent().getMovieId(),
+                        getDataIntent().getTitle(),
+                        getDataIntent().getPhoto(),
+                        getDataIntent().getDescription()
+                ));
+
+                detailMovieViewModel.deleteFavorite(new Favorites(
+                        favorite.getFavoritesId(),
+                        1,
+                        getDataIntent().getMovieId()
+                ));
+            } else {
+                imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
+                detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
+                        getDataIntent().getMovieId(),
+                        getDataIntent().getTitle(),
+                        getDataIntent().getPhoto(),
+                        getDataIntent().getDescription()
+                ));
+                detailMovieViewModel.insertFavorite(new Favorites(
+                        1,
+                        getDataIntent().getMovieId()
+                ));
+            }
+
+
         }
     }
 

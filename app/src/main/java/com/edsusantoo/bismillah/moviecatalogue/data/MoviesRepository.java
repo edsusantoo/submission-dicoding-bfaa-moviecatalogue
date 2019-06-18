@@ -1,6 +1,5 @@
 package com.edsusantoo.bismillah.moviecatalogue.data;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
 import com.edsusantoo.bismillah.moviecatalogue.data.db.RootMoviesDB;
@@ -31,13 +30,6 @@ public class MoviesRepository implements Repository {
     private UserDao userDao;
     private FavoriteDao favoriteDao;
 
-    private LiveData<List<Movie>> allMovies;
-    private LiveData<List<Favorites>> allFavorites;
-    private LiveData<List<User>> allUsers;
-
-
-    private LiveData<Favorites> movieFavorite;
-
     public MoviesRepository(Context context) {
         apiServices = RetrofitConfig.getApiServices();
         compositeDisposable = new CompositeDisposable();
@@ -48,8 +40,6 @@ public class MoviesRepository implements Repository {
         movieDao = rootMoviesDB.movieDao();
         userDao = rootMoviesDB.userDao();
         favoriteDao = rootMoviesDB.favoriteDao();
-
-        allMovies = movieDao.getAll();
     }
 
 
@@ -89,31 +79,6 @@ public class MoviesRepository implements Repository {
     }
 
     @Override
-    public void getMovieFavorite(int movieId) {
-        movieFavorite = favoriteDao.getMovieFavorite(movieId);
-    }
-
-    @Override
-    public LiveData<List<Movie>> getAllMovie() {
-        return allMovies;
-    }
-
-    @Override
-    public LiveData<List<User>> getAllUser() {
-        return allUsers;
-    }
-
-    @Override
-    public LiveData<List<Favorites>> getAllFavorites() {
-        return allFavorites;
-    }
-
-    @Override
-    public LiveData<Favorites> getMovieFavorite() {
-        return movieFavorite;
-    }
-
-    @Override
     public Maybe<List<Favorites>> getAllFavorite() {
         return favoriteDao.getAll();
     }
@@ -121,6 +86,11 @@ public class MoviesRepository implements Repository {
     @Override
     public Maybe<List<Movie>> getMovie(int movieId) {
         return movieDao.getMovie(movieId);
+    }
+
+    @Override
+    public Maybe<Favorites> getMovieFavorites(int movieId) {
+        return favoriteDao.getMovieFavorite(movieId);
     }
 
     @Override

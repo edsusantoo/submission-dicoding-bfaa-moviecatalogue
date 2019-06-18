@@ -46,7 +46,7 @@ public class FavoriteMoviesViewModel extends AndroidViewModel {
                 .subscribe(new MaybeObserver<List<Favorites>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        repository.getCompositeDisposable().add(d);
+
                     }
 
                     @Override

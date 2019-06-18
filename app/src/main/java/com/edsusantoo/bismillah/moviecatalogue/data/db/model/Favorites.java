@@ -3,6 +3,7 @@ package com.edsusantoo.bismillah.moviecatalogue.data.db.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "favorites")
@@ -21,6 +22,13 @@ public class Favorites {
     public Favorites(int userId, int movieId) {
         this.userId = userId;
         this.movieId = movieId;
+    }
+
+    @Ignore
+    public Favorites(int favoritesId, int userId, int movieId) {
+        this.userId = userId;
+        this.movieId = movieId;
+        this.favoritesId = favoritesId;
     }
 
     public int getFavoritesId() {

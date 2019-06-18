@@ -1,6 +1,5 @@
 package com.edsusantoo.bismillah.moviecatalogue.data.db.dao;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -24,6 +23,6 @@ public interface FavoriteDao {
     @Delete
     void delete(Favorites... favorites);
 
-    @Query("SELECT * FROM favorites WHERE id =:movieId")
-    LiveData<Favorites> getMovieFavorite(int movieId);
+    @Query("SELECT * FROM favorites WHERE movie_id =:movieId")
+    Maybe<Favorites> getMovieFavorite(int movieId);
 }
