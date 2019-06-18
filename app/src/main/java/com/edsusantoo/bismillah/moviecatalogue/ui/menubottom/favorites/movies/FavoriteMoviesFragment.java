@@ -46,6 +46,7 @@ public class FavoriteMoviesFragment extends Fragment {
         public void onChanged(@Nullable List<Movie> movies) {
             if (movies != null && movies.size() != 0) {
                 adapter.addMovie(movies);
+                adapter.refresh();
             }
         }
     };

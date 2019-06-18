@@ -23,6 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//TODO: masih belum bisa refressh data ketika hapus favorite
 public class FavoriteTvShowsFragment extends Fragment {
 
     @BindView(R.id.rv_favorite_tvshows)
@@ -46,6 +47,7 @@ public class FavoriteTvShowsFragment extends Fragment {
         public void onChanged(@Nullable List<Movie> movies) {
             if (movies != null && movies.size() != 0) {
                 adapter.addMovie(movies);
+                adapter.refresh();
             }
         }
     };
