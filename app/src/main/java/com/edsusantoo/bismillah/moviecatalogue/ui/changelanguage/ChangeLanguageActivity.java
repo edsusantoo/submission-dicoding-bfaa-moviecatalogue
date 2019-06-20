@@ -1,7 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.changelanguage;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +9,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
+import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
+import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,9 +74,8 @@ public class ChangeLanguageActivity extends AppCompatActivity {
     }
 
     private void finishChangeLanguage() {
-        Intent i = new Intent();
-        i.putExtra(EXTRA_LANGUAGE, getRadioChangeLanguage());
-        setResult(RESULT_OK, i);
+        saveLanguage(getRadioChangeLanguage());
+        setLanguage();
     }
 
 
@@ -94,5 +96,20 @@ public class ChangeLanguageActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+
+    private void setLanguage() {
+        SharedPref sharedPref = new SharedPref(this);
+        Locale locale = new Locale(sharedPref.getSharedPref().getString(Constant.PREF_LANGUAGE, ""));
+        Locale.setDefault(locale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    private void saveLanguage(String language) {
+        SharedPref sharedPref = new SharedPref(this);
+        sharedPref.modifyDataSharedPref(Constant.PREF_LANGUAGE, language);
     }
 }
