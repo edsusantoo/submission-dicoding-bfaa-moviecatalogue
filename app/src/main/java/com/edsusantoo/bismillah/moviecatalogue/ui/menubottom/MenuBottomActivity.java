@@ -123,16 +123,19 @@ public class MenuBottomActivity extends AppCompatActivity implements AHBottomNav
             case 0:
                 if (menuBottom.getCurrentItem() != 0) {
                     viewPager.setCurrentItem(0);
+                    adapterViewPager.notifyDataSetChanged();
                 }
                 break;
             case 1:
                 if (menuBottom.getCurrentItem() != 1) {
                     viewPager.setCurrentItem(1);
+                    adapterViewPager.notifyDataSetChanged();
                 }
                 break;
             case 2:
                 if (menuBottom.getCurrentItem() != 2) {
                     viewPager.setCurrentItem(2);
+                    adapterViewPager.notifyDataSetChanged();
                 }
                 break;
             default:

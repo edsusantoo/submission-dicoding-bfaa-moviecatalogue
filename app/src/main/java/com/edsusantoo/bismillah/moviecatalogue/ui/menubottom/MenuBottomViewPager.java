@@ -2,13 +2,13 @@ package com.edsusantoo.bismillah.moviecatalogue.ui.menubottom;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.favorites.FavoritesFragment;
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.movies.MoviesFragment;
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.tvshows.TvShowsFragment;
 
-public class MenuBottomViewPager extends FragmentPagerAdapter {
+public class MenuBottomViewPager extends FragmentStatePagerAdapter {
 
     MenuBottomViewPager(FragmentManager fm) {
         super(fm);
