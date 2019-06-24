@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+
+//TODO: Buat gimana caranya semua viewmodel extends nya viewmodel bukan androidviewmodel karena jangan sampai ada context diviewmodel, karena untuk mengupdate datanya si activitynya harus recreate
 public class MenuBottomViewModel extends ViewModel {
     private MutableLiveData<String> menuBottom = new MutableLiveData<>();
 
