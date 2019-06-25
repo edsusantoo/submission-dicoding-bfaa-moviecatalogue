@@ -7,8 +7,8 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.MoviesRepository;
-import com.edsusantoo.bismillah.moviecatalogue.data.network.ApiObserver;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.observer.ApiSingleObserver;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -48,9 +48,9 @@ public class MoviesViewModel extends AndroidViewModel {
             repository.getMovie(BuildConfig.API_KEY, language)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new ApiObserver<MovieResponse>(repository.getCompositeDisposable()) {
+                    .subscribe(new ApiSingleObserver<MovieResponse>(repository.getCompositeDisposable()) {
                         @Override
-                        public void onSuccess(MovieResponse response) {
+                        public void onSuccessful(MovieResponse response) {
                             isLoading.setValue(false);
                             dataMovies.setValue(response);
                         }
@@ -69,9 +69,9 @@ public class MoviesViewModel extends AndroidViewModel {
         repository.getMovie(BuildConfig.API_KEY, language)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiObserver<MovieResponse>(repository.getCompositeDisposable()) {
+                .subscribe(new ApiSingleObserver<MovieResponse>(repository.getCompositeDisposable()) {
                     @Override
-                    public void onSuccess(MovieResponse response) {
+                    public void onSuccessful(MovieResponse response) {
                         isLoading.setValue(false);
                         dataMovies.setValue(response);
                     }

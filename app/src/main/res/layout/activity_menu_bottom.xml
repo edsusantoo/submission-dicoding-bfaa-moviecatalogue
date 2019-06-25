@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.menubottom.MenuBottomActivity">
 
-    <!--<FrameLayout-->
-    <!--android:id="@+id/frame_main"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--app:layout_constraintBottom_toTopOf="@+id/menu_bottom_navigation"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
-
     <com.edsusantoo.bismillah.moviecatalogue.utils.NonSwappableViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
@@ -33,4 +24,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
 </android.support.constraint.ConstraintLayout>

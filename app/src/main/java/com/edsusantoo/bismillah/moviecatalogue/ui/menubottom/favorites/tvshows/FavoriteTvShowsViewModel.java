@@ -91,7 +91,6 @@ public class FavoriteTvShowsViewModel extends AndroidViewModel {
 
                     }
                 });
-
     }
 
 
@@ -100,6 +99,5 @@ public class FavoriteTvShowsViewModel extends AndroidViewModel {
         super.onCleared();
         repository.onDestroy();
     }
-
 
 }

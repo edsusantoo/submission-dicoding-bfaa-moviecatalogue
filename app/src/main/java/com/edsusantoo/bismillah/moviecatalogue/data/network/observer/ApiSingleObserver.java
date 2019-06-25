@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.data.network;
+package com.edsusantoo.bismillah.moviecatalogue.data.network.observer;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -6,20 +6,21 @@ import java.net.UnknownHostException;
 
 import javax.net.ssl.SSLHandshakeException;
 
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.exceptions.CompositeException;
 
-public abstract class ApiObserver<T> implements Observer<T> {
+public abstract class ApiSingleObserver<T> implements SingleObserver<T> {
 
     private CompositeDisposable compositeDisposable;
 
-    public ApiObserver(CompositeDisposable compositeDisposable) {
+    protected ApiSingleObserver(CompositeDisposable compositeDisposable) {
         this.compositeDisposable = compositeDisposable;
     }
 
-    public abstract void onSuccess(T response);
+
+    public abstract void onSuccessful(T response);
 
     public abstract void onFailure(String message);
 
@@ -29,11 +30,6 @@ public abstract class ApiObserver<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {
         compositeDisposable.add(d);
-    }
-
-    @Override
-    public void onNext(T t) {
-        onSuccess(t);
     }
 
     @Override
@@ -62,7 +58,7 @@ public abstract class ApiObserver<T> implements Observer<T> {
     }
 
     @Override
-    public void onComplete() {
-
+    public void onSuccess(T t) {
+        onSuccessful(t);
     }
 }

@@ -9,14 +9,14 @@ import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowR
 import java.util.List;
 
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 interface Repository {
 
     //======Response Network======
-    Observable<MovieResponse> getMovie(String api_key, String language);
+    Single<MovieResponse> getMovie(String api_key, String language);
 
-    Observable<TvShowResponse> getTvShow(String api_key, String language);
+    Single<TvShowResponse> getTvShow(String api_key, String language);
 
     //======MovieDao======
     void insertUser(User user);

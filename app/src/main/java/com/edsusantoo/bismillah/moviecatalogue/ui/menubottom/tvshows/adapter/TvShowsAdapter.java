@@ -67,7 +67,6 @@ public class TvShowsAdapter extends RecyclerView.Adapter<TvShowsAdapter.TvShowsV
                 dataMovie.setMovieId(tv_show.getId());
                 dataMovie.setTitle(tv_show.getName());
                 dataMovie.setDescription(finalDescription);
-                dataMovie.setRate(rate);
                 dataMovie.setPhoto(image_url);
                 dataMovie.setType(Constant.TYPE_TVSHOWS);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);

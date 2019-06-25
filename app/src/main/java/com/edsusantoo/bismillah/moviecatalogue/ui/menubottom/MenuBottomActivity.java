@@ -58,10 +58,6 @@ public class MenuBottomActivity extends AppCompatActivity implements AHBottomNav
         menuBottomViewModel = ViewModelProviders.of(this).get(MenuBottomViewModel.class);
         menuBottomViewModel.getPositionMenuBottom().observe(this, getPositionMenuBottom);
 
-        //setfirst
-//        moviesFragment = new MoviesFragment();
-//        callFragment(moviesFragment, TAG_MOVIES);
-
         createNavItems();
 
     }
@@ -92,11 +88,6 @@ public class MenuBottomActivity extends AppCompatActivity implements AHBottomNav
     private int fetchColor(int color) {
         return ContextCompat.getColor(this, color);
     }
-
-//    public void callFragment(Fragment fragment, String tag) {
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.frame_main, fragment, tag).commit();
-//    }
 
     private void selectFragmentState(String lastTagSelected) {
         switch (lastTagSelected) {

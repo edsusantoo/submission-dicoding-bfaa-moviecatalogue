@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         public void onChanged(@Nullable Favorites favorites) {
             if (favorites != null) {
                 favorite = favorites;
+                Log.d("TESTSTE", String.valueOf(favorites.getMovieId()));
                 if (favorites.getMovieId() == getDataIntent().getMovieId()) {
                     imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
                 }

@@ -89,7 +89,6 @@ public class FavoriteMoviesViewModel extends AndroidViewModel {
 
                     }
                 });
-
     }
 
     @Override

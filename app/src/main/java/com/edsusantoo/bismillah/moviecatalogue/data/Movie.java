@@ -17,10 +17,7 @@ public class Movie implements Parcelable {
     };
     private String photo;
     private String title;
-    private String date;
     private String description;
-    private double rate;
-    private String revenue;
     private int movieId;
     private String type;
 
@@ -30,10 +27,7 @@ public class Movie implements Parcelable {
     private Movie(Parcel in) {
         this.photo = in.readString();
         this.title = in.readString();
-        this.date = in.readString();
         this.description = in.readString();
-        this.rate = in.readDouble();
-        this.revenue = in.readString();
         this.movieId = in.readInt();
         this.type = in.readString();
     }
@@ -62,36 +56,12 @@ public class Movie implements Parcelable {
         this.title = title;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public String getRevenue() {
-        return revenue;
-    }
-
-    public void setRevenue(String revenue) {
-        this.revenue = revenue;
     }
 
     public int getMovieId() {
@@ -111,10 +81,7 @@ public class Movie implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.photo);
         dest.writeString(this.title);
-        dest.writeString(this.date);
         dest.writeString(this.description);
-        dest.writeDouble(this.rate);
-        dest.writeString(this.revenue);
         dest.writeInt(this.movieId);
         dest.writeString(this.type);
     }

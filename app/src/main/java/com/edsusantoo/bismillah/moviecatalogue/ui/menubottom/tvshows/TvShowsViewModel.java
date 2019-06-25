@@ -7,8 +7,8 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.MoviesRepository;
-import com.edsusantoo.bismillah.moviecatalogue.data.network.ApiObserver;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.observer.ApiSingleObserver;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -38,9 +38,9 @@ public class TvShowsViewModel extends AndroidViewModel {
             repository.getTvShow(BuildConfig.API_KEY, language)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new ApiObserver<TvShowResponse>(repository.getCompositeDisposable()) {
+                    .subscribe(new ApiSingleObserver<TvShowResponse>(repository.getCompositeDisposable()) {
                         @Override
-                        public void onSuccess(TvShowResponse response) {
+                        public void onSuccessful(TvShowResponse response) {
                             isLoading.setValue(false);
                             dataTvShows.setValue(response);
                         }
@@ -59,9 +59,9 @@ public class TvShowsViewModel extends AndroidViewModel {
         repository.getTvShow(BuildConfig.API_KEY, language)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiObserver<TvShowResponse>(repository.getCompositeDisposable()) {
+                .subscribe(new ApiSingleObserver<TvShowResponse>(repository.getCompositeDisposable()) {
                     @Override
-                    public void onSuccess(TvShowResponse response) {
+                    public void onSuccessful(TvShowResponse response) {
                         isLoading.setValue(false);
                         dataTvShows.setValue(response);
                     }

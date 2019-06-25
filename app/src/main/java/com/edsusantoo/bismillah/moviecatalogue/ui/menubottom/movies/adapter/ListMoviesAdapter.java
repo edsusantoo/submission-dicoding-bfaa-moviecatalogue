@@ -67,9 +67,7 @@ public class ListMoviesAdapter extends RecyclerView.Adapter<ListMoviesAdapter.Li
                 Movie dataMovie = new Movie();
                 dataMovie.setMovieId(movie.getId());
                 dataMovie.setTitle(movie.getTitle());
-                dataMovie.setDate(movie.getReleaseDate());
                 dataMovie.setDescription(finalDescription);
-                dataMovie.setRate(rate);
                 dataMovie.setPhoto(image_url);
                 dataMovie.setType(Constant.TYPE_MOVIE);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE_DETAIL, dataMovie);
