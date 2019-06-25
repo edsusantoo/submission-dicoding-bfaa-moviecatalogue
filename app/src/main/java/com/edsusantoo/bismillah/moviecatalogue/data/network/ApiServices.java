@@ -8,13 +8,13 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiServices {
-    @GET("movie")
+    @GET("discover/movie")
     Single<MovieResponse> getMovie(
             @Query("api_key") String api_key,
             @Query("language") String language
     );
 
-    @GET("tv")
+    @GET("discover/tv")
     Single<TvShowResponse> getTvMovie(
             @Query("api_key") String api_key,
             @Query("language") String language

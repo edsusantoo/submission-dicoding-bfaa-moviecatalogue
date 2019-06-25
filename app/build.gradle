@@ -21,7 +21,8 @@ android {
     def BaseURL
     productFlavors {
         RootMovie {
-            BaseURL = "https://api.themoviedb.org/3/discover/"
+            BaseURL = "https://api.themoviedb.org/3/"
+            buildConfigField("String", "BASE_URL", "\""+BaseURL+"\"")
             buildConfigField("String", "API_KEY", "\"50ec555cc1d67559ec5eb1bff307acce\"")
         }
     }

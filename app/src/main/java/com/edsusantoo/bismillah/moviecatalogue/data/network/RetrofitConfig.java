@@ -1,5 +1,6 @@
 package com.edsusantoo.bismillah.moviecatalogue.data.network;
 
+import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,7 +14,7 @@ public class RetrofitConfig {
 
         Gson gsonBuilder = new GsonBuilder().setLenient().create();
         return new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/discover/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
