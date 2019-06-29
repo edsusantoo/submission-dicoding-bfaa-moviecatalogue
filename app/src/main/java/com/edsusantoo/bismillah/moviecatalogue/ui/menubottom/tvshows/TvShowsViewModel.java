@@ -8,6 +8,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.MoviesRepository;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.observer.ApiObserver;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.observer.ApiSingleObserver;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,6 +63,26 @@ public class TvShowsViewModel extends AndroidViewModel {
                 .subscribe(new ApiSingleObserver<TvShowResponse>(repository.getCompositeDisposable()) {
                     @Override
                     public void onSuccessful(TvShowResponse response) {
+                        isLoading.setValue(false);
+                        dataTvShows.setValue(response);
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        isLoading.setValue(false);
+                        dataTvShows.setValue(null);
+                    }
+                });
+    }
+
+    void getSearchTvMovies(String query) {
+        isLoading.setValue(true);
+        repository.getSearchTvShow(BuildConfig.API_KEY, repository.getLanguage(), query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiObserver<TvShowResponse>(repository.getCompositeDisposable()) {
+                    @Override
+                    public void onSuccess(TvShowResponse response) {
                         isLoading.setValue(false);
                         dataTvShows.setValue(response);
                     }

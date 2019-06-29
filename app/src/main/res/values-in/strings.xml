@@ -120,6 +120,8 @@
     <string name="no_translations">Tidak ada terjemahan dalam bahasa ini</string>
     <string name="nothing_film">Tidak ada Film</string>
     <string name="search_movie">Cari Film</string>
+    <string name="appwidget_text">Contoh</string>
+    <string name="add_widget">Tambah Widget</string>
 
 
 </resources>

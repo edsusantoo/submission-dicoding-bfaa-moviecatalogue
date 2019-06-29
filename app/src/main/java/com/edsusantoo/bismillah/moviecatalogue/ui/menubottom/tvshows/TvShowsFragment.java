@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     @BindView(R.id.recycler_tvmovie)
     RecyclerView recyclerTvShows;
@@ -37,6 +38,9 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     TextView tvNothingMovies;
     @BindView(R.id.img_broken)
     ImageView imgBroken;
+    @BindView(R.id.search_tvshows)
+    SearchView searchTvShows;
+
     private Context context;
     private TvShowsViewModel tvShowsViewModel;
 
@@ -85,6 +89,7 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         ButterKnife.bind(this, view);
 
         swipeRefresh.setOnRefreshListener(this);
+        searchTvShows.setOnQueryTextListener(this);
 
         tvShowsViewModel = ViewModelProviders.of(this).get(TvShowsViewModel.class);
         tvShowsViewModel.getDataTvShows().observe(this, getTvShows);
@@ -125,5 +130,17 @@ public class TvShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onRefresh() {
         tvShowsViewModel.refreshMovies(tvShowsViewModel.getLanguage());
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        tvShowsViewModel.getSearchTvMovies(s);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        tvShowsViewModel.getSearchTvMovies(s);
+        return false;
     }
 }
