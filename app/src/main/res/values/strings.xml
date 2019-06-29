@@ -357,6 +357,7 @@
     <string name="detail_movie">Detail Movie</string>
     <string name="setting">Setting</string>
     <string name="nothing_film">Nothing Film</string>
+    <string name="search_movie">Search Movie</string>
 
 
     <array name="data_tvshow_photo">

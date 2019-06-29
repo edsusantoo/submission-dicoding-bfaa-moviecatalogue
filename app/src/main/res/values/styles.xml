@@ -16,4 +16,11 @@
         <item name="colorAccent">@color/colorSelectedTab</item>
     </style>
 
+    <!-- SearchView Style -->
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@drawable/round_search</item>
+        <item name="closeIcon">@drawable/ic_close</item>
+        <item name="searchIcon">@drawable/ic_search</item>
+    </style>
+
 </resources>

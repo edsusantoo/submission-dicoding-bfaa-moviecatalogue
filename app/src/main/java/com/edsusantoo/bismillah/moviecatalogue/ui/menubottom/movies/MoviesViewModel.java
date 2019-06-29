@@ -8,6 +8,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.data.MoviesRepository;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieResponse;
+import com.edsusantoo.bismillah.moviecatalogue.data.network.observer.ApiObserver;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.observer.ApiSingleObserver;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -72,6 +73,26 @@ public class MoviesViewModel extends AndroidViewModel {
                 .subscribe(new ApiSingleObserver<MovieResponse>(repository.getCompositeDisposable()) {
                     @Override
                     public void onSuccessful(MovieResponse response) {
+                        isLoading.setValue(false);
+                        dataMovies.setValue(response);
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        isLoading.setValue(false);
+                        dataMovies.setValue(null);
+                    }
+                });
+    }
+
+    void getSearchMovies(String query) {
+        isLoading.setValue(true);
+        repository.getSearchMovie(BuildConfig.API_KEY, repository.getLanguage(), query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiObserver<MovieResponse>(repository.getCompositeDisposable()) {
+                    @Override
+                    public void onSuccess(MovieResponse response) {
                         isLoading.setValue(false);
                         dataMovies.setValue(response);
                     }

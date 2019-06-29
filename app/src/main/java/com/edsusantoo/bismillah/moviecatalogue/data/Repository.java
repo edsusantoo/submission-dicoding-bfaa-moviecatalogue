@@ -9,6 +9,7 @@ import com.edsusantoo.bismillah.moviecatalogue.data.network.model.tvshow.TvShowR
 import java.util.List;
 
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 interface Repository {
@@ -17,6 +18,10 @@ interface Repository {
     Single<MovieResponse> getMovie(String api_key, String language);
 
     Single<TvShowResponse> getTvShow(String api_key, String language);
+
+    Observable<MovieResponse> getSearchMovie(String api_key, String language, String query);
+
+    Observable<TvShowResponse> getSearchTvShow(String api_key, String language, String query);
 
     //======MovieDao======
     void insertUser(User user);

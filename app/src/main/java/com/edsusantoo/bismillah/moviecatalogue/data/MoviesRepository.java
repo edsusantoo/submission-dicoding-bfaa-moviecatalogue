@@ -19,6 +19,7 @@ import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 import java.util.List;
 
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -51,6 +52,16 @@ public class MoviesRepository implements Repository {
     @Override
     public Single<TvShowResponse> getTvShow(String api_key, String language) {
         return apiServices.getTvMovie(api_key, language);
+    }
+
+    @Override
+    public Observable<MovieResponse> getSearchMovie(String api_key, String language, String query) {
+        return apiServices.getSearchMovie(api_key, language, query);
+    }
+
+    @Override
+    public Observable<TvShowResponse> getSearchTvShow(String api_key, String language, String query) {
+        return apiServices.getSearchTvShow(api_key, language, query);
     }
 
     @Override

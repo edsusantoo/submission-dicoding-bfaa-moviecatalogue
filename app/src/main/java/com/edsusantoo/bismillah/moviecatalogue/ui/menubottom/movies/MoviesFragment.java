@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recycler_list_movie)
@@ -35,6 +36,8 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     TextView tvNothingMovies;
     @BindView(R.id.img_broken)
     ImageView imgBroken;
+    @BindView(R.id.search_movie)
+    SearchView searchMovies;
 
     private MoviesViewModel moviesViewModel;
     private Observer<Boolean> getIsLoading = new Observer<Boolean>() {
@@ -90,6 +93,7 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         ButterKnife.bind(this, view);
 
         swipeRefresh.setOnRefreshListener(this);
+        searchMovies.setOnQueryTextListener(this);
 
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         moviesViewModel.getDataMovies().observe(this, getMovies);
@@ -144,4 +148,15 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         moviesViewModel.refreshMovies(moviesViewModel.getLanguage());
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        moviesViewModel.getSearchMovies(s);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        moviesViewModel.getSearchMovies(s);
+        return false;
+    }
 }

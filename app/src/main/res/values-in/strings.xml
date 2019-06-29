@@ -119,6 +119,7 @@
     <string name="setting">Pengaturan</string>
     <string name="no_translations">Tidak ada terjemahan dalam bahasa ini</string>
     <string name="nothing_film">Tidak ada Film</string>
+    <string name="search_movie">Cari Film</string>
 
 
 </resources>
