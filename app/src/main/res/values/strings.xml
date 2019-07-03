@@ -381,7 +381,8 @@
         <item>@drawable/poster_the_umbrella</item>
         <item>@drawable/poster_the_walking_dead</item>
     </array>
-    <string name="appwidget_text">Example</string>
+    <string name="appwidget_text">Root Movie</string>
     <string name="add_widget">Add widget</string>
+    <string name="empty">Empty</string>
 
 </resources>

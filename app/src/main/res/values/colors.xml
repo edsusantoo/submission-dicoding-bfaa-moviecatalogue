@@ -8,4 +8,5 @@
     <color name="black">#000000</color>
     <color name="colorSelectedTab">#00b894</color>
     <color name="colorFavorite">#F44336</color>
+    <color name="colorBlackTransparent">#9C000000</color>
 </resources>

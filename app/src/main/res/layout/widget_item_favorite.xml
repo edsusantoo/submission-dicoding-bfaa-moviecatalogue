@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_widget_movie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/minus"
+        android:scaleType="fitCenter"
+        tools:srcCompat="@drawable/poster_avengerinfinity" />
+
+    <TextView
+        android:id="@+id/tv_widget_title_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorBlackTransparent"
+        android:padding="@dimen/_16dp"
+        android:text="@string/title"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+</FrameLayout>

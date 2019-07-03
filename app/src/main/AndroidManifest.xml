@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <receiver android:name=".FavoriteWidget">
+        <receiver android:name=".ui.widget.FavoriteWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -23,6 +23,10 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/favorite_widget_info" />
         </receiver>
+
+        <service
+            android:name=".ui.widget.service.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity android:name=".ui.menubottom.MenuBottomActivity">
             <intent-filter>
