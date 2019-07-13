@@ -18,6 +18,8 @@ import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//TODO: BELUM BISA REFRESH KETIKA ADA DATA BARU
 public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private List<Movie> mWidgetItems = new ArrayList<>();
     private Context mContext;
