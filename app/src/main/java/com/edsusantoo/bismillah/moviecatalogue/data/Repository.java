@@ -14,6 +14,11 @@ import io.reactivex.Single;
 
 interface Repository {
 
+    //======Widget=========
+    List<Favorites> getAllFavoriteWidget();
+
+    List<Movie> getMovieWidget(int movieId, String type);
+
     //======Response Network======
     Single<MovieResponse> getMovie(String api_key, String language);
 

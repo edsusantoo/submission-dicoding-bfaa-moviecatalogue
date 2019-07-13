@@ -27,4 +27,7 @@ public interface MovieDao {
     @Query("SELECT * FROM movie WHERE id =:movieId AND type =:type")
     Maybe<List<Movie>> getMovie(int movieId, String type);
 
+    @Query("SELECT * FROM movie WHERE id =:movieId AND type =:type")
+    List<Movie> getMovieWidget(int movieId, String type);
+
 }

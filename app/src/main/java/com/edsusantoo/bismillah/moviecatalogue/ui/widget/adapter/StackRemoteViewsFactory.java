@@ -18,14 +18,10 @@ import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.MaybeObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    private final List<Movie> mWidgetItems = new ArrayList<>();
-    private final Context mContext;
+    private List<Movie> mWidgetItems = new ArrayList<>();
+    private Context mContext;
+
 
     public StackRemoteViewsFactory(Context context) {
         this.mContext = context;
@@ -96,63 +92,17 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     }
 
     private void getMovieFavorite() {
+        List<Favorites> favorites;
         MoviesRepository repository = new MoviesRepository(mContext);
-        repository.getAllFavorite()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MaybeObserver<List<Favorites>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+        favorites = repository.getAllFavoriteWidget();
+        for (Favorites data : favorites) {
+            getMovie(data.getMovieId());
+        }
 
-                    }
-
-                    @Override
-                    public void onSuccess(List<Favorites> favorites) {
-                        for (Favorites data : favorites) {
-                            getMovie(data.getMovieId());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
-
 
     private void getMovie(final int movieId) {
         final MoviesRepository repository = new MoviesRepository(mContext);
-        repository.getMovie(movieId, Constant.TYPE_MOVIE)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MaybeObserver<List<Movie>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(List<Movie> movies) {
-                        if (movies.size() != 0) {
-                            mWidgetItems.addAll(movies);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        mWidgetItems.addAll(repository.getMovieWidget(movieId, Constant.TYPE_MOVIE));
     }
 }

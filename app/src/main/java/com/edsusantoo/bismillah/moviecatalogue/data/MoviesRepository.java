@@ -45,6 +45,16 @@ public class MoviesRepository implements Repository {
 
 
     @Override
+    public List<Favorites> getAllFavoriteWidget() {
+        return favoriteDao.getAllWidget();
+    }
+
+    @Override
+    public List<Movie> getMovieWidget(int movieId, String type) {
+        return movieDao.getMovieWidget(movieId, type);
+    }
+
+    @Override
     public Single<MovieResponse> getMovie(String api_key, String language) {
         return apiServices.getMovie(api_key, language);
     }

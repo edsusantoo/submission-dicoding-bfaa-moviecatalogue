@@ -17,6 +17,9 @@ public interface FavoriteDao {
     @Query("SELECT * FROM favorites")
     Maybe<List<Favorites>> getAll();
 
+    @Query("SELECT * FROM favorites")
+    List<Favorites> getAllWidget();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Favorites... favorites);
 
