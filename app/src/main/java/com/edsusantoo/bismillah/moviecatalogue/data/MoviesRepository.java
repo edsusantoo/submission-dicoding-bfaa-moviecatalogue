@@ -120,6 +120,16 @@ public class MoviesRepository implements Repository {
     }
 
     @Override
+    public boolean getStatusDailyReminder() {
+        return pref.getSharedPref().getBoolean(Constant.PREF_STATUS_DAILY_REMINDER, false);
+    }
+
+    @Override
+    public boolean getStatusReleaseReminder() {
+        return pref.getSharedPref().getBoolean(Constant.PREF_STATUS_RELEASE_REMINDER, false);
+    }
+
+    @Override
     public void onDestroy() {
         compositeDisposable.clear();
     }

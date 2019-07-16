@@ -23,6 +23,12 @@ public class SharedPref {
         editor.apply();
     }
 
+    public void modifyDataSharedPrefBoolean(String name, Boolean value) {
+        editor = sharedPref.edit();
+        editor.putBoolean(name, value);
+        editor.apply();
+    }
+
     public SharedPreferences getSharedPref() {
         return sharedPref;
     }

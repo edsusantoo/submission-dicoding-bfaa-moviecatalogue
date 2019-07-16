@@ -47,5 +47,9 @@ interface Repository {
 
     String getLanguage();
 
+    boolean getStatusDailyReminder();
+
+    boolean getStatusReleaseReminder();
+
     void onDestroy();
 }

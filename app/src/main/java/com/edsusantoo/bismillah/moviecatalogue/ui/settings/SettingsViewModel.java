@@ -18,6 +18,14 @@ public class SettingsViewModel extends AndroidViewModel {
         return repository.getLanguage();
     }
 
+    boolean getStatusDailyReminder() {
+        return repository.getStatusDailyReminder();
+    }
+
+    boolean getStatusReleaseReminder() {
+        return repository.getStatusReleaseReminder();
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
