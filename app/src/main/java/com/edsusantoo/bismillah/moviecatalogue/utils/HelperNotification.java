@@ -41,7 +41,7 @@ public class HelperNotification {
         int notificationId = new Random().nextInt();
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notification =
-                setupNotification(context, title, body, null, 0, null, null,
+                setupNotification(context, title, body, null, R.drawable.ic_movie, null, null,
                         R.color.colorPrimary, true, null, CHANNEL_ID_NOTIFICATION,
                         Notification.DEFAULT_ALL, Notification.PRIORITY_HIGH, defaultSoundUri, null, null);
         if (notification != null) {
@@ -113,7 +113,6 @@ public class HelperNotification {
             if (!TextUtils.isEmpty(message))
                 builder.setContentText(message);
 
-
             if (!TextUtils.isEmpty(textLarge)) {
                 builder.setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(textLarge));
@@ -160,7 +159,7 @@ public class HelperNotification {
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID_NOTIFICATION,
-                    "HISS",
+                    "MovieCatalogue",
                     NotificationManager.IMPORTANCE_DEFAULT);
             if (mNotificationManager != null) {
                 mNotificationManager.createNotificationChannel(channel);

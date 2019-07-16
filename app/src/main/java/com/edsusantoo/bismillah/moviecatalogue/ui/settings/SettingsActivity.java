@@ -132,16 +132,24 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 7);
         calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntentDailyReminder);
     }
 
 
     private void stopAlarmReleaseReminder() {
-        alarmManager.cancel(pendingIntentReleaseReminder);
+        Intent intent = new Intent(this, ReminderReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE_RELEASE_REMINDER, intent, PendingIntent.FLAG_NO_CREATE);
+        if (pendingIntent != null)
+            alarmManager.cancel(pendingIntent);
     }
 
     private void stopAlarmDailyReminder() {
-        alarmManager.cancel(pendingIntentDailyReminder);
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(this, ReminderReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE_DAILY_REMINDER, intent, PendingIntent.FLAG_NO_CREATE);
+        if (pendingIntent != null)
+            alarmManager.cancel(pendingIntent);
     }
 
 
@@ -161,7 +169,7 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
         if (settingsViewModel.getStatusReleaseReminder()) {
             scReleaseReminder.setChecked(true);
         } else {
-            scReleaseReminder.setChecked(true);
+            scReleaseReminder.setChecked(false);
         }
     }
 
