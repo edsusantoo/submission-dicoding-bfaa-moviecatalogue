@@ -1,4 +1,4 @@
-package com.edsusantoo.bismillah.moviecatalogue.ui.changelanguage;
+package com.edsusantoo.bismillah.moviecatalogue.ui.settings;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChangeLanguageActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
     public static final String EXTRA_LANGUAGE = "extra_language";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,7 +32,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_language);
+        setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -43,10 +43,10 @@ public class ChangeLanguageActivity extends AppCompatActivity {
             }
         });
 
-        ChangeLanguageViewModel changeLanguageViewModel = ViewModelProviders.of(this).get(ChangeLanguageViewModel.class);
+        SettingsViewModel settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
-        if (changeLanguageViewModel.getLanguage() != null || changeLanguageViewModel.getLanguage().isEmpty()) {
-            setRadioButtonLanguage(changeLanguageViewModel.getLanguage());
+        if (settingsViewModel.getLanguage() != null || settingsViewModel.getLanguage().isEmpty()) {
+            setRadioButtonLanguage(settingsViewModel.getLanguage());
         }
 
         //for set radiobutton intent data

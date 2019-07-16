@@ -123,6 +123,9 @@
     <string name="appwidget_text">Root Film</string>
     <string name="add_widget">Tambah Widget</string>
     <string name="empty">Kosong</string>
-
-
+    <string name="dialy_reminder">Pengingat Harian</string>
+    <string name="release_reminder">Pengingat Rilis</string>
+    <string name="release_reminder_ket">Pengingat film yang dirilis hari ini</string>
+    <string name="reminder_for_return_to_app">Pengingat untuk kembali ke aplikasi</string>
+    <string name="reminder">Pengingat</string>
 </resources>

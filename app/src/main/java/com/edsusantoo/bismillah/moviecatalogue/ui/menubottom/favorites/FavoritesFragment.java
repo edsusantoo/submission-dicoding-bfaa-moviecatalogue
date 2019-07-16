@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
-import com.edsusantoo.bismillah.moviecatalogue.ui.changelanguage.ChangeLanguageActivity;
 import com.edsusantoo.bismillah.moviecatalogue.ui.menubottom.favorites.adapter.FavoritesViewPagerAdapter;
+import com.edsusantoo.bismillah.moviecatalogue.ui.settings.SettingsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +49,7 @@ public class FavoritesFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.img_setting) {
-            startActivity(new Intent(getActivity(), ChangeLanguageActivity.class));
+            startActivity(new Intent(getActivity(), SettingsActivity.class));
         }
     }
 }
