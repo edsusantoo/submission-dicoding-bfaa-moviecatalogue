@@ -1,13 +1,15 @@
 package com.edsusantoo.bismillah.moviecatalogue.ui.detailmovie;
 
+import android.appwidget.AppWidgetManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.Movie;
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
+import com.edsusantoo.bismillah.moviecatalogue.ui.widget.FavoriteWidget;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import butterknife.BindView;
@@ -48,7 +51,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         public void onChanged(@Nullable Favorites favorites) {
             if (favorites != null) {
                 favorite = favorites;
-                Log.d("TESTSTE", String.valueOf(favorites.getMovieId()));
                 if (favorites.getMovieId() == getDataIntent().getMovieId()) {
                     imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
                 }
@@ -141,6 +143,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                                     1,
                                     getDataIntent().getMovieId()
                             ));
+                            refreshWidget();
                         } else {
                             imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
                             detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
@@ -154,6 +157,8 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                                     1,
                                     getDataIntent().getMovieId()
                             ));
+
+                            refreshWidget();
                         }
                         break;
 
@@ -173,6 +178,8 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                                     1,
                                     getDataIntent().getMovieId()
                             ));
+
+                            refreshWidget();
                         } else {
                             imgFavorite.setColorFilter(getResources().getColor(R.color.colorFavorite));
                             detailMovieViewModel.insertMovie(new com.edsusantoo.bismillah.moviecatalogue.data.db.model.Movie(
@@ -186,6 +193,8 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                                     1,
                                     getDataIntent().getMovieId()
                             ));
+
+                            refreshWidget();
                         }
                         break;
                 }
@@ -202,4 +211,13 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     private void onMessageSucces(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+    private void refreshWidget() {
+        Intent intent = new Intent(this, FavoriteWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), FavoriteWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
+    }
+
 }
