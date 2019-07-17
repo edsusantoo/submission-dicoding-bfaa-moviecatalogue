@@ -13,16 +13,29 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
+import com.edsusantoo.bismillah.moviecatalogue.service.MoviesReleaseWorkManager;
 import com.edsusantoo.bismillah.moviecatalogue.service.ReminderReceiver;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.edsusantoo.bismillah.moviecatalogue.utils.Constant.EXTRAS_API_KEY;
+import static com.edsusantoo.bismillah.moviecatalogue.utils.Constant.EXTRAS_LANGUAGE;
 
 public class SettingsActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     public static final String EXTRA_LANGUAGE = "extra_language";
@@ -94,7 +107,7 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
         switch (buttonView.getId()) {
             case R.id.sc_daily_reminder:
                 if (isChecked) {
-                    setDailyReminder();
+                    startDailyReminder();
                     saveStatusAlarm(Constant.PREF_STATUS_DAILY_REMINDER, true);
                 } else {
                     stopAlarmDailyReminder();
@@ -103,13 +116,14 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
                 break;
 
             case R.id.sc_release_reminder:
-//                if (isChecked) {
-//                    setReleaseReminder();
-//                    saveStatusAlarm(Constant.PREF_STATUS_RELEASE_REMINDER, true);
-//                } else {
-//                    stopAlarmReleaseReminder();
-//                    saveStatusAlarm(Constant.PREF_STATUS_DAILY_REMINDER, false);
-//                }
+                if (isChecked) {
+                    startWorkManagerMovies();
+                    saveStatusAlarm(Constant.PREF_STATUS_RELEASE_REMINDER, true);
+                } else {
+                    stopWorkManagerMovies();
+                    stopAlarmReleaseReminder();
+                    saveStatusAlarm(Constant.PREF_STATUS_DAILY_REMINDER, false);
+                }
                 break;
         }
     }
@@ -118,11 +132,30 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
      *  Reminder
      *
      */
-    private void setReleaseReminder() {
 
+    private void startWorkManagerMovies() {
+        Data dataCity = new Data.Builder()
+                .putString(EXTRAS_API_KEY, BuildConfig.API_KEY)
+                .putString(EXTRAS_LANGUAGE, settingsViewModel.getLanguage())
+                .build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .setRequiresCharging(false)
+                .build();
+
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(MoviesReleaseWorkManager.class, 15, TimeUnit.MINUTES)
+                .setInputData(dataCity)
+                .setConstraints(constraints)
+                .build();
+        WorkManager.getInstance().enqueueUniquePeriodicWork(MoviesReleaseWorkManager.TAG, ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest);
     }
 
-    private void setDailyReminder() {
+    private void stopWorkManagerMovies() {
+        WorkManager.getInstance().cancelAllWorkByTag(MoviesReleaseWorkManager.TAG);
+    }
+
+
+    private void startDailyReminder() {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderReceiver.class);
         intent.putExtra(Constant.INTENT_DATA_TITLE, "Daily Reminder");

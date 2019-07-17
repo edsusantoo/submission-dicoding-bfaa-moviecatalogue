@@ -14,6 +14,7 @@ import android.text.TextUtils;
 
 import com.edsusantoo.bismillah.moviecatalogue.R;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -24,13 +25,19 @@ public class HelperNotification {
     private static final String TYPE_TEXT_LARGE = "text_large";
     private static final String TYPE_PICTURE = "picture";
 
-    public static void ChooseNotification(Context context, String body, String title, String type, String urlPicture, String textLarge, PendingIntent pendingIntent) {
+    private static final int NOTIFY_ID_ARRAY_MESSAGE = 1;
+
+    public static void ChooseNotification(Context context, String body, String title, String type, String urlPicture, String textLarge, PendingIntent pendingIntent, ArrayList<String> arrayMessageMovie) {
         if (type.equals(TYPE_TEXT_LARGE) && textLarge != null) {
             textLargeNotification(context, title, body, textLarge);
         } else if (type.equals(TYPE_PICTURE) && urlPicture != null) {
             pictureNotification(context, title, body, urlPicture);
         } else if (type.equals(TYPE_TEXT)) {
-            textNotification(context, title, body);
+            if (body != null) {
+                textNotification(context, title, body);
+            } else if (arrayMessageMovie != null) {
+                textArrayNotification(context, arrayMessageMovie, title);
+            }
         }
     }
 
@@ -78,6 +85,26 @@ public class HelperNotification {
                         Notification.DEFAULT_ALL, Notification.PRIORITY_HIGH, defaultSoundUri, null, null);
         if (notification != null) {
             showNotification(context, notificationId, notification.build());
+        }
+    }
+
+    /**
+     * Array Text
+     */
+    private static void textArrayNotification(Context context, ArrayList<String> arrayMessageMovie, String title) {
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle()
+                .setBigContentTitle(title);
+        for (String data : arrayMessageMovie) {
+            inboxStyle.addLine(data + " Release Today !!!");
+        }
+
+        NotificationCompat.Builder notification =
+                setupNotification(context, title, null, null, R.drawable.ic_movie, null, null,
+                        R.color.colorPrimary, true, null, CHANNEL_ID_NOTIFICATION,
+                        Notification.DEFAULT_ALL, Notification.PRIORITY_HIGH, defaultSoundUri, "Movie Catalogue", inboxStyle);
+        if (notification != null) {
+            showNotification(context, NOTIFY_ID_ARRAY_MESSAGE, notification.build());
         }
     }
 

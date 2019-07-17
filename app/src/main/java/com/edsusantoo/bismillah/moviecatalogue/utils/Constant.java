@@ -10,4 +10,7 @@ public class Constant {
     public static final String TYPE_TVSHOWS = "tvshows";
     public static final String INTENT_DATA_TITLE = "title";
     public static final String INTENT_DATA_MESSAGE = "message";
+    public static final String INTENT_DATA_ARRAY_MESSAGE = "array_message";
+    public final static String EXTRAS_API_KEY = "api_key";
+    public final static String EXTRAS_LANGUAGE = "language";
 }
