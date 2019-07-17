@@ -94,6 +94,10 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     }
 
     private void getMovieFavorite() {
+        //clear jika ada isinya untuk mengatasi data yang ke add ulang
+        if (mWidgetItems.size() != 0) {
+            mWidgetItems.clear();
+        }
         List<Favorites> favorites;
         MoviesRepository repository = new MoviesRepository(mContext);
         favorites = repository.getAllFavoriteWidget();
