@@ -5,6 +5,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+    <permission
+        android:name="com.edsusantoo.bismillah.moviecatalogue.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.edsusantoo.bismillah.moviecatalogue.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -39,6 +47,14 @@
         </activity>
         <activity android:name=".ui.detailmovie.DetailMovieActivity" />
         <activity android:name=".ui.settings.SettingsActivity" />
+
+        <provider
+            android:name=".data.db.provider.RootMoviesProvider"
+            android:authorities="com.edsusantoo.bismillah.moviecatalogue"
+            android:exported="true"
+            android:readPermission="com.edsusantoo.bismillah.moviecatalogue.READ_DATABASE"
+            android:writePermission="com.edsusantoo.bismillah.moviecatalogue.WRITE_DATABASE" />
+
     </application>
 
 </manifest>

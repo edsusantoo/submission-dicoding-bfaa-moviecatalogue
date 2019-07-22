@@ -13,4 +13,6 @@ public class Constant {
     public static final String INTENT_DATA_ARRAY_MESSAGE = "array_message";
     public final static String EXTRAS_API_KEY = "api_key";
     public final static String EXTRAS_LANGUAGE = "language";
+    public final static String TABLE_NAME_FAVORITE = "favorites";
+    public final static String TABLE_NAME_MOVIE = "movie";
 }

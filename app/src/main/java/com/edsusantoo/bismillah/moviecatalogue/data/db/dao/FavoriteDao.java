@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.database.Cursor;
 
 import com.edsusantoo.bismillah.moviecatalogue.data.db.model.Favorites;
 
@@ -19,6 +20,9 @@ public interface FavoriteDao {
 
     @Query("SELECT * FROM favorites")
     List<Favorites> getAllWidget();
+
+    @Query("SELECT * FROM favorites")
+    Cursor getAllFavoriteContentProvider();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Favorites... favorites);
