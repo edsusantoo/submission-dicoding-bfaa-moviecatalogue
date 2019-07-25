@@ -19,7 +19,11 @@ public class ReminderReceiver extends BroadcastReceiver {
         if (message != null) {
             HelperNotification.ChooseNotification(context, message, title, "text", null, null, null, null);
         } else if (arrayMessageMovie != null) {
-            HelperNotification.ChooseNotification(context, null, title, "text", null, null, null, arrayMessageMovie);
+            if (arrayMessageMovie.size() == 1) {
+                HelperNotification.ChooseNotification(context, arrayMessageMovie.get(0) + " Release Today !!!", title, "text", null, null, null, null);
+            } else {
+                HelperNotification.ChooseNotification(context, "Release Reminder", title, "text", null, null, null, arrayMessageMovie);
+            }
         }
     }
 }

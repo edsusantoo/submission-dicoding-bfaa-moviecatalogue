@@ -1,5 +1,7 @@
 package com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -168,5 +170,27 @@ public class ResultsItem {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "ResultsItem{" +
+                "overview='" + overview + '\'' +
+                ", originalLanguage='" + originalLanguage + '\'' +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", video=" + video +
+                ", title='" + title + '\'' +
+                ", genreIds=" + genreIds +
+                ", posterPath='" + posterPath + '\'' +
+                ", backdropPath='" + backdropPath + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", voteAverage=" + voteAverage +
+                ", popularity=" + popularity +
+                ", id=" + id +
+                ", adult=" + adult +
+                ", voteCount=" + voteCount +
+                ", favorite=" + favorite +
+                '}';
     }
 }

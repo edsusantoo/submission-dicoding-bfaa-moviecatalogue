@@ -15,4 +15,5 @@ public class Constant {
     public final static String EXTRAS_LANGUAGE = "language";
     public final static String TABLE_NAME_FAVORITE = "favorites";
     public final static String TABLE_NAME_MOVIE = "movie";
+    public final static String BROADCAST_RELEASE_REMINDER = "com.edsusantoo.bismillah.moviecatalogue.ReleaseReminderBroadcast";
 }

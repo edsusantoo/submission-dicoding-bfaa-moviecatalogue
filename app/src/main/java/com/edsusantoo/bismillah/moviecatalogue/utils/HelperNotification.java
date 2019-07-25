@@ -33,10 +33,10 @@ public class HelperNotification {
         } else if (type.equals(TYPE_PICTURE) && urlPicture != null) {
             pictureNotification(context, title, body, urlPicture);
         } else if (type.equals(TYPE_TEXT)) {
-            if (body != null) {
+            if (body != null && arrayMessageMovie != null) {
+                textArrayNotification(context, arrayMessageMovie, title, body);
+            } else if (body != null) {
                 textNotification(context, title, body);
-            } else if (arrayMessageMovie != null) {
-                textArrayNotification(context, arrayMessageMovie, title);
             }
         }
     }
@@ -91,7 +91,7 @@ public class HelperNotification {
     /**
      * Array Text
      */
-    private static void textArrayNotification(Context context, ArrayList<String> arrayMessageMovie, String title) {
+    private static void textArrayNotification(Context context, ArrayList<String> arrayMessageMovie, String title, String message) {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle()
                 .setBigContentTitle(title);
@@ -100,7 +100,7 @@ public class HelperNotification {
         }
 
         NotificationCompat.Builder notification =
-                setupNotification(context, title, null, null, R.drawable.ic_movie, null, null,
+                setupNotification(context, title, message, null, R.drawable.ic_movie, null, null,
                         R.color.colorPrimary, true, null, CHANNEL_ID_NOTIFICATION,
                         Notification.DEFAULT_ALL, Notification.PRIORITY_HIGH, defaultSoundUri, "Movie Catalogue", inboxStyle);
         if (notification != null) {

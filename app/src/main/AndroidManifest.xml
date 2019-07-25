@@ -33,6 +33,12 @@
         </receiver>
 
         <receiver android:name=".service.ReminderReceiver" />
+        <receiver android:name=".service.ReleaseReminderReceiver" />
+
+        <service
+            android:name=".service.ReleaseReminderService"
+            android:enabled="true"
+            android:exported="true" />
 
         <service
             android:name=".ui.widget.service.StackWidgetService"

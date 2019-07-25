@@ -24,6 +24,8 @@ import com.edsusantoo.bismillah.moviecatalogue.BuildConfig;
 import com.edsusantoo.bismillah.moviecatalogue.R;
 import com.edsusantoo.bismillah.moviecatalogue.data.pref.SharedPref;
 import com.edsusantoo.bismillah.moviecatalogue.service.MoviesReleaseWorkManager;
+import com.edsusantoo.bismillah.moviecatalogue.service.ReleaseReminderReceiver;
+import com.edsusantoo.bismillah.moviecatalogue.service.ReleaseReminderService;
 import com.edsusantoo.bismillah.moviecatalogue.service.ReminderReceiver;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
 
@@ -61,6 +63,8 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
 
     private SettingsViewModel settingsViewModel;
 
+    private Intent intentService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +97,11 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
 
         scDailyReminder.setOnCheckedChangeListener(this);
         scReleaseReminder.setOnCheckedChangeListener(this);
+
+        //inisialisasi alarm
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        //inisialisasiservice
+        intentService = new Intent(this, ReleaseReminderService.class);
     }
 
     @Override
@@ -117,12 +126,11 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
 
             case R.id.sc_release_reminder:
                 if (isChecked) {
-                    startWorkManagerMovies();
+                    startAlarmReleaseReminder();
                     saveStatusAlarm(Constant.PREF_STATUS_RELEASE_REMINDER, true);
                 } else {
-                    stopWorkManagerMovies();
                     stopAlarmReleaseReminder();
-                    saveStatusAlarm(Constant.PREF_STATUS_DAILY_REMINDER, false);
+                    saveStatusAlarm(Constant.PREF_STATUS_RELEASE_REMINDER, false);
                 }
                 break;
         }
@@ -132,6 +140,28 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
      *  Reminder
      *
      */
+
+    //ini buat refresh data setiap jam 1 pagi jika ada baru diset alarm di releasereminderreceiver
+    private void startAlarmReleaseReminder() {
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(this, ReleaseReminderReceiver.class);
+        intent.putExtra(EXTRAS_API_KEY, BuildConfig.API_KEY);
+        intent.putExtra(EXTRA_LANGUAGE, settingsViewModel.getLanguage());
+        pendingIntentDailyReminder = PendingIntent.getBroadcast(this, REQUEST_CODE_RELEASE_REMINDER, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntentDailyReminder);
+    }
+
+    private void startServiceReleaseReminder() {
+        intentService = new Intent(this, ReleaseReminderService.class);
+        intentService.putExtra(EXTRAS_API_KEY, BuildConfig.API_KEY);
+        intentService.putExtra(EXTRA_LANGUAGE, settingsViewModel.getLanguage());
+        startService(intentService);
+    }
 
     private void startWorkManagerMovies() {
         Data dataCity = new Data.Builder()
@@ -152,6 +182,10 @@ public class SettingsActivity extends AppCompatActivity implements CompoundButto
 
     private void stopWorkManagerMovies() {
         WorkManager.getInstance().cancelAllWorkByTag(MoviesReleaseWorkManager.TAG);
+    }
+
+    private void stopServiceReleaseReminder() {
+        stopService(intentService);
     }
 
 
