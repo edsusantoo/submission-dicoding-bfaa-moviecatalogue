@@ -9,13 +9,11 @@ import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.MovieRes
 import com.edsusantoo.bismillah.moviecatalogue.data.network.model.movie.ResultsItem;
 import com.edsusantoo.bismillah.moviecatalogue.data.network.observer.ApiSingleObserver;
 import com.edsusantoo.bismillah.moviecatalogue.utils.Constant;
+import com.edsusantoo.bismillah.moviecatalogue.utils.HelperNotification;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,7 +28,6 @@ public class ReleaseReminderReceiver extends BroadcastReceiver {
     }
 
     private void getMovie(String api_key, String language, final Context context) {
-        final List<ResultsItem> listMovieRelease = new ArrayList<>();
         //getmovie
         MoviesRepository repository = new MoviesRepository(context);
         repository.getMovie(api_key, language)
@@ -41,8 +38,7 @@ public class ReleaseReminderReceiver extends BroadcastReceiver {
                     public void onSuccessful(MovieResponse response) {
                         for (ResultsItem data : response.getResults()) {
                             if (data.getReleaseDate().equals(getDateNow())) {
-                                listMovieRelease.add(data);
-                                setReceiver(context, listMovieRelease);
+                                HelperNotification.ChooseNotification(context, data.getTitle() + " Release Today !!!", "Release Reminder", "text", null, null, null, null);
                             }
                         }
                     }
@@ -52,29 +48,6 @@ public class ReleaseReminderReceiver extends BroadcastReceiver {
 
                     }
                 });
-    }
-
-    private void setReceiver(Context context, List<ResultsItem> listMovie) {
-        //copy tittle listmovie to new array string
-        ArrayList<String> data = new ArrayList<>();
-        for (ResultsItem resultsListMovie : listMovie) {
-            data.add(resultsListMovie.getOriginalTitle());
-        }
-
-        //setcalendar releasedate
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        try {
-            calendar.setTime(simpleDateFormat.parse(listMovie.get(0).getReleaseDate()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        //setreceiver
-        Intent intent = new Intent(context, ReminderReceiver.class);
-        intent.putExtra(Constant.INTENT_DATA_TITLE, "Release Reminder");
-        intent.putStringArrayListExtra(Constant.INTENT_DATA_ARRAY_MESSAGE, data);
-        context.sendBroadcast(intent);
     }
 
     private String getDateNow() {
